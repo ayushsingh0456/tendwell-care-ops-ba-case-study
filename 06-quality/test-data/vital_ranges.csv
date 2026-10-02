@@ -1,0 +1,3 @@
+vital_range_id,client_number,type,low,high,unit,set_by,reason
+VRG-001,C-10347,SPO2,88,,%,U-1003,COPD baseline 89-91% at rest
+VRG-002,C-30029,GLUCOSE,70,250,mg/dL,U-3002,Tighter high limit while insulin is titrated

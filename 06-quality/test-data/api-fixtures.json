@@ -1,0 +1,880 @@
+{
+  "_meta": {
+    "description": "Request bodies used by tendwell.postman_collection.json and by API-level test cases. Synthetic data only.",
+    "baseUrl": "https://api.tendwell.example/v1",
+    "dataAsOf": "2026-09-15T08:30:00-04:00",
+    "virtualClockForPostmanRun": "2026-09-15T08:55:00-04:00",
+    "idScheme": "Deterministic UUIDs: see test-data/README.md, section \"Record keys and UUIDs\"",
+    "secrets": "Passwords and MFA-role tokens are never stored here; they come from the CI secret store as Postman environment variables."
+  },
+  "auth": {
+    "loginCoordinator": {
+      "email": "marcus.hale@example.com",
+      "password": "{{coordinatorPassword}}"
+    },
+    "loginCaregiverAisha": {
+      "email": "aisha.bello@example.com",
+      "password": "{{caregiverPassword}}"
+    },
+    "loginCaregiverDaniel": {
+      "email": "daniel.reyes@example.com",
+      "password": "{{caregiverPassword}}"
+    },
+    "loginCaregiverTasha": {
+      "email": "tasha.greene@example.com",
+      "password": "{{caregiverPassword}}"
+    },
+    "loginTenantBCoordinator": {
+      "email": "owen.baptiste@example.com",
+      "password": "{{coordinatorPassword}}"
+    },
+    "loginAdminMfaRequired": {
+      "email": "tom.brennan@example.com",
+      "password": "{{adminPassword}}"
+    }
+  },
+  "clients": {
+    "createDuplicateCandidate": {
+      "locationId": "10c00000-0000-4000-8000-000000000101",
+      "firstName": "Ruth",
+      "lastName": "Kimball",
+      "dateOfBirth": "1950-02-03",
+      "gender": "Female",
+      "primaryLanguage": "English",
+      "phone": "+1-614-555-0137",
+      "serviceAddress": {
+        "line1": "342 Old Mill Road",
+        "city": "Lakemont",
+        "state": "OH",
+        "postalCode": "43999"
+      },
+      "medicaidId": "ZZ99001234",
+      "allergies": "None known",
+      "diagnoses": [
+        {
+          "icd10Code": "I10",
+          "isPrimary": true
+        }
+      ],
+      "contacts": [
+        {
+          "name": "Martin Kimball",
+          "relationship": "Son",
+          "phone": "+1-614-555-0151",
+          "isEmergency": true,
+          "isLegalRep": false
+        }
+      ],
+      "payer": {
+        "payerId": "ba000000-0000-4000-8000-000000000101"
+      }
+    },
+    "phiRevealMedicaidId": {
+      "field": "medicaidId",
+      "reasonCode": "BILLING_INQUIRY",
+      "note": null
+    }
+  },
+  "scheduling": {
+    "complianceOverlap": {
+      "clientId": "c1000000-0000-4000-8000-000000010289",
+      "caregiverId": "ca000000-0000-4000-8000-000000002033",
+      "serviceAuthorizationId": "a0000000-0000-4000-8000-000000001007",
+      "serviceLine": "HOME_VISIT",
+      "scheduledStart": "2026-09-15T10:00:00-04:00",
+      "scheduledEnd": "2026-09-15T11:30:00-04:00"
+    },
+    "complianceExclusion": {
+      "clientId": "c1000000-0000-4000-8000-000000010320",
+      "caregiverId": "ca000000-0000-4000-8000-000000002088",
+      "serviceAuthorizationId": "a0000000-0000-4000-8000-000000001011",
+      "serviceLine": "HOME_VISIT",
+      "scheduledStart": "2026-09-21T09:00:00-04:00",
+      "scheduledEnd": "2026-09-21T11:00:00-04:00"
+    },
+    "complianceExpiredCredential": {
+      "clientId": "c1000000-0000-4000-8000-000000010320",
+      "caregiverId": "ca000000-0000-4000-8000-000000002052",
+      "serviceAuthorizationId": "a0000000-0000-4000-8000-000000001011",
+      "serviceLine": "HOME_VISIT",
+      "scheduledStart": "2026-09-21T13:00:00-04:00",
+      "scheduledEnd": "2026-09-21T15:00:00-04:00"
+    }
+  },
+  "evv": {
+    "identityCheckAisha": {
+      "deviceId": "dvc-ios-2033a",
+      "vendorSessionRef": "stub-pass-E-2033"
+    },
+    "clockIn212m": {
+      "identityCheckId": "{{identityCheckIdAisha}}",
+      "deviceTime": "2026-09-15T08:55:10-04:00",
+      "deviceId": "dvc-ios-2033a",
+      "location": {
+        "lat": 40.1081668,
+        "lng": -82.8359781,
+        "accuracyM": 18
+      },
+      "distanceM": 5
+    },
+    "clockOutReusingConsumedCheck": {
+      "identityCheckId": "{{identityCheckIdAisha}}",
+      "deviceTime": "2026-09-15T08:56:40-04:00",
+      "deviceId": "dvc-ios-2033a",
+      "location": {
+        "lat": 40.1078505,
+        "lng": -82.8383451,
+        "accuracyM": 8
+      },
+      "taskResults": [],
+      "note": null
+    },
+    "identityCheckDaniel": {
+      "deviceId": "dvc-and-2045a",
+      "vendorSessionRef": "stub-pass-E-2045"
+    },
+    "clockInLowAccuracy": {
+      "identityCheckId": "{{identityCheckIdDaniel}}",
+      "deviceTime": "2026-09-15T08:55:30-04:00",
+      "deviceId": "dvc-and-2045a",
+      "location": {
+        "lat": 40.0118877,
+        "lng": -82.8497535,
+        "accuracyM": 3400
+      }
+    },
+    "clockIn40m": {
+      "identityCheckId": "{{identityCheckIdMaya}}",
+      "deviceTime": "2026-09-15T08:55:20-04:00",
+      "deviceId": "dvc-ios-2041a",
+      "location": {
+        "lat": 40.0616113,
+        "lng": -82.973824,
+        "accuracyM": 12
+      }
+    },
+    "geofenceBva": {
+      "d149": {
+        "lat": 40.1076734,
+        "lng": -82.8366339,
+        "accuracyM": 20
+      },
+      "d150": {
+        "lat": 40.1076734,
+        "lng": -82.8366221,
+        "accuracyM": 20
+      },
+      "d151": {
+        "lat": 40.1076734,
+        "lng": -82.8366104,
+        "accuracyM": 20
+      }
+    },
+    "accuracyBva": {
+      "acc99": {
+        "lat": 40.1076734,
+        "lng": -82.8366104,
+        "accuracyM": 99
+      },
+      "acc100": {
+        "lat": 40.1076734,
+        "lng": -82.8366104,
+        "accuracyM": 100
+      },
+      "acc101": {
+        "lat": 40.1076734,
+        "lng": -82.8366104,
+        "accuracyM": 101
+      }
+    },
+    "geofence50mBva": {
+      "d49": {
+        "lat": 39.9806606,
+        "lng": -82.9009208,
+        "accuracyM": 8
+      },
+      "d50": {
+        "lat": 39.9806516,
+        "lng": -82.9009208,
+        "accuracyM": 8
+      },
+      "d51": {
+        "lat": 39.9806426,
+        "lng": -82.9009208,
+        "accuracyM": 8
+      }
+    },
+    "zeroCoordinates": {
+      "lat": 0.0,
+      "lng": 0.0,
+      "accuracyM": 5
+    },
+    "offlineSyncBatch": {
+      "deviceId": "dvc-and-3112a",
+      "punches": [
+        {
+          "clientPunchId": "b7f6a3e2-1c44-4d1a-9a52-3f0c2d9e7a11",
+          "visitId": "d0000000-0000-4000-8000-000000003013",
+          "type": "In",
+          "deviceTime": "2026-09-16T09:01:00-04:00",
+          "location": {
+            "lat": 40.1336814,
+            "lng": -82.8915653,
+            "accuracyM": 8
+          }
+        }
+      ]
+    }
+  },
+  "emar": {
+    "refusedWithoutReason": {
+      "outcome": "Refused",
+      "administeredAt": "2026-09-15T08:50:00-04:00",
+      "reason": null
+    },
+    "prnOverMaxOndansetron": {
+      "administeredAt": "2026-09-15T08:55:00-04:00",
+      "indication": "Nausea",
+      "followUpNote": null
+    },
+    "prnWithinIntervalAcetaminophen": {
+      "administeredAt": "2026-09-15T09:59:00-04:00",
+      "indication": "Back pain",
+      "followUpNote": null
+    },
+    "vitalSpo2OutOfRange": {
+      "visitId": "d0000000-0000-4000-8000-000000003005",
+      "type": "SPO2",
+      "value1": 91,
+      "unit": "%",
+      "method": "Pulse oximeter",
+      "takenAt": "2026-09-15T08:54:00-04:00"
+    }
+  },
+  "payroll": {
+    "exportLockedPeriod": {
+      "columnMappingId": "default"
+    }
+  },
+  "billing": {
+    "runSeptember": {
+      "periodStart": "2026-09-01",
+      "periodEnd": "2026-09-30"
+    }
+  },
+  "engineCases": {
+    "payrollRuleCases": [
+      {
+        "caseId": "PR-01",
+        "title": "Holiday at the start of the week, overtime at the end (no overlap)",
+        "baseRateCents": 1800,
+        "otEligible": true,
+        "holidayEligible": true,
+        "dailyOvertimeProfile": false,
+        "holidays": [
+          "2026-09-07"
+        ],
+        "segments": [
+          {
+            "kind": "visit",
+            "start": "2026-09-07T08:00:00-04:00",
+            "end": "2026-09-07T16:00:00-04:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-09-08T08:00:00-04:00",
+            "end": "2026-09-08T16:00:00-04:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-09-09T08:00:00-04:00",
+            "end": "2026-09-09T16:00:00-04:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-09-10T08:00:00-04:00",
+            "end": "2026-09-10T16:00:00-04:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-09-11T08:00:00-04:00",
+            "end": "2026-09-11T16:00:00-04:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-09-12T08:00:00-04:00",
+            "end": "2026-09-12T10:00:00-04:00"
+          }
+        ],
+        "expectedLines": [
+          {
+            "lineType": "Holiday",
+            "hours": 8.0,
+            "rateCents": 2700,
+            "amountCents": 21600
+          },
+          {
+            "lineType": "Regular",
+            "hours": 32.0,
+            "rateCents": 1800,
+            "amountCents": 57600
+          },
+          {
+            "lineType": "Overtime",
+            "hours": 2.0,
+            "rateCents": 2700,
+            "amountCents": 5400
+          }
+        ],
+        "expectedWagesCents": 84600
+      },
+      {
+        "caseId": "PR-02",
+        "title": "Holiday on the last worked day: overtime minutes are also holiday minutes (no stacking)",
+        "baseRateCents": 1800,
+        "otEligible": true,
+        "holidayEligible": true,
+        "dailyOvertimeProfile": false,
+        "holidays": [
+          "2026-12-25"
+        ],
+        "segments": [
+          {
+            "kind": "visit",
+            "start": "2026-12-21T08:00:00-05:00",
+            "end": "2026-12-21T16:30:00-05:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-12-22T08:00:00-05:00",
+            "end": "2026-12-22T16:30:00-05:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-12-23T08:00:00-05:00",
+            "end": "2026-12-23T16:30:00-05:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-12-24T08:00:00-05:00",
+            "end": "2026-12-24T16:30:00-05:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-12-25T08:00:00-05:00",
+            "end": "2026-12-25T16:00:00-05:00"
+          }
+        ],
+        "expectedLines": [
+          {
+            "lineType": "Holiday",
+            "hours": 6.0,
+            "rateCents": 2700,
+            "amountCents": 16200
+          },
+          {
+            "lineType": "Regular",
+            "hours": 34.0,
+            "rateCents": 1800,
+            "amountCents": 61200
+          },
+          {
+            "lineType": "Overtime",
+            "hours": 2.0,
+            "rateCents": 2700,
+            "amountCents": 5400
+          }
+        ],
+        "expectedWagesCents": 82800,
+        "defectiveEngineWagesCents": 85500
+      },
+      {
+        "caseId": "PR-03",
+        "title": "Same week as PR-02, caregiver not holiday-eligible",
+        "baseRateCents": 1800,
+        "otEligible": true,
+        "holidayEligible": false,
+        "dailyOvertimeProfile": false,
+        "holidays": [
+          "2026-12-25"
+        ],
+        "segments": [
+          {
+            "kind": "visit",
+            "start": "2026-12-21T08:00:00-05:00",
+            "end": "2026-12-21T16:30:00-05:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-12-22T08:00:00-05:00",
+            "end": "2026-12-22T16:30:00-05:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-12-23T08:00:00-05:00",
+            "end": "2026-12-23T16:30:00-05:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-12-24T08:00:00-05:00",
+            "end": "2026-12-24T16:30:00-05:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-12-25T08:00:00-05:00",
+            "end": "2026-12-25T16:00:00-05:00"
+          }
+        ],
+        "expectedLines": [
+          {
+            "lineType": "Regular",
+            "hours": 40.0,
+            "rateCents": 1800,
+            "amountCents": 72000
+          },
+          {
+            "lineType": "Overtime",
+            "hours": 2.0,
+            "rateCents": 2700,
+            "amountCents": 5400
+          }
+        ],
+        "expectedWagesCents": 77400
+      },
+      {
+        "caseId": "PR-04",
+        "title": "Same week as PR-02, caregiver not OT-eligible",
+        "baseRateCents": 1800,
+        "otEligible": false,
+        "holidayEligible": true,
+        "dailyOvertimeProfile": false,
+        "holidays": [
+          "2026-12-25"
+        ],
+        "segments": [
+          {
+            "kind": "visit",
+            "start": "2026-12-21T08:00:00-05:00",
+            "end": "2026-12-21T16:30:00-05:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-12-22T08:00:00-05:00",
+            "end": "2026-12-22T16:30:00-05:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-12-23T08:00:00-05:00",
+            "end": "2026-12-23T16:30:00-05:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-12-24T08:00:00-05:00",
+            "end": "2026-12-24T16:30:00-05:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-12-25T08:00:00-05:00",
+            "end": "2026-12-25T16:00:00-05:00"
+          }
+        ],
+        "expectedLines": [
+          {
+            "lineType": "Holiday",
+            "hours": 8.0,
+            "rateCents": 2700,
+            "amountCents": 21600
+          },
+          {
+            "lineType": "Regular",
+            "hours": 34.0,
+            "rateCents": 1800,
+            "amountCents": 61200
+          }
+        ],
+        "expectedWagesCents": 82800
+      },
+      {
+        "caseId": "PR-05",
+        "title": "Daily profile on, 13 h worked on a holiday: higher multiplier wins per minute",
+        "baseRateCents": 1800,
+        "otEligible": true,
+        "holidayEligible": true,
+        "dailyOvertimeProfile": true,
+        "holidays": [
+          "2026-11-26"
+        ],
+        "segments": [
+          {
+            "kind": "visit",
+            "start": "2026-11-23T07:00:00-05:00",
+            "end": "2026-11-23T13:00:00-05:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-11-24T07:00:00-05:00",
+            "end": "2026-11-24T13:00:00-05:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-11-25T07:00:00-05:00",
+            "end": "2026-11-25T13:00:00-05:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-11-26T07:00:00-05:00",
+            "end": "2026-11-26T20:00:00-05:00"
+          }
+        ],
+        "expectedLines": [
+          {
+            "lineType": "Holiday",
+            "hours": 8.0,
+            "rateCents": 2700,
+            "amountCents": 21600
+          },
+          {
+            "lineType": "Regular",
+            "hours": 18.0,
+            "rateCents": 1800,
+            "amountCents": 32400
+          },
+          {
+            "lineType": "Overtime",
+            "hours": 4.0,
+            "rateCents": 2700,
+            "amountCents": 10800
+          },
+          {
+            "lineType": "DoubleTime",
+            "hours": 1.0,
+            "rateCents": 3600,
+            "amountCents": 3600
+          }
+        ],
+        "expectedWagesCents": 68400
+      },
+      {
+        "caseId": "PR-06",
+        "title": "Daily profile on: 4 x 10 h + 1 x 4 h (no pyramiding into weekly OT)",
+        "baseRateCents": 1800,
+        "otEligible": true,
+        "holidayEligible": true,
+        "dailyOvertimeProfile": true,
+        "holidays": [],
+        "segments": [
+          {
+            "kind": "visit",
+            "start": "2026-10-05T08:00:00-04:00",
+            "end": "2026-10-05T18:00:00-04:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-10-06T08:00:00-04:00",
+            "end": "2026-10-06T18:00:00-04:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-10-07T08:00:00-04:00",
+            "end": "2026-10-07T18:00:00-04:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-10-08T08:00:00-04:00",
+            "end": "2026-10-08T18:00:00-04:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-10-09T08:00:00-04:00",
+            "end": "2026-10-09T12:00:00-04:00"
+          }
+        ],
+        "expectedLines": [
+          {
+            "lineType": "Regular",
+            "hours": 36.0,
+            "rateCents": 1800,
+            "amountCents": 64800
+          },
+          {
+            "lineType": "Overtime",
+            "hours": 8.0,
+            "rateCents": 2700,
+            "amountCents": 21600
+          }
+        ],
+        "expectedWagesCents": 86400
+      },
+      {
+        "caseId": "PR-07",
+        "title": "Weekly profile only: same week as PR-06",
+        "baseRateCents": 1800,
+        "otEligible": true,
+        "holidayEligible": true,
+        "dailyOvertimeProfile": false,
+        "holidays": [],
+        "segments": [
+          {
+            "kind": "visit",
+            "start": "2026-10-05T08:00:00-04:00",
+            "end": "2026-10-05T18:00:00-04:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-10-06T08:00:00-04:00",
+            "end": "2026-10-06T18:00:00-04:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-10-07T08:00:00-04:00",
+            "end": "2026-10-07T18:00:00-04:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-10-08T08:00:00-04:00",
+            "end": "2026-10-08T18:00:00-04:00"
+          },
+          {
+            "kind": "visit",
+            "start": "2026-10-09T08:00:00-04:00",
+            "end": "2026-10-09T12:00:00-04:00"
+          }
+        ],
+        "expectedLines": [
+          {
+            "lineType": "Regular",
+            "hours": 40.0,
+            "rateCents": 1800,
+            "amountCents": 72000
+          },
+          {
+            "lineType": "Overtime",
+            "hours": 4.0,
+            "rateCents": 2700,
+            "amountCents": 10800
+          }
+        ],
+        "expectedWagesCents": 82800
+      },
+      {
+        "caseId": "PR-08a",
+        "title": "Daily profile BVA: 8 h 0 min in one day",
+        "baseRateCents": 1800,
+        "otEligible": true,
+        "holidayEligible": true,
+        "dailyOvertimeProfile": true,
+        "holidays": [],
+        "segments": [
+          {
+            "kind": "visit",
+            "start": "2026-10-05T08:00:00-04:00",
+            "end": "2026-10-05T16:00:00-04:00"
+          }
+        ],
+        "expectedLines": [
+          {
+            "lineType": "Regular",
+            "hours": 8.0,
+            "rateCents": 1800,
+            "amountCents": 14400
+          }
+        ],
+        "expectedWagesCents": 14400
+      },
+      {
+        "caseId": "PR-08b",
+        "title": "Daily profile BVA: 8 h 1 min in one day",
+        "baseRateCents": 1800,
+        "otEligible": true,
+        "holidayEligible": true,
+        "dailyOvertimeProfile": true,
+        "holidays": [],
+        "segments": [
+          {
+            "kind": "visit",
+            "start": "2026-10-05T08:00:00-04:00",
+            "end": "2026-10-05T16:01:00-04:00"
+          }
+        ],
+        "expectedLines": [
+          {
+            "lineType": "Regular",
+            "hours": 8.0,
+            "rateCents": 1800,
+            "amountCents": 14400
+          },
+          {
+            "lineType": "Overtime",
+            "hours": 0.0167,
+            "rateCents": 2700,
+            "amountCents": 45
+          }
+        ],
+        "expectedWagesCents": 14445
+      },
+      {
+        "caseId": "PR-08c",
+        "title": "Daily profile BVA: 12 h 0 min in one day",
+        "baseRateCents": 1800,
+        "otEligible": true,
+        "holidayEligible": true,
+        "dailyOvertimeProfile": true,
+        "holidays": [],
+        "segments": [
+          {
+            "kind": "visit",
+            "start": "2026-10-05T08:00:00-04:00",
+            "end": "2026-10-05T20:00:00-04:00"
+          }
+        ],
+        "expectedLines": [
+          {
+            "lineType": "Regular",
+            "hours": 8.0,
+            "rateCents": 1800,
+            "amountCents": 14400
+          },
+          {
+            "lineType": "Overtime",
+            "hours": 4.0,
+            "rateCents": 2700,
+            "amountCents": 10800
+          }
+        ],
+        "expectedWagesCents": 25200
+      },
+      {
+        "caseId": "PR-08d",
+        "title": "Daily profile BVA: 12 h 1 min in one day",
+        "baseRateCents": 1800,
+        "otEligible": true,
+        "holidayEligible": true,
+        "dailyOvertimeProfile": true,
+        "holidays": [],
+        "segments": [
+          {
+            "kind": "visit",
+            "start": "2026-10-05T08:00:00-04:00",
+            "end": "2026-10-05T20:01:00-04:00"
+          }
+        ],
+        "expectedLines": [
+          {
+            "lineType": "Regular",
+            "hours": 8.0,
+            "rateCents": 1800,
+            "amountCents": 14400
+          },
+          {
+            "lineType": "Overtime",
+            "hours": 4.0,
+            "rateCents": 2700,
+            "amountCents": 10800
+          },
+          {
+            "lineType": "DoubleTime",
+            "hours": 0.0167,
+            "rateCents": 3600,
+            "amountCents": 60
+          }
+        ],
+        "expectedWagesCents": 25260
+      }
+    ],
+    "travelCases": [
+      {
+        "caseId": "TR-20",
+        "gapMinutes": 20,
+        "estimatedDriveMinutes": 25,
+        "expectedPaidMinutes": 20,
+        "expectedAmountCents": 600
+      },
+      {
+        "caseId": "TR-35",
+        "gapMinutes": 35,
+        "estimatedDriveMinutes": 25,
+        "expectedPaidMinutes": 35,
+        "expectedAmountCents": 1050
+      },
+      {
+        "caseId": "TR-119",
+        "gapMinutes": 119,
+        "estimatedDriveMinutes": 25,
+        "expectedPaidMinutes": 35,
+        "expectedAmountCents": 1050
+      },
+      {
+        "caseId": "TR-120",
+        "gapMinutes": 120,
+        "estimatedDriveMinutes": 25,
+        "expectedPaidMinutes": 35,
+        "expectedAmountCents": 1050
+      },
+      {
+        "caseId": "TR-121",
+        "gapMinutes": 121,
+        "estimatedDriveMinutes": 25,
+        "expectedPaidMinutes": 0,
+        "expectedAmountCents": 0
+      }
+    ],
+    "mergeCases": [
+      {
+        "caseId": "MG-01",
+        "segments": [
+          {
+            "kind": "visit",
+            "start": "2026-10-06T09:00:00-04:00",
+            "end": "2026-10-06T11:00:00-04:00"
+          },
+          {
+            "kind": "nonVisit",
+            "start": "2026-10-06T10:30:00-04:00",
+            "end": "2026-10-06T12:00:00-04:00",
+            "description": "In-service training"
+          }
+        ],
+        "expectedHours": 3.0,
+        "expectedAmountCents": 5400,
+        "defectiveDoubleCountHours": 3.5
+      },
+      {
+        "caseId": "MG-02",
+        "segments": [
+          {
+            "kind": "visit",
+            "start": "2026-10-07T09:00:00-04:00",
+            "end": "2026-10-07T11:07:30-04:00"
+          }
+        ],
+        "expectedHoursExact": 2.125,
+        "expectedHoursDisplay": "2.13",
+        "expectedAmountCents": 3825
+      }
+    ],
+    "dstCases": [
+      {
+        "visitId": "VIS-3001",
+        "startUtc": "2026-11-01T02:00:00Z",
+        "endUtc": "2026-11-01T11:00:00Z",
+        "elapsedHours": 9.0,
+        "day1Hours": 2.0,
+        "day2Hours": 7.0,
+        "wallClockHoursWrong": 8.0,
+        "payAtRateCents": 1750,
+        "expectedAmountCents": 15750
+      },
+      {
+        "visitId": "VIS-3002",
+        "startUtc": "2027-03-14T03:00:00Z",
+        "endUtc": "2027-03-14T10:00:00Z",
+        "elapsedHours": 7.0,
+        "day1Hours": 2.0,
+        "day2Hours": 5.0,
+        "wallClockHoursWrong": 8.0,
+        "payAtRateCents": 1750,
+        "expectedAmountCents": 12250
+      }
+    ]
+  }
+}

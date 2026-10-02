@@ -1,0 +1,14 @@
+pay_profile_id,employee_number,effective_from,effective_to,pay_type,base_rate_cents,rate_unit,ot_eligible,holiday_eligible,mileage_eligible,notes
+PPR-0001,E-2041,2026-01-01,2026-09-13,Hourly,1950,Hour,Y,Y,Y,US-019-AC1; canonical week paid at $19.50
+PPR-0002,E-2041,2026-09-14,,Hourly,2025,Hour,Y,Y,Y,"US-019-AC2 rate change ($20.25 from 2026-09-14, entered 2026-09-20); BR-015"
+PPR-0003,E-2017,2026-01-01,,Hourly,1875,Hour,Y,Y,Y,
+PPR-0004,E-2029,2025-11-03,,Hourly,1800,Hour,Y,Y,Y,Inactive caregiver
+PPR-0005,E-2033,2025-03-17,,Hourly,1800,Hour,Y,Y,Y,
+PPR-0006,E-2045,2024-08-12,,Hourly,1850,Hour,Y,Y,Y,
+PPR-0007,E-2052,2023-10-02,,Hourly,1900,Hour,Y,Y,N,
+PPR-0008,E-2088,2025-06-30,,Hourly,1800,Hour,N,Y,N,OT-ineligible branch; the agency remains responsible for FLSA classification
+PPR-0009,E-1102,2021-04-05,,Salaried,5200000,Year,N,N,N,"Salaried, exempt per agency classification"
+PPR-0010,E-1115,2024-02-19,,Hourly,1700,Hour,Y,Y,N,
+PPR-0011,E-3101,2022-09-12,,Hourly,1800,Hour,Y,Y,N,
+PPR-0012,E-3108,2023-01-23,,Hourly,1750,Hour,Y,Y,N,DST tests: 9.00 h = $157.50; 7.00 h = $122.50
+PPR-0013,E-3112,2025-01-06,,Hourly,1800,Hour,Y,Y,Y,

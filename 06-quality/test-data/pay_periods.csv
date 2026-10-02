@@ -1,0 +1,9 @@
+pay_period_id,tenant_id,frequency,start_date,end_date,status,locked_at,notes
+PP-T1-2026-08-17,TEN-001,BiWeekly,2026-08-17,2026-08-30,Locked,2026-09-01T14:05:00-04:00,Exported; target of the PAY_PERIOD_LOCKED test
+PP-T1-2026-08-31,TEN-001,BiWeekly,2026-08-31,2026-09-13,Open,,Canonical period: E-2041 Labor Day workweek is its second week
+PP-T1-2026-09-14,TEN-001,BiWeekly,2026-09-14,2026-09-27,Open,,"Next open period: adjustments, pre-export review"
+PP-T2-2026-09-07,TEN-002,Weekly,2026-09-07,2026-09-13,Open,,Weekly frequency
+PP-T2-2026-09-14,TEN-002,Weekly,2026-09-14,2026-09-20,Open,,Weekly frequency
+PP-T3-2026-09-01,TEN-003,SemiMonthly,2026-09-01,2026-09-15,Open,,Semi-monthly frequency
+PP-T3-2026-10-16,TEN-003,SemiMonthly,2026-10-16,2026-10-31,Open,,DST visit VIS-3001: 2.00 h fall in this period
+PP-T3-2026-11-01,TEN-003,SemiMonthly,2026-11-01,2026-11-15,Open,,DST visit VIS-3001: 7.00 h fall in this period

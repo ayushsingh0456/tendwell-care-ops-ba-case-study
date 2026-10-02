@@ -1,0 +1,6 @@
+tenant_id,pay_period_id,workweek_start,workweek_end,employee_number,line_no,line_type,quantity,quantity_unit,rate_cents,amount_cents,is_wages,source_visit_ids,notes
+TEN-001,PP-T1-2026-08-31,2026-09-07,2026-09-13,E-2041,1,Holiday,6.00,Hours,2925,17550,Y,VIS-0001,Labor Day 2026-09-07 worked; 1.5x (BR-042)
+TEN-001,PP-T1-2026-08-31,2026-09-07,2026-09-13,E-2041,2,Regular,31.50,Hours,1950,61425,Y,VIS-0002;VIS-0003;VIS-0004;VIS-0005;VIS-0006;VIS-0007;VIS-0008;VIS-0009;VIS-0010;VIS-0011;VIS-0012;VIS-0013,Verified visit time not on the holiday and within the first 40.0 h
+TEN-001,PP-T1-2026-08-31,2026-09-07,2026-09-13,E-2041,3,Travel,2.50,Hours,1950,4875,Y,VIS-0002;VIS-0003;VIS-0004;VIS-0005;VIS-0006;VIS-0007;VIS-0008;VIS-0009;VIS-0010;VIS-0011;VIS-0012,"Paid travel = min(gap, drive + 10 min) for 6 legs with gaps of 2 h or less (BR-043)"
+TEN-001,PP-T1-2026-08-31,2026-09-07,2026-09-13,E-2041,4,Overtime,3.00,Hours,2925,8775,Y,VIS-0013,Last 3.0 h chronologically: 2026-09-13 09:30-12:30 (BR-041)
+TEN-001,PP-T1-2026-08-31,2026-09-07,2026-09-13,E-2041,5,Mileage,46.20,Miles,70,3234,N,VIS-0002;VIS-0003;VIS-0004;VIS-0005;VIS-0006;VIS-0007;VIS-0008;VIS-0009;VIS-0010;VIS-0011;VIS-0012,"Reimbursement, not wages; never changes hours (BR-044)"

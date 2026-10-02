@@ -1,0 +1,7 @@
+prn_id,order_id,administered_at,indication,follow_up_note,recorded_by
+PRN-0001,MO-0003,2026-09-14T22:00:00-04:00,Headache,Pain 2/10 at 23:00,E-3108
+PRN-0002,MO-0003,2026-09-15T02:00:00-04:00,Back pain,Asleep at 03:00,E-3112
+PRN-0003,MO-0003,2026-09-15T06:00:00-04:00,Back pain,Pain 3/10 at 07:00,E-3112
+PRN-0004,MO-0011,2026-09-14T14:00:00-04:00,Nausea,Ate lunch at 15:00,E-3108
+PRN-0005,MO-0011,2026-09-14T22:00:00-04:00,Nausea,Settled at 22:45,E-3108
+PRN-0006,MO-0011,2026-09-15T04:00:00-04:00,Nausea,Settled at 04:40,E-3112

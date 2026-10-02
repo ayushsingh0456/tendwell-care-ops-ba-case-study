@@ -1,0 +1,7 @@
+holiday_id,tenant_id,date,name
+H-001,TEN-001,2026-09-07,Labor Day
+H-002,TEN-001,2026-11-26,Thanksgiving Day
+H-003,TEN-001,2026-12-25,Christmas Day
+H-004,TEN-002,2026-09-07,Labor Day (center closed)
+H-005,TEN-003,2026-09-07,Labor Day
+H-006,TEN-003,2026-11-26,Thanksgiving Day

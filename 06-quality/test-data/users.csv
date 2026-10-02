@@ -1,0 +1,33 @@
+user_id,tenant_id,first_name,last_name,email,phone,roles,locations,status,mfa_method,persona,purpose
+U-1001,TEN-001,Tom,Brennan,tom.brennan@example.com,+1-614-555-0142,AG-ADM,LOC-101;LOC-102,Active,TOTP,PER-05,Agency Administrator; MFA mandatory (BR-006); approves support grants; deactivates caregivers
+U-1002,TEN-001,Marcus,Hale,marcus.hale@example.com,+1-614-555-0101,AG-COORD,LOC-101,Active,None,PER-02,Coordinator scoped to Lakemont North; holds clients:reveal_phi; default API token (accessToken)
+U-1003,TEN-001,Priya,Raman,priya.raman@example.com,+1-614-555-0102,AG-SUPV,LOC-101;LOC-102,Active,TOTP,PER-03,Clinical Supervisor; approves care plans and medication orders at TEN-001
+U-1004,TEN-001,Denise,Carter,denise.carter@example.com,+1-614-555-0103,AG-FIN,LOC-101;LOC-102,Active,TOTP,PER-04,Billing & Payroll Specialist; payroll export and billing runs (finToken)
+U-1005,TEN-001,Lena,Marsh,lena.marsh@example.com,+1-614-555-0104,AG-COORD,LOC-101,Deactivated,None,,Deactivated 2026-09-01; held AG-COORD when the incident ladder was configured; must never be notified (INC-2026-015 regression)
+U-1006,TEN-001,Andre,Whitlock,andre.whitlock@example.com,+1-614-555-0105,AG-COORD,LOC-102,Active,None,,"Coordinator scoped to Lakemont South only (location scoping, FR-IAM-06); Deny override on clients:reveal_phi"
+U-1007,TEN-001,Iris,Feld,iris.feld@example.com,+1-614-555-0106,AG-COORD,LOC-101,Active,None,,Dedicated lockout and session-timeout test account
+U-1008,TEN-001,Noah,Brandt,noah.brandt@example.com,+1-614-555-0107,AG-FIN,LOC-101,Invited,None,,"Invited, not yet accepted; invitation and MFA-enrollment tests"
+U-1101,TEN-001,Maya,Ortiz,maya.ortiz@example.com,+1-614-555-0163,CG,LOC-101,Active,None,,Caregiver E-2041 (canonical payroll example)
+U-1102,TEN-001,Rosa,Delgado,rosa.delgado@example.com,+1-614-555-0108,CG,LOC-101,Active,None,PER-01,Caregiver E-2017; Android 12; preferred caregiver for C-10320
+U-1103,TEN-001,Kevin,Tran,kevin.tran@example.com,+1-614-555-0109,CG,LOC-101,Deactivated,None,,Caregiver E-2029; deactivated 2026-09-04; device wiped; future visits are open shifts
+U-1104,TEN-001,Aisha,Bello,aisha.bello@example.com,+1-614-555-0110,CG,LOC-101;LOC-102,Active,None,,Caregiver E-2033; iPhone used for Precise Location Off tests (cgTokenAisha)
+U-1105,TEN-001,Daniel,Reyes,daniel.reyes@example.com,+1-614-555-0111,CG,LOC-101;LOC-102,Active,None,,Caregiver E-2045; credential boundary dates (cgTokenDaniel)
+U-1106,TEN-001,Grace,Whitaker,grace.whitaker@example.com,+1-614-555-0112,CG,LOC-101,Active,None,,Caregiver E-2052; Blocking CPR certification expired 2026-08-31
+U-1107,TEN-001,Jordan,Pike,jordan.pike@example.com,+1-614-555-0113,CG,LOC-101,Active,None,,"Caregiver E-2088; excluded by C-10320 (""Family declined""); not OT-eligible; not mileage-eligible"
+U-2001,TEN-002,Helen,Ruiz,helen.ruiz@example.com,+1-614-555-0114,AG-ADM,LOC-201,Active,TOTP,,Agency Administrator of tenant B
+U-2002,TEN-002,Owen,Baptiste,owen.baptiste@example.com,+1-614-555-0115,AG-COORD,LOC-201,Active,None,,Tenant B coordinator; source of tenantBAccessToken for cross-tenant tests
+U-2003,TEN-002,Carla,Nguyen,carla.nguyen@example.com,+1-614-555-0116,AG-FIN,LOC-201,Active,TOTP,,Daily-rate billing (S5102)
+U-2004,TEN-002,Beatriz,Solano,beatriz.solano@example.com,+1-614-555-0117,AG-SUPV,LOC-201,Active,TOTP,,Clinical Supervisor of tenant B
+U-2101,TEN-002,Brenda,Okafor,brenda.okafor@example.com,+1-614-555-0118,CG,LOC-201,Active,None,,Caregiver E-1102 (salaried program lead)
+U-2102,TEN-002,Felix,Moreau,felix.moreau@example.com,+1-614-555-0119,CG,LOC-201,Active,None,,Caregiver E-1115; records adult-day check-ins
+U-3001,TEN-003,Samuel,Ortega,samuel.ortega@example.com,+1-614-555-0120,AG-ADM,LOC-301;LOC-302;LOC-303;LOC-304,Active,TOTP,,Agency Administrator of TEN-003; incident escalation recipient
+U-3002,TEN-003,Janet,Kowalski,janet.kowalski@example.com,+1-614-555-0121,AG-SUPV,LOC-301;LOC-302;LOC-303;LOC-304,Active,TOTP,,"Clinical Supervisor (RN); missed-dose, refusal and vital alerts"
+U-3003,TEN-003,Derek,Simms,derek.simms@example.com,+1-614-555-0122,AG-COORD,LOC-301;LOC-302;LOC-303;LOC-304,Active,None,,Coordinator; Overdue dose alerts; exception queue
+U-3004,TEN-003,Yvonne,Adebayo,yvonne.adebayo@example.com,+1-614-555-0123,AG-FIN,LOC-301;LOC-302;LOC-303;LOC-304,Active,TOTP,,Fixed-monthly billing and semi-monthly payroll
+U-3101,TEN-003,Tasha,Greene,tasha.greene@example.com,+1-614-555-0124,CG,LOC-302,Active,None,,Caregiver E-3101; Aspen House day shift; records doses (cgTokenTasha)
+U-3102,TEN-003,Malik,Johnson,malik.johnson@example.com,+1-614-555-0125,CG,LOC-301;LOC-302,Active,None,,Caregiver E-3108; evening and overnight shifts (DST tests)
+U-3103,TEN-003,Sofia,Petrova,sofia.petrova@example.com,+1-614-555-0126,CG,LOC-302;LOC-303;LOC-304,Active,None,,Caregiver E-3112; Android 10 (minimum OS); offline sync scenarios
+U-9001,,Elaine,Porter,elaine.porter@example.org,+1-614-555-0127,PLT-ADM,,Active,TOTP,,Platform Administrator; plans and promo codes
+U-9002,,Raj,Mehta,raj.mehta@example.org,+1-614-555-0128,PLT-SUP,,Active,TOTP,,Platform Support Agent; support access grants
+U-T101,TEN-T01,Chris,Lowell,chris.lowell@example.com,+1-614-555-0129,AG-ADM,LOC-T101,Active,TOTP,,"Sandbox owner; sign-up, trial and checklist tests"
+U-T201,TEN-T02,Pat,Morales,pat.morales@example.com,+1-614-555-0130,AG-ADM,LOC-T201,Active,TOTP,,Sandbox owner of a Read-only tenant

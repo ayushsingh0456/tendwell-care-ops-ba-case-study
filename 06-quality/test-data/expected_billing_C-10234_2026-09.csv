@@ -1,0 +1,10 @@
+scenario,authorization_id,line_kind,line_no,visit_id,visit_label,visit_date,service_code,verified_minutes,calculation,units,unit_rate_cents,amount_cents,billable,non_billable_reason
+base,SA-1001,Line,1,VIS-0002,A,2026-09-08,T1019,127,"127 min = 8 r7, no round-up",8,725,5800,Y,
+base,SA-1001,Line,2,VIS-0006,B,2026-09-10,T1019,113,"113 min = 7 r8, round up",8,725,5800,Y,
+base,SA-1001,Line,3,VIS-0011,C,2026-09-12,T1019,120,120 min = 8 r0,8,725,5800,Y,
+base,SA-1001,Total,,,,,T1019,,billable units 24; not billable units 0,24,725,17400,,
+auth-cap,SA-1002,Line,1,VIS-0002,A,2026-09-08,T1019,127,"127 min = 8 r7, no round-up",8,725,5800,Y,
+auth-cap,SA-1002,Line,2,VIS-0006,B,2026-09-10,T1019,113,"113 min = 7 r8, round up",8,725,5800,Y,
+auth-cap,SA-1002,Line,3,VIS-0011,C,2026-09-12,T1019,120,"120 min = 8 r0; 8 units delivered, 4 fit the remaining authorization",4,725,2900,Y,
+auth-cap,SA-1002,Line,4,VIS-0011,C,2026-09-12,T1019,,Excess over the remaining authorization (4 of 8 units),4,725,0,N,Not billable - exceeds authorization
+auth-cap,SA-1002,Total,,,,,T1019,,billable units 20; not billable units 4,20,725,14500,,

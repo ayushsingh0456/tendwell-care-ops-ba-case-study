@@ -1,0 +1,10 @@
+location_id,tenant_id,name,address,time_zone,service_line,lat,lng
+LOC-101,TEN-001,Lakemont North,"200 Harbor Street, Lakemont, OH 43999",America/New_York,HOME_VISIT,40.0439831,-82.9103069
+LOC-102,TEN-001,Lakemont South,"1500 Southfield Pike, Lakemont, OH 43999",America/New_York,HOME_VISIT,39.9766098,-82.9032674
+LOC-201,TEN-002,Cedar Lane Center,"75 Cedar Lane, Lakemont, OH 43999",America/New_York,ADULT_DAY,40.0709324,-82.8211389
+LOC-301,TEN-003,Birch House,"310 Fairhaven Road, Lakemont, OH 43999",America/New_York,SUPPORTED_LIVING,39.9811013,-82.9971284
+LOC-302,TEN-003,Aspen House,"1022 Copper Beech Lane, Lakemont, OH 43999",America/New_York,SUPPORTED_LIVING,40.0080507,-83.0147274
+LOC-303,TEN-003,Cypress House,"455 Linden Bend, Lakemont, OH 43999",America/New_York,SUPPORTED_LIVING,39.954152,-82.9853958
+LOC-304,TEN-003,Northgate Community Services,"1200 Northgate Avenue, Lakemont, OH 43999",America/New_York,HOME_VISIT,40.1203396,-82.9091337
+LOC-T101,TEN-T01,Brookside Main,"10 Test Plaza, Lakemont, OH 43999",America/New_York,HOME_VISIT,40.1427973,-82.7742084
+LOC-T201,TEN-T02,Millrace Main,"12 Test Plaza, Lakemont, OH 43999",America/New_York,HOME_VISIT,40.1427973,-82.7683421

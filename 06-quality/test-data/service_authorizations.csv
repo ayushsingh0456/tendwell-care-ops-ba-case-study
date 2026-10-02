@@ -1,0 +1,22 @@
+authorization_id,client_number,payer_id,service_line,auth_number,service_code,billing_model,unit_type,rate_cents,units_authorized,period_start,period_end,status,units_before_seed,seed_scenario,notes
+SA-1001,C-10234,PYR-101,HOME_VISIT,PA-2026-55871,T1019,Hourly,Unit15Min,725,480,2026-09-01,2026-11-30,Active,0,base,US-013-AC1; canonical uncapped invoice 24 units = $174.00
+SA-1002,C-10234,PYR-101,HOME_VISIT,PA-2026-41207,T1019,Hourly,Unit15Min,725,480,2026-06-01,2026-09-30,Active,460,auth-cap,"Loaded instead of SA-1001: 460 units billed Jun-Aug, 20 remain; cap variant $145.00 + 4 units not billable"
+SA-1003,C-10251,PYR-101,HOME_VISIT,PA-2026-30418,T1019,Hourly,Unit15Min,725,400,2026-07-01,2026-12-31,Active,304,base,Utilization exactly 90.0% as of 2026-09-15 (boundary: flagged)
+SA-1004,C-10262,PYR-102,HOME_VISIT,RHP-77120-03,S5125,Hourly,Unit15Min,680,240,2026-06-26,2026-09-25,Active,0,base,Expires in 10 days as of 2026-09-15 (flagged); boundary 14/15 days on 2026-09-11/2026-09-10
+SA-1005,C-10278,PYR-101,HOME_VISIT,PA-2026-12950,T1019,Hourly,Unit15Min,725,520,2026-04-01,2026-08-31,Expired,0,base,Expired authorization: scheduling against it is a hard block
+SA-1006,C-10278,PYR-101,HOME_VISIT,PA-2026-60233,T1019,Hourly,Unit15Min,725,520,2026-09-01,2027-02-28,Active,0,base,Successor authorization
+SA-1007,C-10289,PYR-101,HOME_VISIT,PA-2026-28844,T1019,Hourly,Unit15Min,725,624,2026-07-01,2026-12-31,Active,96,base,
+SA-1008,C-10295,PYR-102,HOME_VISIT,RHP-77120-11,S5125,Hourly,Unit15Min,680,312,2026-07-01,2026-12-31,Active,64,base,
+SA-1009,C-10301,PYR-101,HOME_VISIT,PA-2026-50710,T1019,Hourly,Unit15Min,725,312,2026-07-06,2026-12-31,Active,40,base,
+SA-1010,C-10312,PYR-101,HOME_VISIT,PA-2026-11873,T1019,Hourly,Unit15Min,725,400,2026-03-09,2026-09-08,Expired,212,base,Client discharged 2026-08-28
+SA-1011,C-10320,PYR-101,HOME_VISIT,PA-2026-38291,T1019,Hourly,Unit15Min,725,480,2026-05-18,2026-11-17,Active,180,base,
+SA-1012,C-10333,PYR-101,HOME_VISIT,PA-2026-27765,T1019,Hourly,Unit15Min,725,260,2026-04-27,2026-10-26,Active,92,base,
+SA-1013,C-10347,PYR-102,HOME_VISIT,RHP-77120-19,S5125,Hourly,Unit15Min,680,208,2026-06-01,2026-11-30,Active,60,base,
+SA-1014,C-10358,PYR-103,HOME_VISIT,PP-C10358-2026,T1019,PerVisit,Visit,9500,52,2026-08-03,2027-08-02,Active,0,base,"Private pay, $95.00 per Verified visit"
+SA-2001,C-20011,PYR-201,ADULT_DAY,PA-2026-70114,S5102,Daily,Day,7800,120,2026-08-01,2026-12-31,Active,0,base,"14 attendance days in August 2026 = $1,092.00"
+SA-2002,C-20018,PYR-201,ADULT_DAY,PA-2026-70188,S5102,Daily,Day,7800,120,2026-06-08,2026-12-31,Suspended,0,base,Suspended by payer pending redetermination
+SA-3001,C-30007,PYR-301,SUPPORTED_LIVING,PA-2026-90007,SL-DAY,FixedMonthly,Month,620000,12,2026-09-10,2027-09-09,Active,0,base,"Admitted 2026-09-10: September prorated 21/30 = $4,340.00"
+SA-3002,C-30012,PYR-301,SUPPORTED_LIVING,PA-2026-90012,SL-DAY,FixedMonthly,Month,620000,12,2026-01-01,2026-12-31,Active,8,base,
+SA-3003,C-30015,PYR-301,SUPPORTED_LIVING,PA-2026-90015,SL-DAY,FixedMonthly,Month,685000,12,2026-01-01,2026-12-31,Active,8,base,
+SA-3004,C-30021,PYR-301,HOME_VISIT,PA-2026-90021,S5125,Hourly,Unit15Min,680,416,2026-02-02,2027-02-01,Active,188,base,
+SA-3005,C-30029,PYR-302,SUPPORTED_LIVING,EVG-LTC-55902,SL-DAY,FixedMonthly,Month,590000,12,2026-01-01,2026-12-31,Active,8,base,

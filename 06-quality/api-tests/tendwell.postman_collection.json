@@ -1,0 +1,1915 @@
+{
+  "info": {
+    "_postman_id": "6f1d2c3b-7a8e-4b9c-9d0e-1f2a3b4c5d6e",
+    "name": "Tendwell API - R1.1 regression (synthetic data)",
+    "description": "Business-rule API checks for Tendwell R1.1 against the staging environment. Synthetic data only; load the seed in 06-quality/test-data (data as of 2026-09-15T08:30:00-04:00), then pin the TEN-001 and TEN-003 virtual clocks to 2026-09-15T08:55:00-04:00 before running. Request bodies are copied from test-data/api-fixtures.json. Reset the seed after each run because the run creates punches, invoices and audit events. Run order matters: Auth first.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{accessToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Adds an Idempotency-Key (UUID v4) to every unsafe request that does not already set one (api-guidelines: Idempotency-Key on unsafe POSTs).",
+          "const unsafe = ['POST', 'PUT', 'PATCH', 'DELETE'];",
+          "if (unsafe.includes(pm.request.method) && !pm.request.headers.has('Idempotency-Key')) {",
+          "  pm.request.headers.upsert({ key: 'Idempotency-Key', value: require('uuid').v4() });",
+          "}",
+          "pm.request.headers.upsert({ key: 'X-Correlation-Id', value: require('uuid').v4() });"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "pm.test('Responses never echo a stack trace', () => pm.expect(pm.response.text()).to.not.match(/at .*\\.(js|ts):\\d+/));",
+          "// Smoke latency guard only; NFR-PERF-01 p95 targets are measured with k6 (TC-NFR-001), not per request here.",
+          "pm.test('Smoke latency guard: under 2000 ms', () => pm.expect(pm.response.responseTime).to.be.below(2000));"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.tendwell.example/v1",
+      "type": "string",
+      "description": "Staging API base URL"
+    },
+    {
+      "key": "accessToken",
+      "value": "",
+      "type": "string",
+      "description": "Set by \"Login - Care Coordinator\"; collection default bearer token"
+    },
+    {
+      "key": "tenantBAccessToken",
+      "value": "",
+      "type": "string",
+      "description": "Set by \"Login - Tenant B Coordinator\" (TEN-002); used for the cross-tenant test"
+    },
+    {
+      "key": "cgTokenAisha",
+      "value": "",
+      "type": "string",
+      "description": "Caregiver E-2033"
+    },
+    {
+      "key": "cgTokenDaniel",
+      "value": "",
+      "type": "string",
+      "description": "Caregiver E-2045"
+    },
+    {
+      "key": "cgTokenTasha",
+      "value": "",
+      "type": "string",
+      "description": "Caregiver E-3101 (TEN-003)"
+    },
+    {
+      "key": "finToken",
+      "value": "",
+      "type": "string",
+      "description": "AG-FIN token (Denise Carter); MFA role, injected by CI from the staging token broker"
+    },
+    {
+      "key": "coordinatorPassword",
+      "value": "",
+      "type": "string",
+      "description": "From the CI secret store; never committed"
+    },
+    {
+      "key": "caregiverPassword",
+      "value": "",
+      "type": "string",
+      "description": "From the CI secret store; never committed"
+    },
+    {
+      "key": "adminPassword",
+      "value": "",
+      "type": "string",
+      "description": "From the CI secret store; never committed"
+    },
+    {
+      "key": "identityCheckIdAisha",
+      "value": "",
+      "type": "string",
+      "description": "Set at run time"
+    },
+    {
+      "key": "identityCheckIdDaniel",
+      "value": "",
+      "type": "string",
+      "description": "Set at run time"
+    },
+    {
+      "key": "identityCheckIdMaya",
+      "value": "",
+      "type": "string",
+      "description": "Set at run time (mobile suite)"
+    },
+    {
+      "key": "billingRunId1",
+      "value": "",
+      "type": "string",
+      "description": "Set at run time"
+    },
+    {
+      "key": "invoiceIdsRun1",
+      "value": "",
+      "type": "string",
+      "description": "Set at run time"
+    },
+    {
+      "key": "invoiceIdsRun2",
+      "value": "",
+      "type": "string",
+      "description": "Set at run time"
+    },
+    {
+      "key": "invoiceId_C10234",
+      "value": "",
+      "type": "string",
+      "description": "Set at run time"
+    },
+    {
+      "key": "clientId_C10234",
+      "value": "c1000000-0000-4000-8000-000000010234",
+      "type": "string",
+      "description": "C-10234"
+    },
+    {
+      "key": "clientId_C30015",
+      "value": "c1000000-0000-4000-8000-000000030015",
+      "type": "string",
+      "description": "C-30015"
+    },
+    {
+      "key": "caregiverId_E2041",
+      "value": "ca000000-0000-4000-8000-000000002041",
+      "type": "string",
+      "description": "E-2041"
+    },
+    {
+      "key": "visitId_VIS0201",
+      "value": "d0000000-0000-4000-8000-000000000201",
+      "type": "string",
+      "description": "VIS-0201"
+    },
+    {
+      "key": "visitId_VIS0203",
+      "value": "d0000000-0000-4000-8000-000000000203",
+      "type": "string",
+      "description": "VIS-0203"
+    },
+    {
+      "key": "doseTaskId_DT0003",
+      "value": "d0500000-0000-4000-8000-000000000003",
+      "type": "string",
+      "description": "DT-0003"
+    },
+    {
+      "key": "orderId_MO0011",
+      "value": "3e000000-0000-4000-8000-000000000011",
+      "type": "string",
+      "description": "MO-0011"
+    },
+    {
+      "key": "payPeriodId_T1_2026_08_31",
+      "value": "9a000000-0000-4000-8000-009120260831",
+      "type": "string",
+      "description": "PP-T1-2026-08-31 (Open)"
+    },
+    {
+      "key": "payPeriodId_T1_2026_08_17",
+      "value": "9a000000-0000-4000-8000-009120260817",
+      "type": "string",
+      "description": "PP-T1-2026-08-17 (Locked)"
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "description": "Obtain tokens for the run and check MFA enforcement. MFA-mandatory roles (AG-ADM, AG-SUPV, AG-FIN, platform roles) cannot sign in non-interactively; CI injects finToken from the staging token broker.",
+      "item": [
+        {
+          "name": "Login - Care Coordinator (Marcus Hale)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "description": "TC-IAM-001. Coordinator token is the collection default (accessToken).",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"marcus.hale@example.com\",\n  \"password\": \"{{coordinatorPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "const b = pm.response.json();",
+                  "pm.test('Access token issued with 15-minute lifetime', () => { pm.expect(b.accessToken).to.be.a('string'); pm.expect(b.expiresIn).to.eql(900); });",
+                  "pm.test('MFA not demanded for this role (BR-006)', () => pm.expect(b.mfaRequired).to.not.eql(true));",
+                  "pm.collectionVariables.set('accessToken', b.accessToken);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login - Caregiver Aisha Bello (E-2033)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"aisha.bello@example.com\",\n  \"password\": \"{{caregiverPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "const b = pm.response.json();",
+                  "pm.test('Access token issued with 15-minute lifetime', () => { pm.expect(b.accessToken).to.be.a('string'); pm.expect(b.expiresIn).to.eql(900); });",
+                  "pm.test('MFA not demanded for this role (BR-006)', () => pm.expect(b.mfaRequired).to.not.eql(true));",
+                  "pm.collectionVariables.set('cgTokenAisha', b.accessToken);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login - Caregiver Daniel Reyes (E-2045)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"daniel.reyes@example.com\",\n  \"password\": \"{{caregiverPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "const b = pm.response.json();",
+                  "pm.test('Access token issued with 15-minute lifetime', () => { pm.expect(b.accessToken).to.be.a('string'); pm.expect(b.expiresIn).to.eql(900); });",
+                  "pm.test('MFA not demanded for this role (BR-006)', () => pm.expect(b.mfaRequired).to.not.eql(true));",
+                  "pm.collectionVariables.set('cgTokenDaniel', b.accessToken);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login - Caregiver Tasha Greene (E-3101, TEN-003)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"tasha.greene@example.com\",\n  \"password\": \"{{caregiverPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "const b = pm.response.json();",
+                  "pm.test('Access token issued with 15-minute lifetime', () => { pm.expect(b.accessToken).to.be.a('string'); pm.expect(b.expiresIn).to.eql(900); });",
+                  "pm.test('MFA not demanded for this role (BR-006)', () => pm.expect(b.mfaRequired).to.not.eql(true));",
+                  "pm.collectionVariables.set('cgTokenTasha', b.accessToken);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login - Tenant B Coordinator (Owen Baptiste, TEN-002)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Token used by the cross-tenant test in the Security folder.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"owen.baptiste@example.com\",\n  \"password\": \"{{coordinatorPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "const b = pm.response.json();",
+                  "pm.test('Access token issued with 15-minute lifetime', () => { pm.expect(b.accessToken).to.be.a('string'); pm.expect(b.expiresIn).to.eql(900); });",
+                  "pm.test('MFA not demanded for this role (BR-006)', () => pm.expect(b.mfaRequired).to.not.eql(true));",
+                  "pm.collectionVariables.set('tenantBAccessToken', b.accessToken);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login - Agency Administrator requires MFA (BR-006)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "description": "TC-IAM-001, US-007-AC2.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"tom.brennan@example.com\",\n  \"password\": \"{{adminPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "const b = pm.response.json();",
+                  "pm.test('Second factor demanded for AG-ADM', () => pm.expect(b.mfaRequired).to.eql(true));",
+                  "pm.test('No access token before MFA', () => pm.expect(b).to.not.have.property('accessToken'));",
+                  "pm.test('Short-lived MFA challenge token returned', () => pm.expect(b.mfaToken).to.be.a('string'));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Clients",
+      "description": "PHI masking, duplicate detection, audited reveal and authorization utilization. Runs as Marcus Hale (AG-COORD, Lakemont North).",
+      "item": [
+        {
+          "name": "List clients - PHI masked (C-10234)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/clients?limit=50&status=Active",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "50"
+                },
+                {
+                  "key": "status",
+                  "value": "Active"
+                }
+              ]
+            },
+            "description": "TC-CLI-006, TC-IAM-007."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "const b = pm.response.json();",
+                  "pm.test('Cursor-paginated list shape', () => { pm.expect(b.items).to.be.an('array'); pm.expect(b).to.have.property('nextCursor'); });",
+                  "const c = b.items.find(i => i.clientNumber === 'C-10234');",
+                  "pm.test('C-10234 is listed for Lakemont North', () => pm.expect(c).to.be.an('object'));",
+                  "pm.test('Medicaid ID masked as ZZ****5522 (BR-011)', () => pm.expect(c.medicaidId).to.eql('ZZ****5522'));",
+                  "pm.test('Date of birth masked', () => pm.expect(c.dateOfBirth).to.eql('**/**/****'));",
+                  "pm.test('No Lakemont South client leaks to a North-scoped coordinator (FR-IAM-06)', () => pm.expect(b.items.map(i => i.clientNumber)).to.not.include.members(['C-10295', 'C-10333', 'C-10347']));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create client - possible duplicate requires confirmation (C-10301)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/clients",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients"
+              ]
+            },
+            "description": "TC-CLI-002, US-012-AC3. No client is created until the coordinator confirms.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"locationId\": \"10c00000-0000-4000-8000-000000000101\",\n  \"firstName\": \"Ruth\",\n  \"lastName\": \"Kimball\",\n  \"dateOfBirth\": \"1950-02-03\",\n  \"gender\": \"Female\",\n  \"primaryLanguage\": \"English\",\n  \"phone\": \"+1-614-555-0137\",\n  \"serviceAddress\": {\n    \"line1\": \"342 Old Mill Road\",\n    \"city\": \"Lakemont\",\n    \"state\": \"OH\",\n    \"postalCode\": \"43999\"\n  },\n  \"medicaidId\": \"ZZ99001234\",\n  \"allergies\": \"None known\",\n  \"diagnoses\": [\n    {\n      \"icd10Code\": \"I10\",\n      \"isPrimary\": true\n    }\n  ],\n  \"contacts\": [\n    {\n      \"name\": \"Martin Kimball\",\n      \"relationship\": \"Son\",\n      \"phone\": \"+1-614-555-0151\",\n      \"isEmergency\": true,\n      \"isLegalRep\": false\n    }\n  ],\n  \"payer\": {\n    \"payerId\": \"ba000000-0000-4000-8000-000000000101\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 409', () => pm.response.to.have.status(409));",
+                  "pm.test('Body is application/problem+json (RFC 9457)', () => pm.expect(pm.response.headers.get('Content-Type')).to.include('application/problem+json'));",
+                  "pm.test('Problem code is CLI_POSSIBLE_DUPLICATE', () => pm.expect(pm.response.json().code).to.eql('CLI_POSSIBLE_DUPLICATE'));",
+                  "pm.test('Message is human-readable, no raw code in detail (NFR-USE-03)', () => pm.expect(pm.response.json().detail).to.be.a('string').and.not.include('CLI_POSSIBLE_DUPLICATE'));",
+                  "pm.test('Matched existing client is named', () => pm.expect(pm.response.json().matches.map(m => m.clientNumber)).to.include('C-10301'));",
+                  "pm.test('Match reason is name and date of birth', () => pm.expect(pm.response.json().matches[0].matchedOn).to.include.members(['firstName', 'lastName', 'dateOfBirth']));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Reveal Medicaid ID with reason (audited)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/clients/{{clientId_C10234}}/phi-reveals",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients",
+                "{{clientId_C10234}}",
+                "phi-reveals"
+              ]
+            },
+            "description": "TC-CLI-006, US-015-AC2.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"field\": \"medicaidId\",\n  \"reasonCode\": \"BILLING_INQUIRY\",\n  \"note\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 201', () => pm.response.to.have.status(201));",
+                  "const b = pm.response.json();",
+                  "pm.test('Only the requested field is returned in clear', () => { pm.expect(b.field).to.eql('medicaidId'); pm.expect(b.value).to.eql('ZZ48105522'); });",
+                  "pm.test('Reveal is audited (BR-057)', () => pm.expect(b.auditEventId).to.be.a('string'));",
+                  "pm.test('Response is not cacheable', () => pm.expect(pm.response.headers.get('Cache-Control')).to.include('no-store'));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Authorizations - remaining units and alerts (C-10234)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/clients/{{clientId_C10234}}/authorizations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients",
+                "{{clientId_C10234}}",
+                "authorizations"
+              ]
+            },
+            "description": "TC-CLI-004."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "const a = pm.response.json().items.find(i => i.authNumber === 'PA-2026-55871');",
+                  "pm.test('PA-2026-55871 is Active T1019 Hourly', () => { pm.expect(a.status).to.eql('Active'); pm.expect(a.serviceCode).to.eql('T1019'); pm.expect(a.billingModel).to.eql('Hourly'); });",
+                  "pm.test('Remaining units = 480 - 24 used = 456 (BR-010)', () => pm.expect(a.remainingUnits).to.eql(456));",
+                  "pm.test('No utilization or expiry alert', () => pm.expect(a.alerts).to.eql([]));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Scheduling",
+      "description": "Dry-run compliance checks (POST /visits/compliance-checks). Nothing is created.",
+      "item": [
+        {
+          "name": "Compliance check - caregiver overlap is a hard block",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/visits/compliance-checks",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "visits",
+                "compliance-checks"
+              ]
+            },
+            "description": "TC-SCH-003. E-2033 already has VIS-0201 09:00-11:00; proposed 10:00-11:30.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clientId\": \"c1000000-0000-4000-8000-000000010289\",\n  \"caregiverId\": \"ca000000-0000-4000-8000-000000002033\",\n  \"serviceAuthorizationId\": \"a0000000-0000-4000-8000-000000001007\",\n  \"serviceLine\": \"HOME_VISIT\",\n  \"scheduledStart\": \"2026-09-15T10:00:00-04:00\",\n  \"scheduledEnd\": \"2026-09-15T11:30:00-04:00\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "const b = pm.response.json();",
+                  "const r = b.results.find(x => x.code === 'SCH_CAREGIVER_OVERLAP');",
+                  "pm.test('SCH_CAREGIVER_OVERLAP returned', () => pm.expect(r).to.be.an('object'));",
+                  "pm.test('Overlap is a hard block (BR-016)', () => pm.expect(r.hardBlock).to.eql(true));",
+                  "pm.test('Visit cannot be saved', () => pm.expect(b.canSave).to.eql(false));",
+                  "pm.test('Message states problem and fix (NFR-USE-03)', () => { pm.expect(r.message).to.be.a('string'); pm.expect(r.suggestedFix).to.be.a('string'); });",
+                  "pm.test('Dry run created no visit', () => pm.expect(b).to.not.have.property('visitId'));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Compliance check - client exclusion is a hard block",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/visits/compliance-checks",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "visits",
+                "compliance-checks"
+              ]
+            },
+            "description": "TC-CLI-008. C-10320 excludes Jordan Pike (E-2088).",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clientId\": \"c1000000-0000-4000-8000-000000010320\",\n  \"caregiverId\": \"ca000000-0000-4000-8000-000000002088\",\n  \"serviceAuthorizationId\": \"a0000000-0000-4000-8000-000000001011\",\n  \"serviceLine\": \"HOME_VISIT\",\n  \"scheduledStart\": \"2026-09-21T09:00:00-04:00\",\n  \"scheduledEnd\": \"2026-09-21T11:00:00-04:00\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "const r = pm.response.json().results.find(x => x.code === 'SCH_CLIENT_EXCLUSION');",
+                  "pm.test('SCH_CLIENT_EXCLUSION is a hard block (BR-017)', () => pm.expect(r.hardBlock).to.eql(true));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "EVV",
+      "description": "Run with the tenant virtual clock pinned to 2026-09-15T08:55-04:00 (clock-in opens 08:45 for the 09:00 visits). TEN-001 has identity verification On, so each clock-in consumes a fresh identity check.",
+      "item": [
+        {
+          "name": "Identity check - Aisha (VIS-0201)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/visits/{{visitId_VIS0201}}/identity-checks",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "visits",
+                "{{visitId_VIS0201}}",
+                "identity-checks"
+              ]
+            },
+            "description": "TC-EVV-006.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"deviceId\": \"dvc-ios-2033a\",\n  \"vendorSessionRef\": \"stub-pass-E-2033\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{cgTokenAisha}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 201', () => pm.response.to.have.status(201));",
+                  "const b = pm.response.json();",
+                  "pm.test('Pass with liveness', () => { pm.expect(b.result).to.eql('Pass'); pm.expect(b.livenessPassed).to.eql(true); });",
+                  "pm.test('Valid for 90 seconds (BR-024)', () => pm.expect((Date.parse(b.expiresAt) - Date.parse(b.createdAt)) / 1000).to.eql(90));",
+                  "pm.collectionVariables.set('identityCheckIdAisha', b.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Clock-in at 212 m - LOCATION_MISMATCH, punch accepted",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/visits/{{visitId_VIS0201}}/clock-in",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "visits",
+                "{{visitId_VIS0201}}",
+                "clock-in"
+              ]
+            },
+            "description": "TC-EVV-005, US-025-AC3/AC4.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identityCheckId\": \"{{identityCheckIdAisha}}\",\n  \"deviceTime\": \"2026-09-15T08:55:10-04:00\",\n  \"deviceId\": \"dvc-ios-2033a\",\n  \"location\": {\n    \"lat\": 40.1081668,\n    \"lng\": -82.8359781,\n    \"accuracyM\": 18\n  },\n  \"distanceM\": 5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{cgTokenAisha}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 201 (punch never blocked for location)', () => pm.response.to.have.status(201));",
+                  "const b = pm.response.json();",
+                  "pm.test('Server computed 212.0 m and ignored device distanceM (BR-021)', () => pm.expect(b.punch.distanceM).to.eql(212.0));",
+                  "pm.test('Exceptions contain LOCATION_MISMATCH', () => pm.expect(b.exceptions.map(e => e.code)).to.include('LOCATION_MISMATCH'));",
+                  "pm.test('No LOW_GPS_ACCURACY for an 18 m fix', () => pm.expect(b.exceptions.map(e => e.code)).to.not.include('LOW_GPS_ACCURACY'));",
+                  "pm.test('Visit is In progress', () => pm.expect(b.visit.status).to.eql('InProgress'));",
+                  "pm.test('Device time and server receipt time kept separately', () => { pm.expect(b.punch.punchTime).to.be.a('string'); pm.expect(b.punch.receivedAt).to.be.a('string'); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Clock-out reusing a consumed identity check - rejected",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/visits/{{visitId_VIS0201}}/clock-out",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "visits",
+                "{{visitId_VIS0201}}",
+                "clock-out"
+              ]
+            },
+            "description": "TC-EVV-006, BR-024 single use.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identityCheckId\": \"{{identityCheckIdAisha}}\",\n  \"deviceTime\": \"2026-09-15T08:56:40-04:00\",\n  \"deviceId\": \"dvc-ios-2033a\",\n  \"location\": {\n    \"lat\": 40.1078505,\n    \"lng\": -82.8383451,\n    \"accuracyM\": 8\n  },\n  \"taskResults\": [],\n  \"note\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{cgTokenAisha}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 422', () => pm.response.to.have.status(422));",
+                  "pm.test('Body is application/problem+json (RFC 9457)', () => pm.expect(pm.response.headers.get('Content-Type')).to.include('application/problem+json'));",
+                  "pm.test('Problem code is EVV_IDENTITY_CHECK_ALREADY_USED', () => pm.expect(pm.response.json().code).to.eql('EVV_IDENTITY_CHECK_ALREADY_USED'));",
+                  "pm.test('Message is human-readable, no raw code in detail (NFR-USE-03)', () => pm.expect(pm.response.json().detail).to.be.a('string').and.not.include('EVV_IDENTITY_CHECK_ALREADY_USED'));",
+                  "pm.test('No Out punch recorded', () => pm.expect(pm.response.json()).to.not.have.property('punch'));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Identity check - Daniel (VIS-0203)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/visits/{{visitId_VIS0203}}/identity-checks",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "visits",
+                "{{visitId_VIS0203}}",
+                "identity-checks"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"deviceId\": \"dvc-and-2045a\",\n  \"vendorSessionRef\": \"stub-pass-E-2045\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{cgTokenDaniel}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 201', () => pm.response.to.have.status(201));",
+                  "pm.collectionVariables.set('identityCheckIdDaniel', pm.response.json().id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Clock-in 95 m with 3,400 m accuracy - LOW_GPS_ACCURACY, not mismatch (CR-004)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/visits/{{visitId_VIS0203}}/clock-in",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "visits",
+                "{{visitId_VIS0203}}",
+                "clock-in"
+              ]
+            },
+            "description": "TC-EVV-004, TC-EVV-005.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identityCheckId\": \"{{identityCheckIdDaniel}}\",\n  \"deviceTime\": \"2026-09-15T08:55:30-04:00\",\n  \"deviceId\": \"dvc-and-2045a\",\n  \"location\": {\n    \"lat\": 40.0118877,\n    \"lng\": -82.8497535,\n    \"accuracyM\": 3400\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{cgTokenDaniel}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 201', () => pm.response.to.have.status(201));",
+                  "const codes = pm.response.json().exceptions.map(e => e.code);",
+                  "pm.test('LOW_GPS_ACCURACY raised (BR-022)', () => pm.expect(codes).to.include('LOW_GPS_ACCURACY'));",
+                  "pm.test('LOCATION_MISMATCH not raised for an inaccurate fix (INC-2026-011 regression)', () => pm.expect(codes).to.not.include('LOCATION_MISMATCH'));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "eMAR",
+      "description": "Dose outcome validation, PRN limits and out-of-range vitals at Aspen House (TEN-003) as Tasha Greene (E-3101).",
+      "item": [
+        {
+          "name": "Dose outcome Refused without reason - rejected",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/dose-tasks/{{doseTaskId_DT0003}}/outcome",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "dose-tasks",
+                "{{doseTaskId_DT0003}}",
+                "outcome"
+              ]
+            },
+            "description": "TC-MAR-003, BR-032.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"outcome\": \"Refused\",\n  \"administeredAt\": \"2026-09-15T08:50:00-04:00\",\n  \"reason\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{cgTokenTasha}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 422', () => pm.response.to.have.status(422));",
+                  "pm.test('Body is application/problem+json (RFC 9457)', () => pm.expect(pm.response.headers.get('Content-Type')).to.include('application/problem+json'));",
+                  "pm.test('Problem code is MAR_REASON_REQUIRED', () => pm.expect(pm.response.json().code).to.eql('MAR_REASON_REQUIRED'));",
+                  "pm.test('Message is human-readable, no raw code in detail (NFR-USE-03)', () => pm.expect(pm.response.json().detail).to.be.a('string').and.not.include('MAR_REASON_REQUIRED'));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "PRN over the 24-hour maximum - blocked (MO-0011)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/medication-orders/{{orderId_MO0011}}/prn-administrations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "medication-orders",
+                "{{orderId_MO0011}}",
+                "prn-administrations"
+              ]
+            },
+            "description": "TC-MAR-008, BR-033. Max 3 per rolling 24 h; doses at 2026-09-14 14:00, 22:00 and 2026-09-15 04:00.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"administeredAt\": \"2026-09-15T08:55:00-04:00\",\n  \"indication\": \"Nausea\",\n  \"followUpNote\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{cgTokenTasha}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 422', () => pm.response.to.have.status(422));",
+                  "pm.test('Body is application/problem+json (RFC 9457)', () => pm.expect(pm.response.headers.get('Content-Type')).to.include('application/problem+json'));",
+                  "pm.test('Problem code is MAR_PRN_MAX_DOSES_EXCEEDED', () => pm.expect(pm.response.json().code).to.eql('MAR_PRN_MAX_DOSES_EXCEEDED'));",
+                  "pm.test('Message is human-readable, no raw code in detail (NFR-USE-03)', () => pm.expect(pm.response.json().detail).to.be.a('string').and.not.include('MAR_PRN_MAX_DOSES_EXCEEDED'));",
+                  "pm.test('Response states when the next dose is allowed', () => pm.expect(pm.response.json().nextAllowedAt).to.eql('2026-09-15T14:00:00-04:00'));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Vital SpO2 91% - out of range, urgent supervisor alert",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/clients/{{clientId_C30015}}/vital-readings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients",
+                "{{clientId_C30015}}",
+                "vital-readings"
+              ]
+            },
+            "description": "TC-MAR-009.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"visitId\": \"d0000000-0000-4000-8000-000000003005\",\n  \"type\": \"SPO2\",\n  \"value1\": 91,\n  \"unit\": \"%\",\n  \"method\": \"Pulse oximeter\",\n  \"takenAt\": \"2026-09-15T08:54:00-04:00\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{cgTokenTasha}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 201', () => pm.response.to.have.status(201));",
+                  "const b = pm.response.json();",
+                  "pm.test('Flagged out of range (BR-034: SpO2 < 92%)', () => pm.expect(b.outOfRange).to.eql(true));",
+                  "pm.test('Urgent alert to the Clinical Supervisor', () => { pm.expect(b.alert.urgency).to.eql('Urgent'); pm.expect(b.alert.recipientRole).to.eql('AG-SUPV'); });",
+                  "pm.test('Care-plan instruction returned to the caregiver', () => pm.expect(b.carePlanInstruction).to.be.a('string'));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Payroll",
+      "description": "Canonical E-2041 Labor Day week (US-041) and period locking. Uses finToken (AG-FIN, injected by CI).",
+      "item": [
+        {
+          "name": "Pay-period summary - E-2041 canonical lines",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/pay-periods/{{payPeriodId_T1_2026_08_31}}/summary?caregiverId={{caregiverId_E2041}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "pay-periods",
+                "{{payPeriodId_T1_2026_08_31}}",
+                "summary"
+              ],
+              "query": [
+                {
+                  "key": "caregiverId",
+                  "value": "{{caregiverId_E2041}}"
+                }
+              ]
+            },
+            "description": "TC-PAY-003. Expected values: test-data/expected_payroll_E-2041_2026-09-07.csv.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{finToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "const cg = pm.response.json().caregivers.find(c => c.employeeNumber === 'E-2041');",
+                  "const line = t => cg.lines.find(l => l.lineType === t);",
+                  "pm.test('Holiday 6 hours at 2925 cents = 17550 cents', () => { const x = line('Holiday'); pm.expect(x.quantity).to.eql(6.0); pm.expect(x.rateCents).to.eql(2925); pm.expect(x.amountCents).to.eql(17550); });",
+                  "pm.test('Regular 31.5 hours at 1950 cents = 61425 cents', () => { const x = line('Regular'); pm.expect(x.quantity).to.eql(31.5); pm.expect(x.rateCents).to.eql(1950); pm.expect(x.amountCents).to.eql(61425); });",
+                  "pm.test('Travel 2.5 hours at 1950 cents = 4875 cents', () => { const x = line('Travel'); pm.expect(x.quantity).to.eql(2.5); pm.expect(x.rateCents).to.eql(1950); pm.expect(x.amountCents).to.eql(4875); });",
+                  "pm.test('Overtime 3 hours at 2925 cents = 8775 cents', () => { const x = line('Overtime'); pm.expect(x.quantity).to.eql(3.0); pm.expect(x.rateCents).to.eql(2925); pm.expect(x.amountCents).to.eql(8775); });",
+                  "pm.test('Mileage 46.2 miles at 70 cents = 3234 cents', () => { const x = line('Mileage'); pm.expect(x.quantity).to.eql(46.2); pm.expect(x.rateCents).to.eql(70); pm.expect(x.amountCents).to.eql(3234); });",
+                  "pm.test('Total wages 92625 cents ($926.25)', () => pm.expect(cg.totals.wagesCents).to.eql(92625));",
+                  "pm.test('Mileage reimbursement 3234 cents is not wages', () => pm.expect(cg.totals.reimbursementCents).to.eql(3234));",
+                  "pm.test('Total payable 95859 cents ($958.59)', () => pm.expect(cg.totals.payableCents).to.eql(95859));",
+                  "pm.test('Hours worked 43.0 (visits 40.5 + travel 2.5)', () => pm.expect(cg.totals.hoursWorked).to.eql(43.0));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Export a locked period - 409 PAY_PERIOD_LOCKED",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/pay-periods/{{payPeriodId_T1_2026_08_17}}/exports",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "pay-periods",
+                "{{payPeriodId_T1_2026_08_17}}",
+                "exports"
+              ]
+            },
+            "description": "TC-PAY-010.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"columnMappingId\": \"default\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{finToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 409', () => pm.response.to.have.status(409));",
+                  "pm.test('Body is application/problem+json (RFC 9457)', () => pm.expect(pm.response.headers.get('Content-Type')).to.include('application/problem+json'));",
+                  "pm.test('Problem code is PAY_PERIOD_LOCKED', () => pm.expect(pm.response.json().code).to.eql('PAY_PERIOD_LOCKED'));",
+                  "pm.test('Message is human-readable, no raw code in detail (NFR-USE-03)', () => pm.expect(pm.response.json().detail).to.be.a('string').and.not.include('PAY_PERIOD_LOCKED'));",
+                  "pm.test('Points to the next open period for adjustments (BR-046)', () => pm.expect(pm.response.json().nextOpenPeriodId).to.be.a('string'));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Billing",
+      "description": "Billing-run idempotency (BR-050, CR-005) and hourly pricing for C-10234. The collection pre-request script gives each run a new Idempotency-Key, so the re-run proves business-key idempotency, not just HTTP replay.",
+      "item": [
+        {
+          "name": "Billing run - September 2026 (first run)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/billing-runs",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "billing-runs"
+              ]
+            },
+            "description": "TC-BIL-006.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"periodStart\": \"2026-09-01\",\n  \"periodEnd\": \"2026-09-30\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{finToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 202 Accepted', () => pm.response.to.have.status(202));",
+                  "pm.test('Run id returned', () => pm.expect(pm.response.json().billingRunId).to.be.a('string'));",
+                  "pm.collectionVariables.set('billingRunId1', pm.response.json().billingRunId);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "List September invoices after first run",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/invoices?periodStart=2026-09-01&periodEnd=2026-09-30",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "invoices"
+              ],
+              "query": [
+                {
+                  "key": "periodStart",
+                  "value": "2026-09-01"
+                },
+                {
+                  "key": "periodEnd",
+                  "value": "2026-09-30"
+                }
+              ]
+            },
+            "description": "",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{finToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "setTimeout(() => {}, 3000); // small sandbox run completes within seconds"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "const items = pm.response.json().items;",
+                  "pm.test('7 draft invoices for September (one per client per payer)', () => pm.expect(items.length).to.eql(7));",
+                  "pm.test('All invoices are Draft', () => items.forEach(i => pm.expect(i.status).to.eql('Draft')));",
+                  "pm.collectionVariables.set('invoiceIdsRun1', JSON.stringify(items.map(i => i.id).sort()));",
+                  "const c = items.find(i => i.clientNumber === 'C-10234');",
+                  "pm.collectionVariables.set('invoiceId_C10234', c.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Billing run - re-run same period with a new Idempotency-Key",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/billing-runs",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "billing-runs"
+              ]
+            },
+            "description": "TC-BIL-006, INC-2026-007 regression.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"periodStart\": \"2026-09-01\",\n  \"periodEnd\": \"2026-09-30\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{finToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 202 Accepted', () => pm.response.to.have.status(202));",
+                  "pm.test('A new run record is created', () => pm.expect(pm.response.json().billingRunId).to.not.eql(pm.collectionVariables.get('billingRunId1')));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "List September invoices after re-run - same invoice IDs",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/invoices?periodStart=2026-09-01&periodEnd=2026-09-30",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "invoices"
+              ],
+              "query": [
+                {
+                  "key": "periodStart",
+                  "value": "2026-09-01"
+                },
+                {
+                  "key": "periodEnd",
+                  "value": "2026-09-30"
+                }
+              ]
+            },
+            "description": "",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{finToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "setTimeout(() => {}, 3000);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "const items = pm.response.json().items;",
+                  "pm.test('7 draft invoices for September (one per client per payer)', () => pm.expect(items.length).to.eql(7));",
+                  "pm.test('All invoices are Draft', () => items.forEach(i => pm.expect(i.status).to.eql('Draft')));",
+                  "pm.collectionVariables.set('invoiceIdsRun2', JSON.stringify(items.map(i => i.id).sort()));",
+                  "const c = items.find(i => i.clientNumber === 'C-10234');",
+                  "pm.collectionVariables.set('invoiceId_C10234', c.id);",
+                  "pm.test('Re-run returned the same invoice IDs (no duplicates)', () => pm.expect(pm.collectionVariables.get('invoiceIdsRun2')).to.eql(pm.collectionVariables.get('invoiceIdsRun1')));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Invoice C-10234 - 8 + 8 + 8 units = 17400 cents",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/invoices/{{invoiceId_C10234}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "invoices",
+                "{{invoiceId_C10234}}"
+              ]
+            },
+            "description": "TC-BIL-003. Expected values: test-data/expected_billing_C-10234_2026-09.csv (scenario base).",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{finToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "const b = pm.response.json();",
+                  "const billable = b.lines.filter(l => l.billable);",
+                  "pm.test('Three billable T1019 lines of 8 units (127, 113, 120 min; BR-047)', () => pm.expect(billable.map(l => l.units)).to.eql([8, 8, 8]));",
+                  "pm.test('Unit rate 725 cents', () => billable.forEach(l => pm.expect(l.unitRateCents).to.eql(725)));",
+                  "pm.test('Subtotal 17400 cents ($174.00)', () => pm.expect(b.subtotalCents).to.eql(17400));",
+                  "pm.test('No not-billable lines under the 480-unit authorization', () => pm.expect(b.lines.filter(l => !l.billable)).to.have.lengthOf(0));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Security",
+      "description": "Tenant isolation (BR-001, ADR-001) and authentication. Cross-tenant reads return 404, never 403, so record existence is not confirmed.",
+      "item": [
+        {
+          "name": "Cross-tenant GET of C-10234 with a TEN-002 token - 404",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/clients/{{clientId_C10234}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients",
+                "{{clientId_C10234}}"
+              ]
+            },
+            "description": "TC-IAM-007, US-009-AC4.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tenantBAccessToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 404 (not 403)', () => pm.response.to.have.status(404));",
+                  "pm.test('No client data in the body', () => { const t = pm.response.text(); ['Jennings', 'ZZ48105522', 'Birchwood'].forEach(s => pm.expect(t).to.not.include(s)); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "No bearer token - 401",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/clients",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients"
+              ]
+            },
+            "description": "",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 401', () => pm.response.to.have.status(401));",
+                  "pm.test('WWW-Authenticate header present', () => pm.expect(pm.response.headers.has('WWW-Authenticate')).to.eql(true));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Coordinator cannot read the audit log - 403",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/audit-events?limit=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "audit-events"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Permissions default to deny (NFR-SEC-04)."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 403', () => pm.response.to.have.status(403));",
+                  "pm.test('Body is application/problem+json (RFC 9457)', () => pm.expect(pm.response.headers.get('Content-Type')).to.include('application/problem+json'));",
+                  "pm.test('Problem code is IAM_PERMISSION_DENIED', () => pm.expect(pm.response.json().code).to.eql('IAM_PERMISSION_DENIED'));",
+                  "pm.test('Message is human-readable, no raw code in detail (NFR-USE-03)', () => pm.expect(pm.response.json().detail).to.be.a('string').and.not.include('IAM_PERMISSION_DENIED'));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

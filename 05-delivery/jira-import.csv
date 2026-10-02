@@ -1,0 +1,2835 @@
+"Issue ID","Issue Type","Summary","Description","Acceptance Criteria","Priority","Story Points","Epic Link","Sprint","Fix Version","Labels","Components"
+"EP-01","Epic","Agency Onboarding & Subscription","Goal: Let a care agency go from the public sign-up site to a provisioned, correctly billed tenant in one sitting, with no Tendwell Labs staff involvement, and make sure subscription problems never block care delivery.
+
+Objectives: Enabler for OBJ-01 to OBJ-06 (no direct KPI). Leading indicator: pilot tenants complete the setup checklist within 5 business days of activation.
+Business need: BN-01
+Functional requirements: FR-ONB-01, FR-ONB-02, FR-ONB-03, FR-ONB-04, FR-ONB-05, FR-ONB-06, FR-ONB-07, FR-ONB-08
+Stories: US-001, US-002, US-003, US-004, US-005, US-006 (29 points)","","Highest","","","","R1","ONB",""
+"EP-02","Epic","Identity & Access Management","Goal: Give every user secure, least-privilege access limited to their tenant and assigned locations, keep a complete sign-in and access trail, and let Tendwell Labs support staff into a tenant only with the agency's time-boxed consent.
+
+Objectives: Enabler for OBJ-01 to OBJ-06 (no direct KPI). Guardrails: zero cross-tenant access findings in the penetration test (NFR-SEC-02); 100% MFA enrollment for MFA-mandatory roles.
+Business need: BN-02
+Functional requirements: FR-IAM-01, FR-IAM-02, FR-IAM-03, FR-IAM-04, FR-IAM-05, FR-IAM-06, FR-IAM-07, FR-IAM-08
+Stories: US-007, US-008, US-009, US-010, US-011 (23 points)","","Highest","","","","R1","IAM",""
+"EP-03","Epic","Client Records & Care Plans","Goal: Keep one accurate, PHI-protected record per client, with the authorizations and approved care plan that drive scheduling, visit verification and billing.
+
+Objectives: OBJ-06 Authorization-overrun denials (6.1% to 1% or less); OBJ-01 EVV completeness (a geocoded service address is a precondition of the location check).
+Business need: BN-03
+Functional requirements: FR-CLI-01, FR-CLI-02, FR-CLI-03, FR-CLI-04, FR-CLI-05, FR-CLI-06, FR-CLI-07, FR-CLI-08
+Stories: US-012, US-013, US-014, US-015, US-016 (24 points)","","Highest","","","","R1","CLI",""
+"EP-04","Epic","Caregiver Workforce & Credentials","Goal: Keep an accurate caregiver roster with current credentials and effective-dated pay profiles, so that only qualified staff are scheduled and everyone is paid at the right rate.
+
+Objectives: OBJ-05 Credential lapses (23 instances per quarter to 0); OBJ-02 Payroll preparation time (correct pay profiles remove manual rate lookups).
+Business need: BN-04
+Functional requirements: FR-WRK-01, FR-WRK-02, FR-WRK-03, FR-WRK-04, FR-WRK-05, FR-WRK-06
+Stories: US-017, US-018, US-019 (13 points)","","Highest","","","","R1","WRK",""
+"EP-05","Epic","Scheduling","Goal: Let Coordinators build and change compliant schedules quickly, with checks that stop unqualified, unauthorized or overlapping assignments before they happen and caregivers told of changes within a minute.
+
+Objectives: OBJ-05 Credential lapses (to 0); OBJ-06 Authorization-overrun denials (to 1% or less); OBJ-01 EVV completeness (accurate schedules give EVV a visit to verify against).
+Business need: BN-05
+Functional requirements: FR-SCH-01, FR-SCH-02, FR-SCH-03, FR-SCH-04, FR-SCH-05, FR-SCH-06, FR-SCH-07
+Stories: US-020, US-021, US-022, US-023, US-024 (31 points)","","Highest","","","","R1","SCH",""
+"EP-06","Epic","Electronic Visit Verification (EVV)","Goal: Capture all six EVV data elements for every visit with minimal caregiver effort, flag anomalies without ever blocking care, and turn clean visits into Verified visits that payroll and billing can trust.
+
+Objectives: OBJ-01 EVV completeness (81% to 97% or more); OBJ-02 Payroll preparation time (fewer manual timesheet fixes); OBJ-04 Days to invoice (Verified visits bill without rework).
+Business need: BN-06
+Functional requirements: FR-EVV-01, FR-EVV-02, FR-EVV-03, FR-EVV-04, FR-EVV-05, FR-EVV-06, FR-EVV-07, FR-EVV-08, FR-EVV-09, FR-EVV-10
+Stories: US-025, US-026, US-027, US-028, US-029, US-030 (37 points)","","Highest","","","","R1","EVV",""
+"EP-07","Epic","Medication Administration (eMAR) & Vitals","Goal: Make every scheduled dose visible, documented and escalated when it is missed, keep PRN doses inside safe limits, and get abnormal vital signs in front of a nurse at once.
+
+Objectives: OBJ-03 Undocumented medication doses (4.6% to 0.5% or less).
+Business need: BN-07
+Functional requirements: FR-MAR-01, FR-MAR-02, FR-MAR-03, FR-MAR-04, FR-MAR-05, FR-MAR-06, FR-MAR-07, FR-MAR-08, FR-MAR-09
+Stories: US-031, US-032, US-033, US-034, US-035 (26 points)","","Highest","","","","R1","MAR",""
+"EP-08","Epic","Care Documentation & Client Incidents","Goal: Give every visit a tamper-evident note and every client incident a closed loop, from field report to investigation, corrective action and on-time external report.
+
+Objectives: OBJ-01 EVV completeness (visits whose care plan requires a note cannot complete without one); compliance guardrail: 100% of reportable incidents have an external report reference before their deadline.
+Business need: BN-08
+Functional requirements: FR-DOC-01, FR-DOC-02, FR-DOC-03, FR-DOC-04, FR-DOC-05, FR-DOC-06
+Stories: US-036, US-037, US-038 (13 points)","","Highest","","","","R1","DOC",""
+"EP-09","Epic","Time Off & Holidays","Goal: Let caregivers request time off in seconds and let Coordinators see and cover the impact before they approve, so that no client visit is silently dropped and payroll receives accurate PTO and holiday data.
+
+Objectives: OBJ-01 EVV completeness (fewer Missed visits from uncovered absences); OBJ-02 Payroll preparation time (PTO and holidays arrive in the pay calculation automatically).
+Business need: BN-09
+Functional requirements: FR-TOF-01, FR-TOF-02, FR-TOF-03, FR-TOF-04, FR-TOF-05
+Stories: US-039, US-040 (8 points)","","Highest","","","","R1","TOF",""
+"EP-10","Epic","Payroll Preparation","Goal: Turn Verified visits and approved time into a reviewed, accurate payroll file that the agency imports into its payroll provider, cutting preparation from 14 hours to 3 hours or less per pay period.
+
+Objectives: OBJ-02 Payroll preparation time (14 h to 3 h or less per pay period per agency).
+Business need: BN-10
+Functional requirements: FR-PAY-01, FR-PAY-02, FR-PAY-03, FR-PAY-04, FR-PAY-05, FR-PAY-06
+Stories: US-041, US-042, US-043 (23 points)","","Highest","","","","R1","PAY",""
+"EP-11","Epic","Client Billing & Invoicing","Goal: Turn Verified visits into correct, authorization-capped invoices and claim files within 2 business days of period end, collect private-pay balances online, and make duplicate invoices impossible.
+
+Objectives: OBJ-04 Days to invoice (9 to 2 business days or fewer); OBJ-06 Authorization-overrun denials (6.1% to 1% or less).
+Business need: BN-11
+Functional requirements: FR-BIL-01, FR-BIL-02, FR-BIL-03, FR-BIL-04, FR-BIL-05, FR-BIL-06, FR-BIL-07, FR-BIL-08
+Stories: US-044, US-045, US-046, US-047, US-048 (29 points)","","Highest","","","","R1","BIL",""
+"EP-12","Epic","Notifications & Escalations","Goal: Deliver the right message to the right active person on the right channel at the right time, with no PHI in message bodies, no duplicates and escalation that stops as soon as the problem is fixed.
+
+Objectives: OBJ-03 Undocumented doses (missed-dose escalation); OBJ-05 Credential lapses (expiry reminders); OBJ-01 EVV completeness (exception alerts). Guardrail: zero notifications to deactivated users (NFR-OBS-02).
+Business need: BN-12
+Functional requirements: FR-NTF-01, FR-NTF-02, FR-NTF-03, FR-NTF-04, FR-NTF-05
+Stories: US-049, US-050 (13 points)","","Highest","","","","R1","NTF",""
+"EP-13","Epic","Reporting & Audit","Goal: Give agency leaders a live picture of today's operations and the standard reports they need, and give auditors an immutable trail of who did what, when and to which record.
+
+Objectives: Measurement for OBJ-01 to OBJ-06 (EVV compliance, MAR compliance, authorization utilization and AR ageing reports provide the KPI values). Guardrail: 100% of exports watermarked and audited.
+Business need: BN-13
+Functional requirements: FR-RPT-01, FR-RPT-02, FR-RPT-03, FR-RPT-04
+Stories: US-051, US-052 (13 points)","","Highest","","","","R1","RPT",""
+"EP-14","Epic","Family Portal","Goal: Give a client's authorized family contact timely, read-only reassurance that visits happen as planned, and a simple way to reach the Care Coordinator, without exposing more PHI than the client has consented to share.
+
+Objectives: No direct R1 KPI. R2 hypothesis: reduce inbound ""did the aide come today?"" calls to Coordinators by 30% at agencies that enable the portal. Supports OBJ-01 indirectly (families notice missed visits sooner).
+Business need: BN-14
+Functional requirements: FR-FAM-01, FR-FAM-02, FR-FAM-03
+Stories: US-053, US-054 (11 points)","","Medium","","","","R2","FAM",""
+"US-001","Story","Register my agency","As an agency owner, I want to register my agency online with my details, the agency's legal details, a plan and our service lines, so that I can start using Tendwell the same day without waiting for a call or manual setup by Tendwell staff.
+
+Persona: PER-05 Tom Brennan (AG-ADM)
+Requirements: FR-ONB-01, FR-ONB-04
+Business rules: BR-002
+Dependencies: US-005, DEP-05
+
+Notes:
+- UX: three-step wizard (owner, agency, plan and service lines) with a progress indicator; the BAA is presented as a separate checkbox with a link to the full text.
+- Analytics: track step completion and abandonment per step; target 70% or more of started sign-ups reach email verification.
+- Out of scope: multi-entity agencies (one EIN per tenant in R1); bulk data import, which Customer Success handles for the pilot (DEP-03).
+- One tenant per EIN: a second registration with an EIN that already has an Active or Trial tenant is routed to Customer Success rather than rejected, to avoid confirming that the agency is a customer.","Scenario: US-001-AC1 Register with a trial code and no payment method
+  Given the public sign-up site shows the Active plan ""Core""
+  And the sign-up link carries the valid trial code ""TRIAL21""
+  When Tom enters his first name, last name, email ""tom.brennan@example.com"" and phone ""+1-614-555-0142""
+  And he enters legal name ""Harborview Home Care LLC"", EIN ""12-3456789"", registered address ""200 Harbor Street, Lakemont, OH 43999"" and time zone ""America/New_York""
+  And he selects plan ""Core"" and service line ""HOME_VISIT"", accepts the terms and the BAA, and submits
+  Then a tenant is created with status ""Pending""
+  And no payment method is requested
+  And the EIN is stored encrypted and shown only as ""**-***6789""
+  And a verification email is sent to ""tom.brennan@example.com""
+
+Scenario: US-001-AC2 Register without a trial code
+  Given Tom has not applied a trial code
+  When he completes the sign-up form and submits
+  Then the payment provider's hosted card form is shown before submission completes
+  And card details are never sent to or stored by Tendwell
+  And after email verification the subscription starts with status ""Active"" instead of ""Trialing""
+
+Scenario Outline: US-001-AC3 Reject incomplete or invalid registration data
+  Given Tom is on the agency details step
+  When he submits with <field> set to ""<value>""
+  Then the form is not submitted
+  And the message ""<message>"" is shown next to the field
+
+  Examples:
+    | field         | value       | message                                                       |
+    | legal name    |             | Enter the agency's legal name as registered with the IRS.     |
+    | EIN           | 12345       | Enter the EIN as 9 digits in the format 12-3456789.           |
+    | service lines | none        | Select at least one service line your agency provides.        |
+    | time zone     |             | Select the time zone your agency schedules visits in.         |
+    | owner email   | tom@example | Enter a full email address, for example name@example.com.     |
+
+Scenario: US-001-AC4 Provision the tenant on activation
+  Given tenant ""Harborview Home Care LLC"" is ""Pending"" with trial code ""TRIAL21""
+  When Tom verifies his email address
+  Then the tenant is provisioned with role templates for AG-ADM, AG-COORD, AG-SUPV, AG-FIN and CG
+  And default credential types, EVV reason codes, notification templates and escalation ladders are created
+  And tenant settings use the platform defaults, including a 150 m geofence radius and clock-in opening 15 minutes before the scheduled start
+  And Tom is assigned the AG-ADM role
+  And the tenant status becomes ""Trial"" with the trial ending 21 days after activation
+
+Scenario: US-001-AC5 Provisioning is retried without creating duplicates
+  Given provisioning for a newly verified tenant fails after the role templates were created
+  When the provisioning job retries
+  Then provisioning completes with exactly one set of role templates, credential types and escalation ladders
+  And the tenant stays ""Pending"" until every provisioning step has succeeded
+  And Tom sees ""We are finishing setting up your account. This usually takes less than a minute."" instead of an error code","Highest","8","EP-01","S1","R1","ONB FR-ONB-01 FR-ONB-04","Public Sign-up Site"
+"US-002","Story","Apply a trial or promo code at sign-up","As an agency owner, I want to apply a trial or promo code and see its effect on the price before I submit, so that I know exactly what my agency will pay.
+
+Persona: PER-05 Tom Brennan (AG-ADM)
+Requirements: FR-ONB-03
+Business rules: BR-002, BR-004
+Dependencies: US-001, US-005
+
+Notes:
+- Validation calls `POST /promo-codes/validate`; a redemption is counted only when the sign-up is submitted, not when the code is checked.
+- Fixed-amount codes apply to the monthly subscription invoice total, not per seat (confirmed with the Product Owner on 2026-03-04).
+- Analytics: code acceptance and rejection reasons per code, to show Platform Administrators which campaigns fail.
+- Out of scope: stacking codes and agency-to-agency invite codes (BR-004 allows one code per subscription).","Scenario Outline: US-002-AC1 Show the price effect of a valid code
+  Given Tom has selected plan ""Core"" at $14.00 per active client seat per month
+  When he applies the code ""<code>""
+  Then the code is accepted
+  And the price summary shows ""<effect>"" before he submits
+
+  Examples:
+    | code       | kind     | effect                                                    |
+    | TRIAL21    | Trial    | 21-day free trial, no payment method required             |
+    | LAKEMONT20 | Percent  | $11.20 per active client seat per month (20% off)         |
+    | WELCOME50  | Fixed    | $50.00 off each monthly subscription invoice              |
+
+Scenario Outline: US-002-AC2 Reject an unusable code with a specific reason
+  Given Tom has selected plan ""Core""
+  And today is 2026-03-16
+  When he applies the code ""<code>""
+  Then the code is rejected with the message ""<message>""
+  And the price summary is unchanged
+  And Tom can still submit the sign-up without a code
+
+  Examples:
+    | code       | condition                                    | message                                                        |
+    | NOPE99     | does not exist                               | We could not find this code. Check the spelling and try again. |
+    | SPRING25   | status Inactive                              | This code is no longer active.                                 |
+    | WINTER10   | expired on 2026-02-28                        | This code expired on 2026-02-28.                               |
+    | FIRST50    | max redemptions 50, redemptions 50           | This code has reached its redemption limit.                    |
+    | PLUSONLY   | eligible only for plan ""Plus""                | This code is not valid for the Core plan.                      |
+
+Scenario: US-002-AC3 Only one code per subscription
+  Given Tom has applied the code ""LAKEMONT20""
+  When he applies the code ""WELCOME50""
+  Then he is asked to confirm replacing ""LAKEMONT20"" with ""WELCOME50""
+  And after he confirms, only ""WELCOME50"" is attached to the sign-up
+
+Scenario: US-002-AC4 The last redemption cannot be used twice
+  Given the code ""FIRST50"" has max redemptions 50 and 49 redemptions
+  When two agencies submit sign-ups with ""FIRST50"" at the same moment
+  Then exactly one sign-up keeps the code and the redemption count becomes 50
+  And the other agency sees ""This code has reached its redemption limit."" and can submit without the code
+
+Scenario: US-002-AC5 Code matching ignores case and surrounding spaces
+  When Tom applies the code "" lakemont20 ""
+  Then the code ""LAKEMONT20"" is applied","Highest","3","EP-01","S1","R1","ONB FR-ONB-03","Public Sign-up Site"
+"US-003","Story","Verify my email and complete the setup checklist","As an agency owner, I want to verify my email address and then follow a setup checklist, so that my agency is activated securely and I know exactly what to configure before the first visit.
+
+Persona: PER-05 Tom Brennan (AG-ADM)
+Requirements: FR-ONB-02, FR-ONB-05
+Business rules: None
+Dependencies: US-001
+
+Notes:
+- UX: each checklist item deep-links to the screen that completes it; wireframe referenced in the wireframe index.
+- Analytics: time from activation to ""6 of 6 complete"" per tenant; pilot target is 5 business days or fewer.
+- Security: verification tokens are single use, stored hashed and compared in constant time; the email contains no PHI.
+- Out of scope: guided product tours.","Scenario: US-003-AC1 Verify within 24 hours and land on the checklist
+  Given a verification email was sent to ""tom.brennan@example.com"" at 2026-03-16 09:00
+  When Tom opens the link at 2026-03-17 08:59
+  Then his email is marked verified and the tenant is activated
+  And Tom is signed in and lands on the setup checklist showing ""0 of 6 complete""
+
+Scenario Outline: US-003-AC2 Reject an expired, used or altered link
+  Given a verification email was sent at 2026-03-16 09:00
+  When Tom opens <link> at <time>
+  Then he sees ""<message>""
+  And the tenant stays ""Pending""
+
+  Examples:
+    | link                        | time             | message                                                        |
+    | the original link           | 2026-03-17 09:01 | This link has expired. Send a new verification email.          |
+    | a link he has already used  | 2026-03-16 09:30 | This link has already been used. Sign in to continue.          |
+    | a link with an altered token| 2026-03-16 09:05 | This link is not valid. Send a new verification email.         |
+
+Scenario: US-003-AC3 Resending invalidates earlier links
+  Given Tom requested a second verification email at 2026-03-16 10:00
+  When he opens the first link at 2026-03-16 10:05
+  Then he sees ""This link is not valid. Send a new verification email.""
+  And the second link still verifies his email
+
+Scenario Outline: US-003-AC4 Checklist items complete automatically
+  Given Tom's tenant is active and the checklist shows ""<before> of 6 complete""
+  When <action>
+  Then the item ""<item>"" is ticked without any manual step
+  And the checklist shows ""<after> of 6 complete""
+
+  Examples:
+    | before | action                                                        | item               | after |
+    | 0      | Tom saves the location ""Lakemont North""                       | Add a location     | 1     |
+    | 1      | Tom confirms service line HOME_VISIT in settings              | Set service lines  | 2     |
+    | 2      | Tom adds payer ""Lakemont County Medicaid"" of type Medicaid    | Add a payer        | 3     |
+    | 3      | a caregiver profile is created                                | Add a caregiver    | 4     |
+    | 4      | a client is admitted                                          | Add a client       | 5     |
+    | 5      | the first visit is scheduled                                  | Create a schedule  | 6     |
+
+Scenario: US-003-AC5 Checklist visibility and dismissal
+  Given the checklist shows ""4 of 6 complete""
+  When Tom dismisses the checklist
+  Then it is hidden from his home page and can be reopened from Settings
+  And users without the AG-ADM role never see the checklist
+  And when all 6 items are complete the checklist is replaced by ""Setup complete"" for 7 days and then hidden","Highest","5","EP-01","S1","R1","ONB FR-ONB-02 FR-ONB-05","Agency Web App"
+"US-004","Story","Manage my subscription seats and payment method","As an agency owner, I want to see and manage my subscription seats and payment method, so that I am billed correctly for the clients we actually serve and our account never lapses by surprise.
+
+Persona: PER-05 Tom Brennan (AG-ADM)
+Requirements: FR-ONB-06
+Business rules: BR-002
+Dependencies: US-001, DEP-05
+
+Notes:
+- Seat proration uses calendar days in the cycle, inclusive of the day the seat is added; amounts are rounded half-up to the cent.
+- Out of scope: annual billing, invoicing by bank transfer, and mid-cycle plan downgrades (handled at cycle end).
+- Open question (closed 2026-03-11): Should discharged clients release a seat mid-cycle? Decision: no; seats are counted per cycle, per BR-002.","Scenario: US-004-AC1 View the subscription summary
+  Given Harborview Home Care is Active on plan ""Core"" with 60 seats for the cycle 2026-09-01 to 2026-09-30
+  When Tom opens Settings > Subscription
+  Then he sees the plan, 60 seats, the number of active client seats so far this cycle, the next invoice date 2026-10-01 and its estimated amount
+  And the payment method is shown only as the card brand and last 4 digits
+
+Scenario: US-004-AC2 Prorate a seat increase within the cycle
+  Given the cycle 2026-09-01 to 2026-09-30 was billed in advance for 60 seats at $14.00
+  When the 62nd client becomes an active seat on 2026-09-16 because a visit is scheduled for them
+  Then seats increase to 62
+  And a proration charge of $14.00 is added (2 seats x $14.00 x 15/30 days)
+  And Tom sees the proration on the next invoice preview
+
+Scenario: US-004-AC3 Count a client as an active seat only once per cycle
+  Given client C-10234 already counts as an active seat in the cycle
+  When a second and third visit are scheduled for C-10234 in the same cycle
+  Then the seat count does not change
+  And a client with no scheduled visit in the cycle is not counted
+
+Scenario: US-004-AC4 Seat decreases take effect next cycle
+  Given the tenant has 62 seats in the current cycle
+  When only 58 clients have a scheduled visit in the next cycle
+  Then the next cycle is billed for 58 seats
+  And no credit is issued for the current cycle
+
+Scenario: US-004-AC5 Update the payment method securely
+  When Tom replaces the card on file using the payment provider's hosted form
+  Then the new card is shown as brand and last 4 digits only
+  And an audit event ""subscription.payment_method_updated"" records Tom as actor
+  And no card number, expiry or CVC reaches Tendwell servers
+
+Scenario: US-004-AC6 Only Agency Administrators manage the subscription
+  Given Denise Carter has the AG-FIN role and no subscription permission override
+  When she opens Settings
+  Then the Subscription page is not shown
+  And a direct call to PATCH /v1/subscription returns 403 with an application/problem+json body","Highest","5","EP-01","S1","R1","ONB FR-ONB-06","Agency Web App"
+"US-005","Story","Manage plans and promo codes","As a Platform Administrator, I want to create, edit and retire plans and promo codes in the Platform Console, so that we can run pricing and campaigns without a code release.
+
+Persona: Platform Administrator (PLT-ADM)
+Requirements: FR-ONB-08
+Business rules: BR-004
+Dependencies: US-007
+
+Notes:
+- The Platform Console requires MFA for every platform role (BR-006).
+- Analytics: redemptions per code per week on the platform dashboard.
+- Out of scope: tenant-specific negotiated pricing (handled by a dedicated plan in R1).","Scenario: US-005-AC1 Create a plan that appears on sign-up
+  When the Platform Administrator creates plan code ""CORE"", name ""Core"", price $14.00 per seat per month
+  Then the plan is saved with status ""Active""
+  And it is listed by GET /v1/plans on the public sign-up site
+
+Scenario: US-005-AC2 Retire a plan without disturbing existing subscribers
+  Given 12 tenants subscribe to plan ""Core""
+  When the Platform Administrator retires plan ""Core""
+  Then ""Core"" is no longer offered on the sign-up site
+  And the 12 tenants stay on ""Core"" at their current price until their plan is changed
+
+Scenario Outline: US-005-AC3 Validate promo code settings
+  When the Platform Administrator saves a promo code with <setting>
+  Then the result is ""<result>""
+
+  Examples:
+    | setting                                     | result                                              |
+    | Percent discount of 20                      | Saved                                               |
+    | Percent discount of 0                       | Rejected: enter a percentage from 1 to 100          |
+    | Percent discount of 101                     | Rejected: enter a percentage from 1 to 100          |
+    | Fixed discount of $0.00                     | Rejected: enter an amount greater than $0.00        |
+    | expiry date earlier than today              | Rejected: the expiry date must be in the future     |
+    | max redemptions of 0                        | Rejected: max redemptions must be 1 or more         |
+    | code ""lakemont20"" when ""LAKEMONT20"" exists  | Rejected: this code already exists                  |
+
+Scenario: US-005-AC4 Max redemptions cannot drop below current redemptions
+  Given promo code ""FIRST50"" has 37 redemptions
+  When the Platform Administrator sets max redemptions to 30
+  Then the change is rejected with ""Max redemptions cannot be lower than the 37 redemptions already made.""
+
+Scenario: US-005-AC5 Restrict plan and promo management to platform administrators
+  Given a Platform Support Agent and an Agency Administrator are signed in
+  When either calls POST /v1/platform/promo-codes
+  Then the request returns 403
+  And every successful plan or promo change by a Platform Administrator creates an audit event with before and after values","Highest","5","EP-01","S1","R1","ONB FR-ONB-08","Platform Console"
+"US-006","Story","Move unpaid tenants to read-only without blocking care","As the subscription lifecycle job, I want to move a tenant to Read-only when its trial or payments lapse and restore it as soon as payment succeeds, so that unpaid use is contained while caregivers can always deliver and record care.
+
+Persona: System (SYS)
+Requirements: FR-ONB-07
+Business rules: BR-003
+Dependencies: US-004, US-025, US-049
+
+Notes:
+- Clarification (Product Owner and Clinical SME, 2026-05-19): BR-003 says ""EVV clock-in stays available"". The team agreed that the whole caregiver visit flow (clock-in, tasks, eMAR, vitals, notes, incidents, clock-out) stays available, because blocking any part of it would block or hide care.
+- Clarification: the 7-day grace applies to both triggers, matching the configuration defaults.
+- Single-flight execution follows ADR-003 (`job_executions` with a unique idempotency key).
+- Out of scope: automatic cancellation. Cancellation and the 90-day retention are handled by Customer Success in R1.","Scenario Outline: US-006-AC1 Start Read-only 7 days after the trigger
+  Given tenant ""Cedar Lane Adult Day Center"" has no successful payment
+  And <trigger> occurred at 2026-06-21 00:00 America/New_York
+  When the lifecycle job runs at <run time>
+  Then the tenant status is ""<status>""
+
+  Examples:
+    | trigger                         | run time         | status   |
+    | the trial expired               | 2026-06-27 23:59 | Trial    |
+    | the trial expired               | 2026-06-28 00:00 | ReadOnly |
+    | the third payment retry failed  | 2026-06-27 23:59 | Active   |
+    | the third payment retry failed  | 2026-06-28 00:00 | ReadOnly |
+
+Scenario: US-006-AC2 Warn the Agency Administrator during the grace period
+  Given the trial expired at 2026-06-21 00:00
+  When Tom signs in on 2026-06-25
+  Then a banner states ""Your account becomes read-only on 2026-06-28. Add a payment method to keep full access.""
+  And Tom receives an email and in-app notification with the same date and no PHI
+
+Scenario: US-006-AC3 Read-only allows viewing and exporting but not office edits
+  Given the tenant is ""ReadOnly""
+  When Marcus Hale tries to create a visit pattern
+  Then the request returns 403 with problem type ""tenant-read-only"" and the message ""Your agency account is read-only. Ask your administrator to update billing.""
+  And Marcus can still view the schedule board and export reports
+
+Scenario: US-006-AC4 Care delivery stays available in Read-only
+  Given the tenant is ""ReadOnly""
+  And Rosa Delgado has a visit scheduled today at 08:00
+  When Rosa clocks in, records task statuses, documents a dose, writes the visit note and clocks out
+  Then every action succeeds exactly as it would for an Active tenant
+  And incident reporting from the Caregiver app also stays available
+
+Scenario: US-006-AC5 Restore Active when payment succeeds
+  Given the tenant is ""ReadOnly""
+  When the payment provider's webhook reports a successful payment at 10:12
+  Then the tenant status is ""Active"" within 5 minutes
+  And the Read-only banner is removed for all users
+
+Scenario: US-006-AC6 The lifecycle job is single-flight
+  Given two scheduler workers start the lifecycle job for the same night
+  When both attempt to process tenant ""Cedar Lane Adult Day Center""
+  Then the status changes exactly once
+  And exactly one Read-only notification is sent to each Agency Administrator","Highest","3","EP-01","S6","R1","ONB FR-ONB-07","Platform Services"
+"US-007","Story","Sign in with multi-factor authentication","As an Agency Administrator, I want to sign in with my password and a second factor, so that nobody can reach my agency's client and payroll data with a stolen password.
+
+Persona: PER-05 Tom Brennan (AG-ADM)
+Requirements: FR-IAM-01, FR-IAM-08
+Business rules: BR-006, BR-007
+Dependencies: US-001
+
+Notes:
+- MFA uses TOTP or SMS one-time codes through the managed OIDC provider; access tokens live 15 minutes and refresh tokens rotate on use.
+- Recovery when an MFA device is lost: another Agency Administrator resets the factor, or Tendwell Support does so under a support grant (US-011). The reset is audited.
+- Analytics: sign-in success rate and MFA failure rate per tenant feed the security dashboard.
+- Out of scope: SSO with agency identity providers (backlog candidate); WebAuthn passkeys (R2 candidate).","Scenario: US-007-AC1 Sign in with password and authenticator code
+  Given Tom has the AG-ADM role and an enrolled authenticator app
+  When he enters ""tom.brennan@example.com"", his correct password and a current 6-digit TOTP code
+  Then he is signed in to the Agency Web App
+  And a sign-in event is recorded with outcome ""Success"", IP address, device and timestamp
+
+Scenario Outline: US-007-AC2 MFA is mandatory for privileged roles
+  Given a user whose only role is <role> signs in for the first time with a correct password
+  When the password step succeeds
+  Then MFA enrollment is <enrollment>
+
+  Examples:
+    | role     | enrollment                                         |
+    | AG-ADM   | required before any page is shown                  |
+    | AG-SUPV  | required before any page is shown                  |
+    | AG-FIN   | required before any page is shown                  |
+    | PLT-ADM  | required before any page is shown                  |
+    | PLT-SUP  | required before any page is shown                  |
+    | AG-COORD | offered and can be skipped                         |
+    | CG       | offered and can be skipped                         |
+
+Scenario Outline: US-007-AC3 Record failed sign-ins without revealing which factor failed
+  When a sign-in attempt for ""<email>"" fails because <cause>
+  Then the user sees ""<message>""
+  And a sign-in event is recorded with outcome ""<outcome>"" and the attempted email
+
+  Examples:
+    | email                     | cause                        | message                                   | outcome     |
+    | tom.brennan@example.com   | the password is wrong        | Email or password is incorrect.           | BadPassword |
+    | nobody@example.com        | no account exists            | Email or password is incorrect.           | BadPassword |
+    | tom.brennan@example.com   | the TOTP code is wrong       | That code did not work. Try a new code.   | MfaFailed   |
+
+Scenario Outline: US-007-AC4 Enforce the password policy
+  When Tom sets his password to a <candidate>
+  Then the password is <result>
+
+  Examples:
+    | candidate                                         | result                                                       |
+    | 11-character password not on the breached list   | rejected: use at least 12 characters                         |
+    | 12-character password not on the breached list   | accepted                                                     |
+    | 12-character password found on the breached list | rejected: this password has appeared in a data breach        |
+
+Scenario: US-007-AC5 No forced periodic rotation
+  Given Tom's password was set 400 days ago and has not appeared on the breached list
+  When he signs in
+  Then he is not asked to change his password
+
+Scenario: US-007-AC6 Use an SMS one-time code without PHI
+  Given Tom chose SMS as his second factor with verified phone ""+1-614-555-0142""
+  When he passes the password step
+  Then an SMS is sent containing only a one-time code and the text ""Tendwell sign-in code. Do not share it.""","Highest","5","EP-02","S1","R1","IAM FR-IAM-01 FR-IAM-08","Agency Web App"
+"US-008","Story","Reset a forgotten password","As a caregiver, I want to reset my forgotten password from my phone, so that I can sign in before my next visit without calling the office.
+
+Persona: PER-01 Rosa Delgado (CG)
+Requirements: FR-IAM-02
+Business rules: BR-007
+Dependencies: US-007
+
+Notes:
+- The reset email contains no PHI and no account details other than the link.
+- UX: the mobile app opens the reset link inside the app when installed (universal link / app link).
+- Out of scope: reset by SMS link (phones are often shared in households).","Scenario: US-008-AC1 Request a reset without revealing whether the email is registered
+  When Rosa requests a password reset for ""rosa.delgado@example.com""
+  And another person requests a reset for ""unknown.person@example.com""
+  Then both see ""If an account exists for this email, we sent a reset link. It expires in 30 minutes.""
+  And only ""rosa.delgado@example.com"" receives an email
+  And both responses take a similar time, within 100 ms of each other at p95
+
+Scenario Outline: US-008-AC2 The reset link is valid for 30 minutes and single use
+  Given a reset link was sent to Rosa at 06:30
+  When she opens it at <time> <state>
+  Then <result>
+
+  Examples:
+    | time  | state                     | result                                                         |
+    | 06:59 | for the first time        | she can set a new password                                     |
+    | 07:00 | for the first time        | she can set a new password                                     |
+    | 07:01 | for the first time        | she sees ""This link has expired. Request a new one.""           |
+    | 06:45 | after already resetting   | she sees ""This link has already been used. Sign in instead.""   |
+
+Scenario: US-008-AC3 Apply the password policy on reset
+  When Rosa enters an 11-character new password
+  Then she sees ""Use at least 12 characters. A short phrase is easier to remember.""
+  And her old password still works
+
+Scenario: US-008-AC4 Revoke other sessions after a reset
+  Given Rosa is signed in on a tablet and on her phone
+  When she completes a password reset from her phone
+  Then the tablet session and all refresh tokens issued before the reset are revoked
+  And Rosa receives an email confirming the password change with no PHI
+  And unsynced EVV punches on both devices are kept and sync after she signs in again
+
+Scenario: US-008-AC5 Deactivated users cannot reset
+  Given the user ""former.aide@example.com"" is Deactivated
+  When a reset is requested for that email
+  Then the neutral confirmation message is shown and no email is sent","Highest","2","EP-02","S1","R1","IAM FR-IAM-02","Caregiver Mobile App"
+"US-009","Story","Assign roles and permission overrides","As an Agency Administrator, I want to assign role templates and individual permission overrides and see the effective result before saving, so that each person gets exactly the access their job needs.
+
+Persona: PER-05 Tom Brennan (AG-ADM)
+Requirements: FR-IAM-05, FR-IAM-06
+Business rules: BR-001, BR-005
+Dependencies: US-007
+
+Notes:
+- Permission changes apply on the user's next request; permissions are evaluated server-side and are not embedded in the 15-minute access token.
+- Permissions default to deny (NFR-SEC-04); Agency Administrators receive a quarterly access-review report.
+- Row-level security on `tenant_id` follows ADR-001 and DEC-01; the API never accepts a tenant ID from the client.
+- Out of scope: custom role templates authored from scratch (R1 supports copying and editing the defaults).","Scenario: US-009-AC1 Preview effective permissions before saving
+  Given Marcus Hale has no roles
+  When Tom assigns the role template AG-COORD and the location ""Lakemont North""
+  Then before saving, Tom sees the effective permission list including ""visits:create"" and ""visit_exceptions:resolve""
+  And after saving, the change is audited with before and after values
+
+Scenario Outline: US-009-AC2 Compute effective permissions with deny winning
+  Given Marcus has role template AG-COORD
+  And the template <template state> ""<permission>""
+  And Marcus has the override <override>
+  Then the effective permission ""<permission>"" is <effective>
+
+  Examples:
+    | template state | permission           | override       | effective |
+    | grants         | clients:reveal_phi   | none           | granted   |
+    | grants         | clients:reveal_phi   | Deny           | denied    |
+    | does not grant | payroll:export       | Grant          | granted   |
+    | does not grant | payroll:export       | none           | denied    |
+    | grants         | visits:cancel        | Grant          | granted   |
+
+Scenario: US-009-AC3 Enforce permissions on the server
+  Given Marcus has an effective Deny on ""clients:reveal_phi""
+  When he calls POST /v1/clients/{clientId}/phi-reveals directly with a valid token
+  Then the API returns 403 with an application/problem+json body
+  And the denied attempt is written to the audit log
+
+Scenario: US-009-AC4 Isolate tenants in the database
+  Given client C-10234 belongs to Harborview Home Care (TEN-001)
+  When an Agency Administrator of Cedar Lane Adult Day Center (TEN-002) requests GET /v1/clients/{id of C-10234}
+  Then the API returns 404, not 403, so the record's existence is not confirmed
+  And a database query run under TEN-002's session returns no rows for C-10234 because row-level security filters on tenant_id
+
+Scenario: US-009-AC5 Limit data to assigned locations
+  Given Marcus is assigned only to ""Lakemont North""
+  And Harborview also has the location ""Lakemont South""
+  When Marcus opens the client list
+  Then only clients of ""Lakemont North"" are listed
+  And a request for a ""Lakemont South"" client returns 404
+
+Scenario: US-009-AC6 Keep at least one active Agency Administrator
+  Given Tom is the only active user with the AG-ADM role
+  When he removes AG-ADM from himself
+  Then the change is rejected with ""Your agency needs at least one active Agency Administrator. Assign the role to someone else first.""","Highest","8","EP-02","S1","R1","IAM FR-IAM-05 FR-IAM-06","Agency Web App"
+"US-010","Story","Lock accounts and expire idle sessions","As the authentication service, I want to lock accounts after repeated failed sign-ins and end idle sessions, so that password guessing and unattended screens do not expose PHI.
+
+Persona: System (SYS)
+Requirements: FR-IAM-03, FR-IAM-04
+Business rules: None
+Dependencies: US-007
+
+Notes:
+- Lockout messaging is deliberately the same whether the account exists or not after lock, except for the lock text itself; the Compliance and Privacy Officer accepted the small enumeration risk in exchange for fewer support calls.
+- Lockout applies per account, not per IP; IP rate limiting is handled at the WAF.
+- Out of scope: risk-based or adaptive authentication.","Scenario Outline: US-010-AC1 Lock after 5 consecutive failures
+  Given Marcus's account is Active
+  When <failures> consecutive sign-in attempts fail with a wrong password
+  Then the account status is ""<status>""
+  And the account owner email is <email>
+
+  Examples:
+    | failures | status | email    |
+    | 4        | Active | not sent |
+    | 5        | Locked | sent     |
+
+Scenario Outline: US-010-AC2 The lock lasts 15 minutes
+  Given Marcus's account was locked at 09:00
+  When he signs in with the correct password at <time>
+  Then the result is ""<result>""
+
+  Examples:
+    | time     | result                                                                         |
+    | 09:14:59 | Your account is temporarily locked. Try again later or reset your password.    |
+    | 09:15:00 | Signed in                                                                      |
+
+Scenario: US-010-AC3 A successful sign-in resets the failure counter
+  Given Marcus has 4 consecutive failed attempts
+  When he signs in successfully and later fails 4 more times
+  Then the account is not locked
+
+Scenario: US-010-AC4 Warn and then end an idle web session
+  Given Denise is signed in to the Agency Web App and has been idle for 14 minutes
+  Then a dialog warns ""You will be signed out in 60 seconds"" with a ""Stay signed in"" button
+  When she does not respond for 60 seconds
+  Then the session ends and she sees the sign-in page with ""You were signed out after 15 minutes of inactivity.""
+  And PHI is no longer displayed on the screen
+
+Scenario: US-010-AC5 Re-authenticate on mobile after 12 hours
+  Given Rosa last authenticated on the Caregiver app 12 hours ago
+  When she opens the app
+  Then she must confirm her identity with the device PIN or biometrics
+  And if that fails 3 times she must sign in with her password
+  And punches queued offline before the prompt are kept and sync after she authenticates","Highest","3","EP-02","S1","R1","IAM FR-IAM-03 FR-IAM-04","Platform Services"
+"US-011","Story","Request time-boxed support access to a tenant","As a Platform Support Agent, I want to request time-boxed access to an agency's tenant that starts only after the agency approves it, so that I can troubleshoot with the agency's consent and a full audit trail.
+
+Persona: Platform Support Agent (PLT-SUP)
+Requirements: FR-IAM-07
+Business rules: BR-008
+Dependencies: US-009
+
+Notes:
+- ReadWrite grants are available only when Tom selects ReadWrite during approval; the default is ReadOnly (BR-008).
+- Support agents never see PHI unmasked unless the grant is approved and their platform role holds the reveal permission; every reveal still needs a reason (US-015).
+- Analytics: number of grants per tenant per month and median grant duration, reviewed quarterly by the Compliance and Privacy Officer.","Scenario: US-011-AC1 Request access with a reason
+  When the support agent requests ReadOnly access to Harborview Home Care for 2 hours with reason ""Ticket 4821: schedule board not loading""
+  Then a grant is created with status ""Requested""
+  And Tom Brennan receives an in-app and email notification asking him to approve or decline
+
+Scenario Outline: US-011-AC2 Limit the duration to 4 hours
+  When the support agent requests access for <duration>
+  Then the request is <result>
+
+  Examples:
+    | duration          | result                                         |
+    | 4 hours           | accepted                                       |
+    | 4 hours 1 minute  | rejected: access can last at most 4 hours      |
+    | 0 minutes         | rejected: enter a duration of at least 1 minute |
+
+Scenario: US-011-AC3 No access before approval and none after expiry
+  Given a grant is ""Requested""
+  When the support agent opens the tenant's client list
+  Then the request returns 403
+  When Tom approves the grant at 10:00 for 2 hours
+  Then the support agent can view the tenant's data until 12:00
+  And the first request after 12:00 returns 403 and the grant status is ""Expired""
+
+Scenario: US-011-AC4 Revoke or decline at any time
+  Given a grant is ""Active""
+  When Tom revokes it
+  Then the grant status is ""Revoked"" and the support agent's next request returns 403
+  And a declined request ends with status ""Declined"" and the support agent is notified
+
+Scenario: US-011-AC5 Audit and restrict actions under a grant
+  Given a ReadOnly grant is ""Active""
+  When the support agent views client C-10234 and then tries to edit the client's phone number
+  Then the view is audited with actor type ""Support"" and the grant ID
+  And the edit returns 403 because the grant is read-only","High","5","EP-02","S2","R1","IAM FR-IAM-07","Platform Console"
+"US-012","Story","Admit a new client","As a Care Coordinator, I want to admit a new client with demographics, a verified service address, contacts, clinical basics, payer details and caregiver preferences, so that the client can be scheduled and visited safely from day one.
+
+Persona: PER-02 Marcus Hale (AG-COORD)
+Requirements: FR-CLI-01, FR-CLI-02, FR-CLI-08
+Business rules: BR-011, BR-017
+Dependencies: US-009
+
+Notes:
+- Exactly one diagnosis is marked primary; the first diagnosis entered is primary by default.
+- UX: the address field uses autocomplete; the map preview shows the 150 m geofence circle so the Coordinator can see whether the pin sits on the right building.
+- Data: allergies are free text in R1 and are shown on the eMAR order form (US-031); coded allergy lists are out of scope.
+- Issue ISS-01 (approximate geocoding during migration) led to AC2.","Scenario: US-012-AC1 Admit a client with complete data
+  Given Marcus is assigned to ""Lakemont North""
+  When he enters first and last name, date of birth 1948-04-11, gender, primary language ""English"", phone ""+1-614-555-0187"", service address ""418 Birchwood Lane, Lakemont, OH 43999"", allergy ""Penicillin"", primary diagnosis ""I10"", an emergency contact and payer ""Lakemont County Medicaid"" with Medicaid ID ""ZZ48105522""
+  And he saves the record
+  Then the client is created with the next client number, for example ""C-10234"", status ""Active"" and the admission date
+  And the address is geocoded to latitude and longitude and the geofence radius is set to the tenant default of 150 m
+  And date of birth, Medicaid ID, diagnoses, phone and service address are stored with field-level encryption and shown masked
+
+Scenario: US-012-AC2 Confirm the map pin when geocoding is imprecise
+  Given the geocoder returns an approximate (non-rooftop) result for ""1 County Road 9, Lakemont, OH 43999""
+  When Marcus tries to save the client
+  Then he must confirm or move the map pin before saving
+  And the record stores that the location was confirmed manually, by whom and when
+
+Scenario Outline: US-012-AC3 Warn of a possible duplicate client
+  Given an Active client exists with first name ""Ruth"", last name ""Kimball"", date of birth 1950-02-03 and Medicaid ID ""ZZ30115874""
+  When Marcus admits a client with <new data>
+  Then <outcome>
+
+  Examples:
+    | new data                                                     | outcome                                                       |
+    | ""Ruth"", ""Kimball"", 1950-02-03, Medicaid ID ""ZZ99001234""      | a duplicate warning is shown and confirmation is required     |
+    | ""Ruthie"", ""Kimbel"", 1949-07-19, Medicaid ID ""ZZ30115874""     | a duplicate warning is shown and confirmation is required     |
+    | ""Ruth"", ""Kimball"", 1961-09-30, Medicaid ID ""ZZ71180036""      | no warning is shown                                           |
+
+Scenario: US-012-AC4 Confirming a duplicate warning is audited
+  Given a duplicate warning is shown for a new client
+  When Marcus confirms ""This is a different person"" and saves
+  Then the client is created
+  And the audit log records the override with the matched client number and Marcus as actor
+  When instead Marcus chooses ""Cancel""
+  Then no client is created
+
+Scenario Outline: US-012-AC5 Validate diagnoses as ICD-10-CM codes
+  When Marcus adds the diagnosis code ""<code>""
+  Then the result is ""<result>""
+
+  Examples:
+    | code   | result                                                          |
+    | I10    | accepted with description ""Essential (primary) hypertension""    |
+    | E11.9  | accepted with description ""Type 2 diabetes mellitus without complications"" |
+    | XYZ    | rejected: enter a valid ICD-10-CM code, for example I10         |
+
+Scenario: US-012-AC6 Record caregiver preferences and exclusions
+  When Marcus records caregiver Rosa Delgado as ""Preferred"" and caregiver Jordan Pike as ""Excluded"" with reason ""Family declined""
+  Then scheduling suggestions for this client list Rosa first
+  And any attempt to assign Jordan Pike to this client is a hard block in compliance checks
+  And an exclusion cannot be saved without a reason","Highest","8","EP-03","S2","R1","CLI FR-CLI-01 FR-CLI-02 FR-CLI-08","Agency Web App"
+"US-013","Story","Record a service authorization and track remaining units","As a Care Coordinator, I want to record each payer authorization and see how many units remain, so that we never schedule or bill care the payer has not authorized.
+
+Persona: PER-02 Marcus Hale (AG-COORD)
+Requirements: FR-CLI-03, FR-CLI-04
+Business rules: BR-009, BR-010
+Dependencies: US-012
+
+Notes:
+- Units on scheduled visits use the scheduled duration and the same rounding rule as billing (BR-047); delivered units use verified durations.
+- Overlapping authorizations for the same payer and service code are blocked so that billing can always find exactly one matching authorization (FR-BIL-02).
+- Analytics: authorizations flagged per week feed the operations dashboard tile (US-051).
+- Out of scope: electronic authorization intake from payers (R2 candidate).","Scenario: US-013-AC1 Record an hourly authorization
+  When Marcus records for C-10234 an authorization from ""Lakemont County Medicaid"" with auth number ""PA-2026-55871"", service line HOME_VISIT, service code T1019, billing model Hourly, unit type Unit15Min, rate $7.25, 480 units, period 2026-09-01 to 2026-11-30
+  Then the authorization is saved with status ""Active""
+  And it is listed on the client's Authorizations tab with 480 units remaining
+
+Scenario: US-013-AC2 Compute remaining units from scheduled and delivered visits
+  Given the T1019 authorization for C-10234 has 480 units
+  And Verified and Completed visits used 200 units
+  And future Scheduled visits will use 232 units
+  When Marcus opens the authorization
+  Then remaining units show 48
+  And utilization shows 90% with the flag ""90% or more used""
+
+Scenario Outline: US-013-AC3 Flag high utilization or near expiry
+  Given today is 2026-11-16
+  And an authorization has utilization <utilization> and period end <end date>
+  Then the authorization <flag>
+
+  Examples:
+    | utilization | end date   | flag                                      |
+    | 89%         | 2026-12-31 | is not flagged                            |
+    | 90%         | 2026-12-31 | is flagged ""90% or more used""             |
+    | 50%         | 2026-12-01 | is not flagged                            |
+    | 50%         | 2026-11-30 | is flagged ""Expires in 14 days""           |
+
+Scenario Outline: US-013-AC4 Validate authorization data
+  When Marcus saves an authorization with <invalid data>
+  Then it is rejected with ""<message>""
+
+  Examples:
+    | invalid data                                                  | message                                                                     |
+    | period end 2026-08-31 before period start 2026-09-01          | The period end must be on or after the period start.                        |
+    | billing model Daily with unit type Unit15Min                  | Daily billing needs unit type Day.                                          |
+    | 0 units authorized                                            | Enter the number of units authorized, 1 or more.                            |
+    | same payer and service code T1019 overlapping 2026-10-01 to 2026-12-31 | An active T1019 authorization from this payer already covers these dates. |
+
+Scenario: US-013-AC5 Expire authorizations automatically
+  Given the T1019 authorization period ends 2026-11-30
+  When the nightly job runs on 2026-12-01 at 00:05 America/New_York
+  Then the authorization status is ""Expired""
+  And new visits after 2026-11-30 cannot be scheduled against it","Highest","5","EP-03","S2","R1","CLI FR-CLI-03 FR-CLI-04","Agency Web App"
+"US-014","Story","Approve a versioned care plan","As a Clinical Supervisor, I want to review and approve each care plan version before caregivers use it, so that every visit follows a plan a registered nurse has signed off.
+
+Persona: PER-03 Priya Raman, RN (AG-SUPV)
+Requirements: FR-CLI-05
+Business rules: BR-012
+Dependencies: US-012
+
+Notes:
+- Care-plan tasks are grouped by visit type so that a morning and an evening visit can carry different task lists.
+- Clinical SME review: the plan shows the approver's name and credentials (RN) on the caregiver's task screen.
+- Out of scope: e-signature by the client or legal representative on the care plan (R2 candidate).","Scenario: US-014-AC1 Approve the first care plan
+  Given Marcus created care plan version 1 for C-10234 with ADL tasks ""Bathing assistance"" and ""Mobility support"" and IADL task ""Light housekeeping""
+  And he set ""Requires visit note"" to Yes and submitted it
+  When Priya opens the plan and approves it
+  Then version 1 status changes from ""PendingApproval"" to ""Active""
+  And the plan records Priya as approver and the approval timestamp
+
+Scenario: US-014-AC2 Change an Active plan through a new version
+  Given version 1 is Active
+  When Marcus adds the task ""Meal preparation"" and submits
+  Then version 2 is created with status ""PendingApproval""
+  And version 1 stays Active and is used by visits until version 2 is approved
+  When Priya approves version 2
+  Then version 2 is Active and version 1 is ""Superseded"" and read-only
+
+Scenario: US-014-AC3 Visits keep the version that was Active at clock-in
+  Given Rosa clocked in to a visit for C-10234 at 08:58 while version 1 was Active
+  When Priya approves version 2 at 09:30
+  Then Rosa's current visit still shows the version 1 task list at clock-out
+  And the next visit, clocking in at 13:00, uses version 2
+
+Scenario: US-014-AC4 Only a Clinical Supervisor can approve
+  Given Marcus holds the AG-COORD role
+  When he opens a care plan in ""PendingApproval""
+  Then no Approve action is shown
+  And a direct call to POST /v1/care-plans/{carePlanId}/approve returns 403
+
+Scenario: US-014-AC5 Return a plan with comments
+  When Priya returns version 2 with the comment ""Add transfer instructions for the bathing task""
+  Then version 2 goes back to ""Draft"" with the comment visible to Marcus
+  And version 1 stays Active","Highest","5","EP-03","S2","R1","CLI FR-CLI-05","Agency Web App"
+"US-015","Story","Reveal masked PHI with a reason","As a Care Coordinator, I want PHI masked by default and revealed only when I give a reason, so that I see the minimum necessary and every exception is accountable.
+
+Persona: PER-02 Marcus Hale (AG-COORD)
+Requirements: FR-CLI-06
+Business rules: BR-011, BR-057
+Dependencies: US-012, US-009
+
+Notes:
+- The revealed value is returned only in the response of the reveal call and is never cached in the browser's storage.
+- Reason codes are tenant-configurable; ""Other"" always needs a note.
+- Analytics: reveals per user per month in the quarterly access review (NFR-SEC-04).","Scenario: US-015-AC1 Mask PHI in lists and detail views
+  When Marcus opens the client list and the detail page of C-10234
+  Then date of birth shows ""**/**/****"", Medicaid ID shows ""ZZ****5522"", phone shows ""+1-614-555-**87"", service address shows ""Lakemont, OH"" and diagnoses show ""1 diagnosis (masked)""
+  And client name and client number are shown unmasked
+
+Scenario Outline: US-015-AC2 Reveal a field only with a reason
+  Given Marcus holds the permission ""clients:reveal_phi""
+  When he selects Reveal on ""<field>"" and chooses the reason ""<reason>"" with note ""<note>""
+  Then <result>
+
+  Examples:
+    | field         | reason              | note                               | result                                                   |
+    | Phone         | Care coordination   |                                    | the full phone number is shown                           |
+    | Medicaid ID   | Billing inquiry     |                                    | the full Medicaid ID is shown                            |
+    | Date of birth | Other               | Confirming identity with hospital  | the full date of birth is shown                          |
+    | Date of birth | Other               |                                    | the reveal is refused: add a note when the reason is Other |
+
+Scenario: US-015-AC3 Reveal is limited to one field and one page view
+  Given Marcus revealed the phone number of C-10234
+  Then the Medicaid ID and date of birth stay masked
+  And when he leaves the page and returns, the phone number is masked again
+
+Scenario: US-015-AC4 Users without the permission cannot reveal
+  Given a user without ""clients:reveal_phi""
+  When they view C-10234
+  Then no Reveal action is shown
+  And a direct call to POST /v1/clients/{clientId}/phi-reveals returns 403 and is audited as a denied attempt
+
+Scenario: US-015-AC5 Every reveal is audited
+  When Marcus reveals the phone number of C-10234 with reason ""Care coordination""
+  Then an audit event is written with action ""phi.reveal"", the client, the field, the reason, Marcus as actor, IP address, device and timestamp
+  And the event appears in the audit log search for the Agency Administrator","Highest","3","EP-03","S2","R1","CLI FR-CLI-06","Agency Web App"
+"US-016","Story","Discharge a client","As a Care Coordinator, I want to discharge a client with a date and reason, so that future visits are cancelled, caregivers are told, and the record is kept read-only for the retention period.
+
+Persona: PER-02 Marcus Hale (AG-COORD)
+Requirements: FR-CLI-07
+Business rules: BR-013
+Dependencies: US-022, US-049
+
+Notes:
+- Readmission creates a new admission episode on the same client record; it is out of scope for R1 and handled by Customer Success on request.
+- Seats: a discharged client still counts as an active seat in the cycle where they had a visit (BR-002).
+- Retention defaults to 7 years and is configurable to the tenant's state requirement (BR-013).","Scenario: US-016-AC1 Discharge with immediate effect
+  Given C-10234 has Scheduled visits on 2026-09-21, 2026-09-23 and 2026-09-25
+  When Marcus discharges C-10234 on 2026-09-21 with discharge date 2026-09-21 and reason ""Moved to skilled nursing facility""
+  Then the client status is ""Discharged""
+  And the visits on 2026-09-23 and 2026-09-25 are Cancelled with reason ""Client discharged""
+  And the visit on 2026-09-21 is not cancelled
+  And each affected caregiver receives a notification without PHI within 1 minute
+
+Scenario: US-016-AC2 Future-dated discharge
+  Given today is 2026-10-03
+  When Marcus discharges C-10234 with discharge date 2026-10-15
+  Then the client stays ""Active"" until 2026-10-15 and becomes ""Discharged"" on 2026-10-16 at 00:00 America/New_York
+  And visits after 2026-10-15 are cancelled now and the visit patterns end on 2026-10-15
+
+Scenario: US-016-AC3 Visits already in progress or completed are untouched
+  Given Rosa is clocked in to a visit for C-10234
+  When Marcus discharges C-10234 with today's date
+  Then the in-progress visit can still be clocked out, verified, paid and billed
+
+Scenario Outline: US-016-AC4 Validate discharge data
+  When Marcus discharges a client admitted on 2026-03-02 with <input>
+  Then it is rejected with ""<message>""
+
+  Examples:
+    | input                                    | message                                                  |
+    | discharge date 2026-03-01                | The discharge date cannot be before the admission date.  |
+    | no reason                                | Select a discharge reason.                               |
+
+Scenario: US-016-AC5 Discharged records are read-only and retained
+  Given C-10234 is Discharged
+  When any user tries to edit the client's demographics or add a visit
+  Then the change is rejected with ""This client is discharged. The record is read-only.""
+  And the record cannot be deleted before the retention period of 7 years after discharge ends","Highest","3","EP-03","S4","R1","CLI FR-CLI-07","Agency Web App"
+"US-017","Story","Onboard a caregiver and invite them to the app","As a Care Coordinator, I want to create a caregiver profile and send the mobile app invitation in one step, so that new hires can receive visits on their first day; and when someone leaves, their access ends at once without losing visit data.
+
+Persona: PER-02 Marcus Hale (AG-COORD)
+Requirements: FR-WRK-01, FR-WRK-06
+Business rules: None
+Dependencies: US-009
+
+Notes:
+- FR-WRK-06 (deactivation) sits in this story because invitation and deactivation are two ends of the same account lifecycle. Per FR-WRK-06 the actor for deactivation is the Agency Administrator, not the Coordinator.
+- A visit in progress at deactivation is not reassigned; it is flagged for Coordinator review.
+- Remote wipe on deactivation implements NFR-MOB-02.
+- Out of scope: background-check and I-9 workflows (handled outside Tendwell in R1).","Scenario: US-017-AC1 Create a caregiver profile and send the invitation
+  When Marcus creates caregiver ""Maya Ortiz"" with employee number ""E-2041"", email ""maya.ortiz@example.com"", phone ""+1-614-555-0163"", employment type ""FullTime"", hire date 2026-02-16, location ""Lakemont North"", skills ""Hoyer lift"" and languages ""English, Spanish""
+  Then the caregiver is saved with status ""Active"" and a linked user with status ""Invited""
+  And an invitation is sent by SMS and email with a single-use link to install the app and set a password
+  And neither message contains client information
+
+Scenario Outline: US-017-AC2 Reject duplicate identifiers
+  Given caregiver E-2041 exists with email ""maya.ortiz@example.com""
+  When Marcus creates a caregiver with <duplicate>
+  Then it is rejected with ""<message>""
+
+  Examples:
+    | duplicate                               | message                                                       |
+    | employee number ""E-2041""                | Employee number E-2041 is already used by another caregiver.  |
+    | email ""MAYA.ORTIZ@example.com""          | This email is already used by another user in your agency.    |
+
+Scenario: US-017-AC3 Resend the invitation
+  Given Maya has not accepted her invitation
+  When Marcus selects ""Resend invitation""
+  Then a new link is sent and the earlier link stops working
+
+Scenario: US-017-AC4 Deactivate a caregiver
+  Given Maya has 6 future Scheduled visits and is signed in on her phone
+  When Tom Brennan (AG-ADM) deactivates Maya with reason ""Resigned"" effective immediately
+  Then her sessions and refresh tokens are revoked and her next API call returns 401
+  And her 6 future visits move to the Open Shifts queue with the Coordinator notified
+  And the caregiver status is ""Inactive"" and the user status is ""Deactivated""
+
+Scenario: US-017-AC5 Keep offline punches captured before deactivation
+  Given Maya captured a clock-out offline at 16:02 and was deactivated at 16:30
+  When her phone reconnects at 17:10
+  Then the sync accepts punches captured before 16:30 from her registered device
+  And the app then wipes its local data and signs out
+  And punches captured after 16:30 are rejected and reported to the Coordinator
+
+Scenario: US-017-AC6 Only Agency Administrators can deactivate
+  Given Marcus holds only the AG-COORD role
+  When he opens Maya's profile
+  Then no Deactivate action is shown
+  And a direct call to POST /v1/caregivers/{caregiverId}/deactivate returns 403","Highest","5","EP-04","S2","R1","WRK FR-WRK-01 FR-WRK-06","Agency Web App"
+"US-018","Story","Track caregiver credentials and expiry","As a Care Coordinator, I want each caregiver's credentials tracked with automatic status and reminders, so that nobody is scheduled with an expired blocking credential.
+
+Persona: PER-02 Marcus Hale (AG-COORD)
+Requirements: FR-WRK-02, FR-WRK-03, FR-WRK-04
+Business rules: BR-014
+Dependencies: US-017, US-049
+
+Notes:
+- Reminders are deduplicated by credential, recipient and reminder day (BR-055), so a rerun of the job sends nothing new.
+- Caregivers can view their own credentials and expiry dates in the app; uploads by caregivers are out of scope for R1.
+- Analytics: count of caregivers with an Expired Blocking credential and at least one future visit is the leading indicator for OBJ-05 (target 0).","Scenario: US-018-AC1 Record a credential with its document
+  Given the credential type ""CPR certification"" is Blocking with a validity of 24 months
+  When Marcus records Maya's CPR certification issued 2025-11-02 expiring 2027-11-02 and uploads the certificate PDF
+  Then the credential is saved with status ""Valid""
+  And the document is stored encrypted and opened only through a short-lived link
+
+Scenario Outline: US-018-AC2 Recompute status daily
+  Given today is 2026-10-03 and the nightly status job has run
+  When a credential expires on <expiry date>
+  Then its status is ""<status>""
+
+  Examples:
+    | expiry date | status   |
+    | 2026-11-03  | Valid    |
+    | 2026-11-02  | Expiring |
+    | 2026-10-03  | Expiring |
+    | 2026-10-02  | Expired  |
+
+Scenario Outline: US-018-AC3 Send reminders 30, 14 and 1 days before expiry
+  Given Maya's TB screening expires on 2026-11-02
+  When the reminder job runs on <run date>
+  Then a reminder is <sent> to Maya and to the Coordinators of ""Lakemont North""
+
+  Examples:
+    | run date   | sent     |
+    | 2026-10-03 | sent     |
+    | 2026-10-04 | not sent |
+    | 2026-10-19 | sent     |
+    | 2026-11-01 | sent     |
+
+Scenario: US-018-AC4 Expired blocking credential blocks new assignments
+  Given Maya's Blocking ""CPR certification"" expired on 2026-10-02
+  And she has 4 future visits
+  When Marcus tries to assign Maya to a new visit
+  Then the compliance check returns a hard block ""Maya Ortiz has an expired CPR certification.""
+  And her 4 future visits are flagged ""Credential expired"" on the schedule board
+
+Scenario: US-018-AC5 Expired advisory credential only warns
+  Given the credential type ""Driver's license"" is Advisory and Maya's expired on 2026-10-02
+  When Marcus assigns Maya to a new visit
+  Then the compliance check returns a warning and the visit can be saved
+
+Scenario: US-018-AC6 Renewal clears flags and stops reminders
+  Given Maya's CPR certification is Expired and her future visits are flagged
+  When Marcus records a renewed CPR certification expiring 2028-10-05
+  Then the credential status is ""Valid"", the flags are removed and no further reminders are sent for the old credential","Highest","5","EP-04","S2","R1","WRK FR-WRK-02 FR-WRK-03 FR-WRK-04","Agency Web App"
+"US-019","Story","Maintain an effective-dated pay profile","As a Billing & Payroll Specialist, I want each caregiver's pay rate and eligibility flags kept with effective dates, so that every visit is paid at the rate that applied on the visit date.
+
+Persona: PER-04 Denise Carter (AG-FIN)
+Requirements: FR-WRK-05
+Business rules: BR-015
+Dependencies: US-017
+
+Notes:
+- Overtime eligibility means the caregiver is non-exempt under the FLSA; the agency remains responsible for classifying employees correctly.
+- Adjustments in AC4 are produced by US-043.
+- Out of scope: client-specific pay rates and shift differentials (backlog).","Scenario: US-019-AC1 Create a pay profile
+  When Denise sets Maya's (E-2041) pay profile effective 2026-01-01: pay type Hourly, base rate $19.50, overtime-eligible Yes, holiday-eligible Yes, mileage-eligible Yes
+  Then the profile is saved and shown as current
+
+Scenario Outline: US-019-AC2 Pay visits at the rate effective on the visit date
+  Given Maya's rate is $19.50 effective 2026-01-01
+  And Denise added a rate of $20.25 effective 2026-09-14 on 2026-09-20
+  When pay is calculated for a visit on <visit date>
+  Then the base rate used is <rate>
+
+  Examples:
+    | visit date | rate   |
+    | 2026-09-13 | $19.50 |
+    | 2026-09-14 | $20.25 |
+
+Scenario: US-019-AC3 New profiles close the previous one
+  Given Maya's current profile is effective from 2026-01-01 with no end date
+  When Denise adds a profile effective 2026-09-14
+  Then the earlier profile ends on 2026-09-13
+  And no date is covered by two profiles
+
+Scenario: US-019-AC4 Retroactive change in a locked period creates adjustments
+  Given the pay period 2026-08-31 to 2026-09-13 is exported and locked
+  When Denise adds a profile with rate $20.25 effective 2026-09-07
+  Then the locked period's lines are unchanged
+  And adjustment lines for the rate difference on visits from 2026-09-07 to 2026-09-13 are created in the next open period
+
+Scenario: US-019-AC5 Restrict who can see and change pay rates
+  Given Marcus holds only the AG-COORD role
+  When he opens Maya's profile
+  Then the Pay tab is not shown
+  And a direct call to PUT /v1/caregivers/{caregiverId}/pay-profiles returns 403
+  And every change Denise makes is audited with before and after values","Highest","3","EP-04","S2","R1","WRK FR-WRK-05","Agency Web App"
+"US-020","Story","Create a recurring visit pattern","As a Care Coordinator, I want to set up a client's recurring visits once and have the system keep the next 8 weeks scheduled, so that I spend my time on exceptions instead of re-entering the same visits every week.
+
+Persona: PER-02 Marcus Hale (AG-COORD)
+Requirements: FR-SCH-01, FR-SCH-07
+Business rules: BR-018
+Dependencies: US-013, US-017, US-049
+
+Notes:
+- The horizon is 8 weeks (56 days, inclusive) from the later of today and the pattern start date.
+- A pattern can be saved without a caregiver; its visits are created as open shifts (US-023).
+- Every materialized occurrence runs the compliance checks of US-021; conflicting occurrences are listed by date before saving.
+- UX: recurring-visit creation is the scenario used for NFR-USE-02 (90% of new Coordinators complete it unaided after 30 minutes of training).
+- Nightly materialization is single-flight (ADR-003).","Scenario: US-020-AC1 Materialize an open-ended pattern for 8 weeks
+  Given today is 2026-09-04
+  When Marcus creates a pattern for C-10234 with caregiver Rosa Delgado, service T1019 under PA-2026-55871, Monday, Wednesday and Friday 08:00 to 10:00, starting 2026-09-07 with no end date
+  Then the horizon runs 8 weeks from 2026-09-07 to 2026-11-01
+  And 24 visits are created with status ""Scheduled"", the first on 2026-09-07 and the last on 2026-10-30
+  And each visit references the pattern and the authorization
+
+Scenario: US-020-AC2 Extend the horizon nightly without duplicates
+  Given the pattern above has visits up to 2026-10-30 and a horizon ending 2026-11-01
+  When the nightly materialization job runs for 2026-09-08 and then runs again for the same date
+  Then the horizon ends 2026-11-02 and exactly one new visit is created, on 2026-11-02
+  And no visit is duplicated
+
+Scenario: US-020-AC3 Respect the pattern end date
+  When Marcus creates the same pattern with end date 2026-09-30
+  Then exactly 11 visits are created, the last on 2026-09-30
+
+Scenario: US-020-AC4 Editing a pattern changes only future, not-yet-started visits
+  Given the pattern has visits from 2026-09-07 and today is 2026-09-11 at 08:30
+  And Rosa is clocked in to the 2026-09-11 visit
+  When Marcus changes the pattern time to 09:00 to 11:00 from 2026-09-11
+  Then the 2026-09-07 and 2026-09-09 visits and the in-progress 2026-09-11 visit are unchanged
+  And visits from 2026-09-14 onwards are 09:00 to 11:00
+
+Scenario: US-020-AC5 Notify the caregiver within 1 minute without PHI
+  When the pattern above is saved at 14:20:00
+  Then Rosa receives one notification by 14:21:00 saying ""You have 24 new visits. Open Tendwell to view your schedule.""
+  And the notification contains no client name or address
+
+Scenario: US-020-AC6 Keep local times across a DST change
+  Given the pattern materializes visits on 2026-10-30 and 2026-11-02
+  When daylight saving time ends on 2026-11-01
+  Then both visits show 08:00 to 10:00 America/New_York
+  And both are stored in UTC with the correct offset (12:00Z and 13:00Z)","Highest","8","EP-05","S3","R1","SCH FR-SCH-01 FR-SCH-07","Agency Web App"
+"US-021","Story","See compliance checks before saving a visit","As a Care Coordinator, I want every visit I create or edit checked against credentials, authorizations, exclusions, overlaps, travel time and approved time off, so that I catch problems before a caregiver is sent or a claim is denied.
+
+Persona: PER-02 Marcus Hale (AG-COORD)
+Requirements: FR-SCH-03
+Business rules: BR-009, BR-010, BR-014, BR-016, BR-017, BR-039
+Dependencies: US-012, US-013, US-018
+
+Notes:
+- The travel buffer warning applies only to consecutive visits at different addresses with less than 15 minutes between them (BR-016); exactly 15 minutes passes.
+- Units for the remaining-units check use the scheduled duration and the BR-047 rounding rule: 90 minutes is 6 units.
+- Every message follows NFR-USE-03: problem plus fix, no raw error codes.
+- Analytics: hard blocks and overrides per check type per week; a rising override rate on remaining units is a signal to chase reauthorizations.","Scenario Outline: US-021-AC1 Classify each check as a hard block or a warning
+  Given Rosa Delgado is the proposed caregiver for a visit to C-10234 on 2026-09-23 from 10:30 to 12:00
+  And <condition>
+  When Marcus saves the visit
+  Then the check ""<check>"" returns ""<result>""
+
+  Examples:
+    | condition                                                                                   | check               | result     |
+    | Rosa has another visit on 2026-09-23 from 09:00 to 11:00                                    | Caregiver overlap   | Hard block |
+    | Rosa's previous visit ends at 10:20 at a different address                                  | Travel buffer       | Warning    |
+    | Rosa's previous visit ends at 10:15 at a different address                                  | Travel buffer       | Pass       |
+    | Rosa's Blocking CPR certification expired on 2026-09-22                                     | Blocking credential | Hard block |
+    | C-10234 has Rosa recorded as Excluded                                                       | Client exclusion    | Hard block |
+    | the only T1019 authorization ended on 2026-09-22                                            | Authorization       | Hard block |
+    | the only active authorization is for service line ADULT_DAY                                 | Authorization       | Hard block |
+    | the T1019 authorization has 4 units remaining and the visit needs 6                         | Remaining units     | Warning    |
+    | Rosa has approved time off on 2026-09-23                                                    | Time off            | Hard block |
+
+Scenario: US-021-AC2 Return all results in one response
+  Given a proposed visit fails the overlap check and the remaining-units check
+  When Marcus selects ""Check"" (POST /v1/visits/compliance-checks)
+  Then both results are returned together with a plain-language message and a suggested fix for each
+  And the dry run creates no visit
+
+Scenario: US-021-AC3 Save past a warning only with an override reason
+  Given the only result is the warning ""Exceeds remaining authorized units by 2""
+  When Marcus saves without a reason
+  Then the save is rejected with ""Enter a reason to schedule beyond the remaining authorized units.""
+  When he enters ""Reauthorization requested on 2026-09-18"" and saves
+  Then the visit is saved and the override reason, Marcus and the timestamp are audited
+
+Scenario: US-021-AC4 Nobody can override a hard block
+  Given a proposed visit returns the hard block ""Client exclusion""
+  When Tom Brennan (AG-ADM) tries to save it
+  Then the save is rejected and no override option is shown
+
+Scenario: US-021-AC5 Checks rerun on every edit
+  Given a saved visit passed all checks
+  When Marcus moves it to a date on which Rosa has approved time off
+  Then the edit is rejected with the hard block ""Time off""
+
+Scenario: US-021-AC6 Checks are fast enough for interactive use
+  Given a tenant with 250 caregivers and 4,000 visits in the 8-week horizon
+  When Marcus runs a dry-run check for a single visit
+  Then results return within 800 ms at p95","Highest","8","EP-05","S3","R1","SCH FR-SCH-03","Agency Web App"
+"US-022","Story","Edit or cancel one visit or a series","As a Care Coordinator, I want to add one-off visits and change or cancel a single occurrence or the rest of a series, so that the schedule matches what the client actually needs this week.
+
+Persona: PER-02 Marcus Hale (AG-COORD)
+Requirements: FR-SCH-02, FR-SCH-04
+Business rules: BR-018, BR-019
+Dependencies: US-020, US-021
+
+Notes:
+- Caregiver notifications for changed or cancelled visits follow FR-SCH-07 (implemented in US-020): within 1 minute and without PHI.
+- ""Caregiver unavailable"" automatically republishes the visit as an open shift; other reasons do not.
+- Time corrections for completed visits are handled in US-029 so that punches stay append-only (BR-026).","Scenario: US-022-AC1 Create a one-off visit
+  When Marcus creates a one-off visit for C-10234 with Rosa on Saturday 2026-09-19 from 10:00 to 12:00 under PA-2026-55871
+  Then the visit is saved with status ""Scheduled"" and no pattern
+  And the compliance checks run before it is saved
+
+Scenario: US-022-AC2 Edit only this occurrence
+  Given the Monday-Wednesday-Friday pattern for C-10234
+  When Marcus moves the 2026-09-23 visit to 13:00 to 15:00 and chooses ""This visit only""
+  Then only the 2026-09-23 visit changes
+  And the pattern and all other visits are unchanged
+
+Scenario: US-022-AC3 Edit this and following occurrences
+  When Marcus changes the caregiver to Maya Ortiz from 2026-09-28 and chooses ""This and following visits""
+  Then the original pattern ends on 2026-09-27
+  And a new pattern starts on 2026-09-28 with Maya
+  And visits before 2026-09-28 still show Rosa
+
+Scenario Outline: US-022-AC4 Cancellation requires a reason code
+  When Marcus cancels the 2026-09-25 visit with reason ""<reason>"" and note ""<note>""
+  Then the result is ""<result>""
+
+  Examples:
+    | reason                 | note                          | result                                                         |
+    | Client hospitalized    |                               | Cancelled                                                      |
+    | Client request         |                               | Cancelled                                                      |
+    | Caregiver unavailable  |                               | Cancelled and offered as an open shift                         |
+    | Other                  | Family visiting from Toledo   | Cancelled                                                      |
+    | Other                  |                               | Rejected: add a note when the reason is Other                  |
+    | (none)                 |                               | Rejected: select a cancellation reason                         |
+
+Scenario Outline: US-022-AC5 Allowed changes depend on visit status
+  Given a visit with status ""<status>""
+  When Marcus tries to <action>
+  Then the result is ""<result>""
+
+  Examples:
+    | status     | action          | result                                                                       |
+    | Scheduled  | change the time | Saved                                                                        |
+    | InProgress | cancel it       | Rejected: the caregiver is clocked in; resolve the visit after clock-out     |
+    | Completed  | change the time | Rejected: use a time correction in the exception queue                       |
+    | Verified   | cancel it       | Rejected: a verified visit cannot be cancelled                               |
+    | Missed     | cancel it       | Rejected: a missed visit stays on record; add a note instead                 |","Highest","5","EP-05","S3","R1","SCH FR-SCH-02 FR-SCH-04","Agency Web App"
+"US-023","Story","Claim an open shift","As a caregiver, I want to see and claim open shifts I am eligible for, so that I can pick up extra hours and clients are not left without a visit.
+
+Persona: PER-01 Rosa Delgado (CG)
+Requirements: FR-SCH-05
+Business rules: BR-014, BR-016, BR-017
+Dependencies: US-021, US-049
+
+Notes:
+- Coordinator confirmation (AC4) was added by CR-002 in SRS v1.1; the story was re-estimated from 3 to 5 points.
+- The exclusion reason is never shown to the caregiver; the message is deliberately generic.
+- Analytics: time from publish to claim, and share of open shifts filled by claim versus by the Coordinator.","Scenario: US-023-AC1 Claim an eligible open shift
+  Given an open shift for a client in ""Lakemont North"" on 2026-09-24 from 14:00 to 16:00
+  And Rosa works in ""Lakemont North"", has no overlapping visit, no expired Blocking credential and is not excluded by the client
+  When Rosa opens Open Shifts and taps ""Claim""
+  Then the visit is assigned to Rosa with status ""Scheduled""
+  And the shift disappears from the Open Shifts list of every other caregiver
+
+Scenario: US-023-AC2 First committed claim wins
+  Given Rosa and Maya both see the same open shift
+  When both tap ""Claim"" within the same second and Rosa's claim is committed first
+  Then the visit is assigned to Rosa
+  And Maya sees ""This shift was just taken. Pull to refresh for other open shifts.""
+
+Scenario Outline: US-023-AC3 Ineligible caregivers cannot claim
+  Given <condition>
+  Then the open shift is not listed for Rosa
+  And a direct claim request returns 409 with the reason ""<reason>""
+
+  Examples:
+    | condition                                                       | reason                                        |
+    | Rosa has a visit from 13:30 to 15:00 on 2026-09-24              | You already have a visit at this time.        |
+    | Rosa's Blocking CPR certification expired on 2026-09-20         | Your CPR certification has expired.           |
+    | the client has Rosa recorded as Excluded                        | You are not eligible for this shift.          |
+
+Scenario: US-023-AC4 Coordinator confirmation when the tenant enables it
+  Given the tenant setting ""Coordinator confirms open-shift claims"" is On
+  When Rosa claims the open shift
+  Then her claim shows ""Pending confirmation"" and the shift is hidden from other caregivers
+  When Marcus confirms the claim
+  Then the visit is assigned to Rosa and she is notified
+  When instead Marcus declines it with a reason
+  Then the shift returns to Open Shifts and Rosa is notified
+
+Scenario: US-023-AC5 Travel buffer is a warning, not a block
+  Given Rosa's previous visit ends at 13:50 at a different address
+  When she claims the 14:00 open shift
+  Then the claim succeeds
+  And the visit shows the travel buffer warning on the Coordinator's schedule board","High","5","EP-05","S5","R1","SCH FR-SCH-05","Caregiver Mobile App"
+"US-024","Story","Use the schedule board","As a Care Coordinator, I want a day and week schedule board with filters and clear visit status, so that I can spot gaps and problems for my roughly 70 clients at a glance.
+
+Persona: PER-02 Marcus Hale (AG-COORD)
+Requirements: FR-SCH-06
+Business rules: BR-019
+Dependencies: US-020
+
+Notes:
+- Unassigned open shifts are shown in a separate lane at the top of each day.
+- Accessibility: the board is keyboard navigable and meets WCAG 2.2 AA, including 1.4.1 Use of Color and 2.4.11 Focus Not Obscured.
+- Out of scope: drag-and-drop reassignment (R2 candidate); route optimization.","Scenario: US-024-AC1 Filter the board
+  Given Marcus is assigned to ""Lakemont North""
+  When he opens the week view for 2026-09-21 to 2026-09-27 and filters by service line HOME_VISIT and caregiver Rosa Delgado
+  Then only Rosa's HOME_VISIT visits in ""Lakemont North"" for that week are shown
+  And the filters combine with AND and stay applied when he switches to the day view
+
+Scenario Outline: US-024-AC2 Show each status with color and text
+  Given a visit with status ""<status>""
+  Then the visit card shows the label ""<label>"" and its status color
+  And the status is also conveyed by the label, so color is not the only indicator
+
+  Examples:
+    | status      | label        |
+    | Scheduled   | Scheduled    |
+    | InProgress  | In progress  |
+    | Completed   | Completed    |
+    | NeedsReview | Needs review |
+    | Verified    | Verified     |
+    | Cancelled   | Cancelled    |
+    | Missed      | Missed       |
+
+Scenario: US-024-AC3 Mark a visit Missed after its scheduled end
+  Given a visit from 08:00 to 10:00 has no clock-in
+  When the time reaches 10:00
+  Then the visit shows ""Missed"" on the board by 10:05
+
+Scenario: US-024-AC4 Load a busy week fast
+  Given the week view contains 500 visits
+  When Marcus opens it
+  Then the board is fully rendered within 2.5 s at p95
+
+Scenario: US-024-AC5 Show only the minimum necessary
+  When Marcus hovers over a visit card
+  Then he sees client name, client number, caregiver, times and status
+  And no service address, diagnosis or Medicaid ID is shown on the board","Highest","5","EP-05","S3","R1","SCH FR-SCH-06","Agency Web App"
+"US-025","Story","Clock in at the client's home","As a caregiver, I want to clock in to my visit with one tap when I arrive at the client's home, so that my time and location are recorded correctly without paperwork or calls to the office.
+
+Persona: PER-01 Rosa Delgado (CG)
+Requirements: FR-EVV-01, FR-EVV-02, FR-EVV-03
+Business rules: BR-020, BR-021, BR-022, BR-023
+Dependencies: US-020, US-012
+
+Notes:
+- Version history: AC3 rows for accuracy worse than 100 m and AC6 were revised by CR-004 (SRS v1.3) after INC-2026-011, when approximate iOS locations (about 3-5 km accuracy) produced 1,180 false Location mismatch exceptions in 3 days.
+- QA device matrix must include iOS ""Precise Location: Off"" and Android ""Approximate location"" settings.
+- Analytics: exception rate by code, app version and OS; NFR-OBS-02 alerts when the EVV exception rate exceeds 2x the 7-day baseline.
+- UX: the next-visit card shows the client's first name and last initial, the time window and a single primary button; the address opens in the maps app.
+- Out of scope: blocking a punch for location reasons. Exceptions are reviewed after the fact so that care is never delayed.","Scenario: US-025-AC1 Clock in inside the geofence
+  Given Rosa is assigned to the 08:00 to 10:00 visit for C-10234
+  And her phone reports a location 40 m from the service address with 12 m accuracy
+  When she opens the app at 07:52 and taps ""Clock in"" on the next-visit card
+  Then a punch of type In and source Mobile is recorded with GPS coordinates, accuracy, device time, server receipt time and device ID
+  And the server computes the distance as 40 m and raises no exception
+  And the visit status becomes ""In progress""
+  And the clock-in takes no more than 3 taps from app open and completes within 2 s at p95
+
+Scenario Outline: US-025-AC2 Clock-in window and Late start tolerance
+  Given the visit is scheduled 08:00 to 10:00
+  When Rosa tries to clock in at <time>
+  Then the result is ""<result>""
+
+  Examples:
+    | time  | result                                                                         |
+    | 07:44 | Clock in is disabled with ""Clock-in opens at 07:45""                            |
+    | 07:45 | Clocked in, no exception                                                       |
+    | 08:10 | Clocked in, no exception                                                       |
+    | 08:11 | Clocked in, Late start exception raised                                        |
+    | 10:00 | Clocked in, Late start exception raised                                        |
+    | 10:01 | Clock in is unavailable with ""This visit has ended. Contact your coordinator."" |
+
+Scenario Outline: US-025-AC3 Location and accuracy decide the exception, never the punch
+  Given the client's geofence radius is <radius> m
+  When Rosa clocks in with a fix <distance> m from the service address and <accuracy> accuracy
+  Then the punch is recorded
+  And the exception raised is ""<exception>""
+
+  Examples:
+    | radius | distance | accuracy | exception         |
+    | 150    | 212      | 18 m     | LOCATION_MISMATCH |
+    | 150    | 95       | 3,400 m  | LOW_GPS_ACCURACY  |
+    | 150    | 40       | 12 m     | none              |
+    | 150    | 150      | 20 m     | none              |
+    | 150    | 151      | 20 m     | LOCATION_MISMATCH |
+    | 150    | 60       | 100 m    | none              |
+    | 150    | 60       | 101 m    | LOW_GPS_ACCURACY  |
+    | 150    | (0,0)    | 5 m      | LOW_GPS_ACCURACY  |
+    | 300    | 212      | 18 m     | none              |
+
+Scenario: US-025-AC4 The server ignores a device-declared distance
+  Given Rosa's phone is 212 m from the service address
+  When the clock-in request includes a field ""distanceM"" with the value 5
+  Then the server ignores the field and computes 212 m from the coordinates
+  And a LOCATION_MISMATCH exception is raised
+
+Scenario: US-025-AC5 Cannot clock in to someone else's visit
+  Given the 08:00 visit for C-10234 is assigned to Maya Ortiz
+  When Rosa calls POST /v1/visits/{visitId}/clock-in for that visit
+  Then the request returns 403 and no punch is recorded
+  And Rosa's app offers ""Start an unscheduled visit"", which raises UNSCHEDULED_VISIT for Coordinator review
+
+Scenario: US-025-AC6 Ask for precise location before clocking in
+  Given Rosa's iPhone has Precise Location turned off for Tendwell
+  When she taps ""Clock in""
+  Then the app explains why precise location is needed and offers to open Settings
+  And if she continues without it and the fix is 95 m from the address with 3,400 m accuracy, the punch is recorded and LOW_GPS_ACCURACY is raised instead of LOCATION_MISMATCH","Highest","8","EP-06","S3","R1","EVV FR-EVV-01 FR-EVV-02 FR-EVV-03","Caregiver Mobile App"
+"US-026","Story","Confirm my identity with a selfie check","As a caregiver at an agency that requires identity verification, I want a quick selfie check at clock-in, so that the agency can show it was really me who delivered the visit.
+
+Persona: PER-01 Rosa Delgado (CG)
+Requirements: FR-EVV-04
+Business rules: BR-024
+Dependencies: US-025, DEP-02
+
+Notes:
+- Identity verification is optional per tenant (DEC-07) and sits behind the `IdentityVerificationPort` adapter (ADR-004) so the vendor can be replaced.
+- Privacy: the vendor deletes selfie images after the match under the BAA; Tendwell stores only the result, liveness flag, match score and timestamps. Biometric consent is captured at enrollment; the agency remains responsible for any state biometric privacy obligations.
+- Delivery: carried over from S4 to S5 because the vendor's sandbox credentials arrived late (ISS-02, DEP-02).
+- Out of scope: offline face matching on the device.","Scenario: US-026-AC1 Pass the identity check and clock in
+  Given Harborview Home Care has identity verification turned on
+  And Rosa enrolled her reference selfie with recorded consent
+  When she taps ""Clock in"" and completes the selfie liveness check
+  Then the server matches the selfie against her enrolled reference through the identity verification adapter
+  And the check result is ""Pass"" with liveness passed and a match score
+  And the In punch references the identity check ID
+  And the identity check completes within 4 s at p95
+
+Scenario Outline: US-026-AC2 A passed check is valid for 90 seconds
+  Given Rosa passed an identity check at 07:55:00
+  When the clock-in punch reaches the server at <time>
+  Then the result is ""<result>""
+
+  Examples:
+    | time     | result                                                       |
+    | 07:56:29 | Clocked in using the check                                   |
+    | 07:56:30 | Clocked in using the check                                   |
+    | 07:56:31 | Rejected: ""Your check expired. Take a new selfie.""           |
+
+Scenario: US-026-AC3 A check is used for one punch only
+  Given Rosa's check was consumed by her clock-in at 07:56
+  When the same check ID is sent with her clock-out or with a clock-in to another visit
+  Then the punch is rejected with ""Take a new selfie to continue.""
+
+Scenario: US-026-AC4 Failed checks never block care
+  Given the liveness check or the face match fails
+  When Rosa has failed 3 attempts
+  Then the app lets her clock in without a passed check
+  And the visit gets an IDENTITY_CHECK_FAILED exception for Coordinator review
+
+Scenario: US-026-AC5 No selfie step when the tenant has not enabled it
+  Given Cedar Lane Adult Day Center has identity verification turned off
+  When a caregiver clocks in
+  Then no selfie step is shown and no biometric data is captured
+
+Scenario: US-026-AC6 Offline clock-in on an identity-enabled tenant
+  Given Harborview has identity verification on and Rosa has no connectivity
+  When she clocks in offline
+  Then the punch is stored without an identity check
+  And on sync the visit gets IDENTITY_CHECK_FAILED with the reason ""Not performed (offline)""","High","5","EP-06","S4","R1","EVV FR-EVV-04","Caregiver Mobile App"
+"US-027","Story","Clock in and out without signal","As a caregiver who often works in homes with no signal, I want to clock in and out offline and have my punches sync later, so that my visits count and I am paid without calling the office.
+
+Persona: PER-01 Rosa Delgado (CG)
+Requirements: FR-EVV-05
+Business rules: BR-025
+Dependencies: US-025, US-028
+
+Notes:
+- On-device storage uses SQLCipher with a key held in the iOS Keychain or Android Keystore (NFR-MOB-02); the queue is wiped remotely on deactivation (US-017).
+- 72-hour offline capacity implements NFR-AVL-02; the spec in [08-ai-assisted-ba](../../08-ai-assisted-ba/specs/001-offline-evv-capture/spec.md) elaborates the edge cases.
+- Device clock: the app records elapsed time since its last server time sync so that the server can detect device clocks set manually; mismatches over 5 minutes are logged for review in R1 and become an exception candidate for R2.
+- Analytics: share of punches synced offline and median sync delay per tenant.","Scenario: US-027-AC1 Clock in with no connectivity
+  Given Rosa's phone has no network connection
+  When she taps ""Clock in"" at 08:02 device time at the client's home
+  Then the punch is stored in the encrypted on-device queue with GPS coordinates, accuracy, device time and device ID
+  And the app shows ""Saved on this phone. It will sync when you are back online.""
+  And the visit shows ""In progress"" in the app
+
+Scenario: US-027-AC2 Sync keeps capture time and receipt time separately
+  Given Rosa's offline clock-in was captured at 08:02 and her clock-out at 10:01
+  When her phone reconnects at 11:40
+  Then both punches are sent in one batch to POST /v1/evv/punches/sync
+  And each punch keeps its device capture time as the punch time and 11:40 as the server receipt time
+  And each punch has source ""MobileOffline"" and the server computes its distance
+  And no LATE_OFFLINE_SYNC exception is raised
+
+Scenario Outline: US-027-AC3 Flag punches synced more than 24 hours after capture
+  Given a punch was captured offline on 2026-09-15 at 08:02
+  When the server receives it at <received>
+  Then LATE_OFFLINE_SYNC is <raised>
+
+  Examples:
+    | received          | raised     |
+    | 2026-09-16 08:01  | not raised |
+    | 2026-09-16 08:02  | not raised |
+    | 2026-09-16 08:03  | raised     |
+
+Scenario: US-027-AC4 Resending a batch never duplicates punches
+  Given a sync batch was accepted but the response was lost
+  When the app resends the same batch with the same punch IDs
+  Then the server returns success and stores no duplicate punches
+
+Scenario: US-027-AC5 Hold 72 hours of punches and protect them on sign-out
+  Given Rosa worked 18 visits over 72 hours with no connectivity
+  Then all 36 punches are kept on the device and sync in capture order when she reconnects
+  And if she tries to sign out with unsynced punches, the app warns ""You have 36 visits that have not synced. Stay signed in until you are online.""
+
+Scenario: US-027-AC6 Sync a visit that changed while offline
+  Given the Coordinator reassigned the 08:00 visit to Maya while Rosa was offline and Rosa delivered it anyway
+  When Rosa's punches sync
+  Then her punches are kept and linked to an unscheduled visit for Rosa
+  And UNSCHEDULED_VISIT is raised so the Coordinator can reconcile the two visits","Highest","8","EP-06","S4","R1","EVV FR-EVV-05","Caregiver Mobile App"
+"US-028","Story","Clock out with tasks and note","As a caregiver, I want to mark each care-plan task and write the visit note as I clock out, so that the agency has a complete record of the care I gave.
+
+Persona: PER-01 Rosa Delgado (CG)
+Requirements: FR-EVV-06
+Business rules: BR-012
+Dependencies: US-014, US-025
+
+Notes:
+- Clock-out works offline (US-027); task statuses and the note are queued with the punch.
+- The visit note itself is specified in US-036; this story enforces its presence at clock-out.
+- UX: tasks are listed in care-plan order with large Done and Not done buttons; the reason picker opens only for Not done.","Scenario: US-028-AC1 Clock out with every task recorded
+  Given Rosa is clocked in to the 08:00 visit using care plan version 3
+  When she marks ""Bathing assistance"" and ""Mobility support"" as Done and ""Meal preparation"" as Not done with reason ""Client declined""
+  And she submits the visit note and taps ""Clock out"" at 09:58
+  Then a punch of type Out is recorded with GPS coordinates, accuracy, device time, server receipt time and device ID
+  And the visit status becomes ""Completed""
+
+Scenario: US-028-AC2 Every task needs a status
+  Given ""Meal preparation"" has no status
+  When Rosa taps ""Clock out""
+  Then clock-out is not recorded
+  And the app highlights ""Meal preparation"" with ""Mark this task Done or Not done before clocking out.""
+
+Scenario Outline: US-028-AC3 Not done needs a reason
+  When Rosa marks a task Not done with reason ""<reason>"" and note ""<note>""
+  Then the result is ""<result>""
+
+  Examples:
+    | reason                 | note                         | result                                            |
+    | Client declined        |                              | accepted                                          |
+    | Supplies unavailable   |                              | accepted                                          |
+    | Not enough time        |                              | accepted                                          |
+    | Other                  | Client asleep, family asked  | accepted                                          |
+    | Other                  |                              | rejected: add a note when the reason is Other     |
+    | (none)                 |                              | rejected: select a reason                         |
+
+Scenario Outline: US-028-AC4 Visit note required only when the care plan says so
+  Given the care plan's ""Requires visit note"" is <setting>
+  When Rosa clocks out without a note
+  Then the result is ""<result>""
+
+  Examples:
+    | setting | result                                                     |
+    | Yes     | Blocked: ""Write the visit note before clocking out.""       |
+    | No      | Clocked out                                                |
+
+Scenario: US-028-AC5 Use the task list from the version Active at clock-in
+  Given Rosa clocked in while care plan version 3 was Active
+  When version 4 with an extra task is approved during her visit
+  Then her clock-out screen shows the version 3 tasks only
+
+Scenario Outline: US-028-AC6 Early end tolerance
+  Given the visit is scheduled to end at 10:00
+  When Rosa clocks out at <time>
+  Then EARLY_END is <raised>
+
+  Examples:
+    | time  | raised     |
+    | 09:49 | raised     |
+    | 09:50 | not raised |
+    | 10:20 | not raised |","Highest","5","EP-06","S3","R1","EVV FR-EVV-06","Caregiver Mobile App"
+"US-029","Story","Resolve EVV exceptions with reason codes","As a Care Coordinator, I want one queue of visit exceptions where I can correct times with a reason while the original punches stay visible, so that visits become Verified quickly and our records stand up to an audit.
+
+Persona: PER-02 Marcus Hale (AG-COORD)
+Requirements: FR-EVV-07, FR-EVV-08, FR-EVV-10
+Business rules: BR-026, BR-028
+Dependencies: US-025, US-028
+
+Notes:
+- Manual punches use `supersedes_punch_id` when they replace an earlier punch; nothing is updated or deleted (ADR-002).
+- AC5 formalizes in R1.1 (CR-004) the bulk-resolve tool first shipped during the INC-2026-011 response. It is limited to punches with accuracy worse than 100 m so that genuine Location mismatch exceptions are still reviewed one by one.
+- Analytics: median time from exception raised to resolved, and the share of visits with a Manual punch (an input to the EVV compliance report).
+- Reason codes are provisioned per tenant (FR-ONB-04) and can be mapped to state aggregator codes in R2.","Scenario: US-029-AC1 Work the exception queue
+  Given ""Lakemont North"" has 14 open exceptions
+  When Marcus opens the exception queue
+  Then exceptions are listed oldest first with visit, client, caregiver, exception code, punch times and computed distance
+  And he can filter by exception code, caregiver, client and date range
+
+Scenario: US-029-AC2 Correct a missing clock-out without changing the original punches
+  Given Rosa's 08:00 visit has a clock-in at 07:58 and an open MISSING_CLOCK_OUT exception
+  When Marcus adds a clock-out at 10:02 with reason code ""Caregiver forgot to clock out"" and note ""Confirmed by phone with Rosa at 10:40""
+  Then a new punch of source ""Manual"" is added with the reason code, note and Marcus as creator
+  And the original clock-in punch is unchanged
+  And the visit history shows both punches with their sources
+  And the exception status is ""Resolved""
+
+Scenario Outline: US-029-AC3 A correction needs a reason code and a note
+  When Marcus submits a time correction with reason code ""<reason>"" and note ""<note>""
+  Then the result is ""<result>""
+
+  Examples:
+    | reason                          | note                              | result                                   |
+    | Caregiver forgot to clock out   | Confirmed by phone with Rosa      | accepted                                 |
+    | (none)                          | Confirmed by phone with Rosa      | rejected: select a reason code           |
+    | Caregiver forgot to clock out   |                                   | rejected: add a note                     |
+
+Scenario Outline: US-029-AC4 Verify a visit only when it is complete and clean
+  Given a Completed visit with all six EVV data elements
+  And its only exception is <exception state>
+  Then the visit status is ""<status>""
+
+  Examples:
+    | exception state                      | status       |
+    | none                                 | Verified     |
+    | LATE_START, Open                     | Needs review |
+    | LATE_START, Resolved                 | Verified     |
+    | LOCATION_MISMATCH, Waived with reason| Verified     |
+
+Scenario: US-029-AC5 Bulk-resolve exceptions caused by low GPS accuracy
+  Given 40 open exceptions raised from 2026-08-18 to 2026-08-20 whose punches report accuracy worse than 100 m
+  And they are coded LOW_GPS_ACCURACY, or LOCATION_MISMATCH where they were raised before R1.1
+  When Marcus selects them, chooses reason code ""GPS accuracy issue confirmed"" and enters one note
+  Then each exception is resolved with that reason and note
+  And each resolution is audited individually with Marcus as actor
+  And an exception whose punch accuracy is 100 m or better cannot be included in the bulk action
+
+Scenario: US-029-AC6 Only Verified visits reach payroll and billing
+  Given Rosa has 10 Completed visits in the pay period, of which 9 are Verified and 1 is Needs review
+  When the pay-period summary and the billing run are calculated
+  Then both use only the 9 Verified visits
+  And the Needs review visit is listed as excluded with its open exception","Highest","8","EP-06","S4","R1","EVV FR-EVV-07 FR-EVV-08 FR-EVV-10","Agency Web App"
+"US-030","Story","Auto-close visits left open","As the visit lifecycle job, I want to close visits that were never clocked out and hold them from pay and billing, so that forgotten clock-outs do not inflate hours or invoices.
+
+Persona: System (SYS)
+Requirements: FR-EVV-09
+Business rules: BR-027
+Dependencies: US-029
+
+Notes:
+- MISSING_CLOCK_OUT is raised once the scheduled end plus the 10-minute tolerance passes without a clock-out (UAT clarification agreed with the Product Owner on 2026-06-10).
+- The job runs every 5 minutes, single-flight via `job_executions` (ADR-003).
+- The placeholder clock-out is source ""System"" and is never treated as caregiver-attested time.","Scenario Outline: US-030-AC1 Auto-close 14 hours after clock-in
+  Given Rosa clocked in at 08:03 to a visit scheduled 08:00 to 10:00 and has not clocked out
+  When the job runs at <time>
+  Then the visit is <result>
+
+  Examples:
+    | time  | result                                                                                          |
+    | 10:10 | still In progress with no MISSING_CLOCK_OUT exception                                           |
+    | 10:11 | still In progress with an open MISSING_CLOCK_OUT exception                                      |
+    | 22:02 | still In progress                                                                               |
+    | 22:03 | auto-closed with a System clock-out at 10:00 (the scheduled end) and an open AUTO_CLOSED exception |
+
+Scenario: US-030-AC2 Auto-closed visits are not paid or billed until resolved
+  Given a visit was auto-closed and its AUTO_CLOSED exception is Open
+  When the pay-period summary and the billing run are calculated
+  Then the visit is excluded from both and listed as ""Excluded: auto-closed""
+
+Scenario: US-030-AC3 Resolve with the actual clock-out
+  Given an auto-closed visit with a placeholder clock-out at 10:00
+  When Marcus adds a Manual clock-out at 09:57 with reason code ""Caregiver forgot to clock out"" and a note
+  Then the placeholder stays in the visit history and is superseded by the Manual punch
+  And the AUTO_CLOSED exception is Resolved and the visit can be Verified
+
+Scenario: US-030-AC4 A late offline clock-out does not resolve the exception by itself
+  Given the visit was auto-closed at 22:03
+  When Rosa's offline clock-out captured at 10:04 syncs at 23:30
+  Then the real clock-out is added to the visit history
+  And the AUTO_CLOSED exception stays Open for the Coordinator to confirm
+  And LATE_OFFLINE_SYNC is not raised because the punch arrived 13 h 26 min after capture
+
+Scenario: US-030-AC5 The job is single-flight
+  Given two workers run the auto-close job at the same time
+  Then each eligible visit is closed once and gets exactly one AUTO_CLOSED exception","Highest","3","EP-06","S5","R1","EVV FR-EVV-09","Platform Services"
+"US-031","Story","Enter and approve a medication order","As a Clinical Supervisor, I want medication orders entered in full and activated only after I approve them, so that caregivers never see a dose that a nurse has not checked against the prescription.
+
+Persona: PER-03 Priya Raman, RN (AG-SUPV)
+Requirements: FR-MAR-01
+Business rules: None
+Dependencies: US-012
+
+Notes:
+- Allergies recorded on the client (US-012) are displayed on the order form; automated drug-allergy and drug-interaction screening is out of scope because R1 has no drug knowledge base (Clinical SME agreed 2026-04-21).
+- An order change (dose, time, route) is entered as a discontinue plus a new order so that the MAR shows exactly what was active when.
+- Out of scope: e-prescribing and pharmacy integration.","Scenario: US-031-AC1 Enter an order that waits for approval
+  When Marcus enters for C-10234 the order Lisinopril, strength 10 mg, form tablet, dose 1 tablet, route by mouth, schedule time 08:00, start 2026-09-01, no end date, prescriber ""Dr. Alan Pierce"" with NPI 1234567893 and instructions ""Hold if systolic BP below 100""
+  Then the order is saved with status ""PendingApproval""
+  And no dose task is generated and caregivers do not see the order
+
+Scenario: US-031-AC2 Approve an order
+  Given the Lisinopril order is ""PendingApproval""
+  When Priya compares it with the prescription and approves it
+  Then the order status is ""Active"" with Priya as approver
+  And dose tasks are generated from the next scheduled time
+
+Scenario Outline: US-031-AC3 Validate the order before saving
+  When an order is saved with <issue>
+  Then it is rejected with ""<message>""
+
+  Examples:
+    | issue                                               | message                                                                 |
+    | no route                                            | Select a route, for example by mouth.                                   |
+    | a scheduled order with no schedule time             | Add at least one schedule time, or mark the order as PRN.               |
+    | a PRN order without an indication                   | Enter the PRN indication, for example ""pain"".                           |
+    | a PRN order without a maximum per 24 hours          | Enter the maximum number of PRN doses in 24 hours.                      |
+    | end date 2026-08-31 before start date 2026-09-01    | The end date must be on or after the start date.                        |
+    | an administration window of 14 minutes              | Set the window between 15 and 120 minutes.                              |
+    | an administration window of 121 minutes             | Set the window between 15 and 120 minutes.                              |
+
+Scenario: US-031-AC4 Only a Clinical Supervisor approves
+  Given Marcus holds only the AG-COORD role
+  When he opens a ""PendingApproval"" order
+  Then no Approve action is shown
+  And a direct call to POST /v1/medication-orders/{orderId}/approve returns 403
+
+Scenario: US-031-AC5 Discontinue an order
+  Given the Lisinopril order is Active and today's 08:00 dose is Overdue
+  When Priya discontinues the order effective 2026-09-20 12:00 with reason ""Changed by prescriber""
+  Then the order status is ""Discontinued""
+  And no dose task is generated for any time after 2026-09-20 12:00 and future tasks leave the caregiver's due list
+  And today's Overdue 08:00 dose stays on the due list and must still be documented","Highest","5","EP-07","S4","R1","MAR FR-MAR-01","Agency Web App"
+"US-032","Story","Document a scheduled dose","As a caregiver, I want the doses due during my visit listed on my visit screen and recorded with one tap, so that every dose I give, or cannot give, is documented at the time.
+
+Persona: PER-01 Rosa Delgado (CG)
+Requirements: FR-MAR-02, FR-MAR-03, FR-MAR-09
+Business rules: BR-029, BR-032
+Dependencies: US-031, US-025
+
+Notes:
+- FR-MAR-09 (monthly MAR grid, used by the Clinical Supervisor) is delivered in this story because it reads the same dose data; the Supervisor is the user of AC6.
+- The caregiver sees only doses for the client she is currently visiting, and only from 60 minutes before the window opens.
+- Accessibility: outcome buttons meet a 44 x 44 pt target size and work with 200% font scaling (NFR-ACC-01).
+- Analytics: the undocumented-dose rate (OBJ-03) = Missed - undocumented doses / scheduled doses, per tenant per month.","Scenario: US-032-AC1 Generate dose tasks for a rolling 7 days
+  Given the Lisinopril order became Active on 2026-09-14 at 15:00
+  Then dose tasks exist for 08:00 on each day from 2026-09-15 to 2026-09-21
+  When the nightly job runs on 2026-09-15 and then runs again
+  Then exactly one task is added, for 2026-09-22, and no task is duplicated
+
+Scenario: US-032-AC2 Show due doses on the visit screen and record Given
+  Given Rosa is clocked in to the 07:30 to 09:30 visit for C-10234 on 2026-09-15
+  When she opens the visit screen
+  Then she sees ""Lisinopril 10 mg tablet, 1 tablet by mouth, due 08:00 (07:00 to 09:00)""
+  When she records ""Given"" at 08:05
+  Then the dose task status is ""Given"" with administration time 08:05 and Rosa as recorder
+
+Scenario Outline: US-032-AC3 Administration window from the order setting
+  Given a dose is scheduled at 20:00 and the order's window is <window> minutes
+  Then the administration window is <start> to <end>
+
+  Examples:
+    | window | start | end   |
+    | 60     | 19:00 | 21:00 |
+    | 15     | 19:45 | 20:15 |
+    | 120    | 18:00 | 22:00 |
+
+Scenario Outline: US-032-AC4 Outcomes that need a reason
+  When Rosa records the outcome ""<outcome>"" with reason ""<reason>""
+  Then the result is ""<result>""
+
+  Examples:
+    | outcome                              | reason                            | result                                    |
+    | Given                                |                                   | accepted                                  |
+    | Refused                              | Client said she felt nauseous     | accepted                                  |
+    | Refused                              |                                   | rejected: enter the reason for Refused    |
+    | Held                                 | Systolic BP 96, per instructions  | accepted                                  |
+    | Held                                 |                                   | rejected: enter the reason for Held       |
+    | Not available                        |                                   | rejected: enter the reason for Not available |
+    | Self-administered with supervision   |                                   | accepted                                  |
+
+Scenario: US-032-AC5 Document doses offline
+  Given Rosa has no connectivity during the visit
+  When she records ""Given"" at 08:05
+  Then the outcome is queued with the EVV punches and shows ""Saved on this phone""
+  And on sync the server keeps 08:05 as the administration time
+
+Scenario: US-032-AC6 Print the monthly MAR grid
+  Given C-10234 had 30 scheduled Lisinopril doses and 2 PRN acetaminophen doses in August 2026
+  When Priya opens GET /v1/clients/{clientId}/mar?month=2026-08 and prints it
+  Then the grid shows one row per order and scheduled time and one column per day, with the outcome code and recorder initials in each cell
+  And late entries are marked ""LE"" and Missed - undocumented doses are marked ""MU""
+  And PRN administrations are listed with time, indication and recorder
+  And the printout carries a watermark with Priya's name, the tenant and the print timestamp","Highest","8","EP-07","S4","R1","MAR FR-MAR-02 FR-MAR-03 FR-MAR-09","Caregiver Mobile App"
+"US-033","Story","Be alerted to missed and repeatedly refused doses","As a Clinical Supervisor, I want an escalation when a dose goes undocumented and an alert when a client keeps refusing or having a medication held, so that I can act on a clinical risk the same day.
+
+Persona: PER-03 Priya Raman, RN (AG-SUPV)
+Requirements: FR-MAR-04, FR-MAR-06
+Business rules: BR-030, BR-031, BR-032
+Dependencies: US-032, US-050
+
+Notes:
+- CR-007 (auto-cancel undocumented doses at midnight) was rejected on clinical-safety and audit grounds; AC3 encodes the decision. See the change request log and DEC-10.
+- Overdue and Missed alerts belong to the missed-dose event family and are urgent under BR-053, so a 22:00 dose in a supported-living home escalates at night (Clinical SME, 2026-04-28).
+- Escalation steps use the ladder engine of US-050, with recipients resolved at send time (BR-054).
+- Analytics: Missed - undocumented doses per 100 scheduled doses, by location and shift.","Scenario Outline: US-033-AC1 Escalate an undocumented dose step by step
+  Given a Lisinopril dose is scheduled at 08:00 with a 60-minute window (07:00 to 09:00)
+  And no outcome has been recorded
+  When the time reaches <time>
+  Then the dose status is ""<status>""
+  And <notification>
+
+  Examples:
+    | time  | status               | notification                                                              |
+    | 08:00 | Due                  | Rosa receives a reminder                                                  |
+    | 09:00 | Overdue              | Rosa and the Coordinator receive an Overdue alert                         |
+    | 09:59 | Overdue              | no new alert is sent                                                      |
+    | 10:00 | MissedUndocumented   | Priya receives an urgent alert that bypasses quiet hours                  |
+
+Scenario Outline: US-033-AC2 Late entry within 24 hours of the scheduled time
+  Given the 08:00 dose on 2026-09-15 is ""MissedUndocumented""
+  When Rosa records ""Given"" with administration time 08:10 at <entry time>
+  Then the result is ""<result>""
+
+  Examples:
+    | entry time       | result                                                                               |
+    | 2026-09-15 11:30 | accepted, status ""Given"", labelled ""Late entry""                                      |
+    | 2026-09-16 08:00 | accepted, status ""Given"", labelled ""Late entry""                                      |
+    | 2026-09-16 08:01 | rejected: ""The late-entry window has closed. Ask your Clinical Supervisor to annotate this dose."" |
+
+Scenario: US-033-AC3 Undocumented doses are never cancelled automatically
+  Given the 20:00 dose on 2026-09-15 is ""MissedUndocumented"" at 23:59
+  When the date changes to 2026-09-16 and every nightly job has run
+  Then the dose is still ""MissedUndocumented"" and still appears on the MAR and in Priya's review queue
+  And no job or user can delete it; Priya can only add an annotation after the late-entry window
+
+Scenario: US-033-AC4 Escalation stops once the dose is documented
+  Given the 08:00 dose became ""Overdue"" at 09:00
+  When Rosa records ""Given"" at 09:30 with administration time 08:50
+  Then the dose status is ""Given"" and no MissedUndocumented status or Supervisor alert follows
+  And the Overdue alert for the Coordinator is marked resolved
+
+Scenario Outline: US-033-AC5 Alert after 2 consecutive Refused or Held outcomes for the same order
+  Given the last recorded outcomes for <order> are <outcomes>, oldest first
+  Then Priya <alert>
+
+  Examples:
+    | order                    | outcomes                      | alert                                  |
+    | Lisinopril               | Refused, Refused              | receives a repeated-refusal alert      |
+    | Lisinopril               | Held, Refused                 | receives a repeated-refusal alert      |
+    | Lisinopril               | Refused, Given, Refused       | receives no alert                      |
+    | Lisinopril then Metformin| Refused, Refused              | receives no alert                      |","Highest","5","EP-07","S4","R1","MAR FR-MAR-04 FR-MAR-06","Agency Web App"
+"US-034","Story","Give a PRN dose safely","As a caregiver, I want the app to check PRN limits before I record an as-needed dose, so that I never give more than the prescriber allowed.
+
+Persona: PER-01 Rosa Delgado (CG)
+Requirements: FR-MAR-05
+Business rules: BR-033
+Dependencies: US-031, US-032
+
+Notes:
+- Rolling 24 hours counts doses with an administration time later than 24 hours before the proposed dose; a dose exactly 24 hours earlier no longer counts.
+- Offline, the app checks limits against the PRN history it last synced and warns that other staff may have given a dose.
+- Out of scope: PRN effectiveness scoring and trend charts.","Scenario: US-034-AC1 Record a PRN dose with an indication
+  Given the acetaminophen PRN order is Active and no PRN dose was given in the last 24 hours
+  When Rosa records a PRN dose at 10:00 with indication ""Knee pain 6/10""
+  Then the administration is saved with time, indication and Rosa as recorder
+  And the app prompts for a follow-up note on effect before clock-out
+
+Scenario: US-034-AC2 An indication is required
+  When Rosa records a PRN dose without an indication
+  Then it is rejected with ""Enter why this PRN dose is needed.""
+
+Scenario Outline: US-034-AC3 Enforce the minimum interval
+  Given the last PRN dose was given at 10:00 and the minimum interval is 240 minutes
+  When Rosa tries to record a PRN dose at <time>
+  Then the result is ""<result>""
+
+  Examples:
+    | time  | result                                                                |
+    | 13:59 | blocked: ""Too soon. The next dose is allowed from 14:00.""             |
+    | 14:00 | accepted                                                              |
+
+Scenario Outline: US-034-AC4 Enforce the rolling 24-hour maximum
+  Given PRN doses were given on 2026-09-14 at 06:00, 10:00, 14:00 and 18:00 and the maximum is 4 per 24 hours
+  When Rosa tries to record a PRN dose at <time>
+  Then the result is ""<result>""
+
+  Examples:
+    | time             | result                                                                      |
+    | 2026-09-15 05:59 | blocked: ""Maximum of 4 doses in 24 hours reached. Next dose allowed 06:00."" |
+    | 2026-09-15 06:00 | accepted                                                                    |
+
+Scenario: US-034-AC5 Blocks cannot be overridden by the caregiver
+  Given a PRN dose is blocked
+  Then the app offers no override and shows ""Contact your Clinical Supervisor""
+  And the blocked attempt is recorded in the audit log
+
+Scenario: US-034-AC6 Conflict found when an offline dose syncs
+  Given Rosa recorded a PRN dose offline at 13:30 while Maya had recorded one online at 12:00 for the same client
+  When Rosa's dose syncs
+  Then the administration is kept because it happened
+  And Priya receives an urgent alert ""PRN limit exceeded"" with both administrations","Highest","3","EP-07","S5","R1","MAR FR-MAR-05","Caregiver Mobile App"
+"US-035","Story","Record vitals and trigger out-of-range alerts","As a caregiver, I want to record vital signs during the visit and be told what to do when a reading is out of range, so that the nurse knows at once and I follow the care plan.
+
+Persona: PER-01 Rosa Delgado (CG)
+Requirements: FR-MAR-07, FR-MAR-08
+Business rules: BR-034, BR-053
+Dependencies: US-025, US-050
+
+Notes:
+- Default ranges come from BR-034 and were confirmed by the Clinical SME; agencies can change client ranges, not the platform defaults.
+- Readings are queued offline like dose outcomes; the alert is sent when the reading syncs and shows the capture time.
+- Out of scope: Bluetooth device integration for vitals (R2 candidate).","Scenario: US-035-AC1 Record an in-range reading
+  When Rosa records blood pressure 128/82 mmHg, method ""Sitting, left arm, automatic cuff"", at 08:15
+  Then the reading is saved with time, method, Rosa as recorder and the visit
+  And it is not flagged out of range
+
+Scenario Outline: US-035-AC2 Default alert ranges
+  Given C-10234 has no client-specific ranges
+  When Rosa records <type> <value>
+  Then the reading is <flag>
+
+  Examples:
+    | type          | value      | flag          |
+    | systolic BP   | 89 mmHg    | out of range  |
+    | systolic BP   | 90 mmHg    | in range      |
+    | systolic BP   | 180 mmHg   | in range      |
+    | systolic BP   | 181 mmHg   | out of range  |
+    | diastolic BP  | 110 mmHg   | in range      |
+    | diastolic BP  | 111 mmHg   | out of range  |
+    | pulse         | 49 bpm     | out of range  |
+    | pulse         | 121 bpm    | out of range  |
+    | temperature   | 100.3 F    | in range      |
+    | temperature   | 100.4 F    | out of range  |
+    | SpO2          | 92%        | in range      |
+    | SpO2          | 91%        | out of range  |
+    | blood glucose | 69 mg/dL   | out of range  |
+    | blood glucose | 300 mg/dL  | in range      |
+    | blood glucose | 301 mg/dL  | out of range  |
+
+Scenario: US-035-AC3 Out-of-range readings alert the nurse at any hour
+  Given the time is 22:30, inside quiet hours
+  When Rosa records SpO2 89%
+  Then Priya receives an urgent alert by push and SMS within 1 minute
+  And the alert text has no PHI: ""Urgent: vital sign alert at Lakemont North. Sign in to review.""
+  And Rosa sees the care-plan instruction ""Recheck in 5 minutes at rest. If still below 92%, call the on-call nurse.""
+
+Scenario: US-035-AC4 Client-specific ranges override the defaults
+  Given Priya set the SpO2 low limit for C-10234 to 88% because of COPD
+  When Rosa records SpO2 89%
+  Then the reading is in range and no alert is sent
+  When Rosa records SpO2 87%
+  Then the reading is out of range and Priya is alerted
+
+Scenario Outline: US-035-AC5 Reject implausible values
+  When Rosa records <type> <value>
+  Then it is rejected with ""<message>""
+
+  Examples:
+    | type        | value | message                                         |
+    | SpO2        | 101%  | Enter an SpO2 value from 50 to 100.             |
+    | pain score  | 11    | Enter a pain score from 0 to 10.                |
+    | pulse       | 0 bpm | Enter a pulse from 20 to 250 bpm.               |
+
+Scenario: US-035-AC6 Only a Clinical Supervisor sets client ranges
+  Given Marcus holds only the AG-COORD role
+  When he calls PUT /v1/clients/{clientId}/vital-ranges
+  Then the request returns 403","Highest","5","EP-07","S5","R1","MAR FR-MAR-07 FR-MAR-08","Caregiver Mobile App"
+"US-036","Story","Write a visit note that locks after 24 hours","As a caregiver, I want to write a short structured visit note with a narrative and fix it for a day if needed, so that the record is complete and, once locked, cannot be quietly changed.
+
+Persona: PER-01 Rosa Delgado (CG)
+Requirements: FR-DOC-01, FR-DOC-02
+Business rules: BR-035
+Dependencies: US-025
+
+Notes:
+- The lock is enforced by a scheduled job and checked again on every write, so an edit cannot slip through between job runs.
+- UX: structured fields are pick lists with a free-text ""Other""; the narrative has speech-to-text from the phone keyboard.
+- Out of scope: client or family signature on the visit note.","Scenario: US-036-AC1 Write and submit a visit note
+  Given Rosa is clocked in to the 08:00 visit for C-10234
+  When she records mood ""Calm"", appetite ""Ate half of breakfast"", skin ""No concerns"", a change in condition ""None"" and the narrative ""Client walked to the mailbox with the walker. Reported mild knee pain.""
+  And she clocks out at 09:58
+  Then the note is linked to the visit with status ""Submitted"" and Rosa as author
+
+Scenario Outline: US-036-AC2 The note locks 24 hours after clock-out
+  Given Rosa clocked out on 2026-09-15 at 10:00
+  When she edits the note at <time>
+  Then the result is ""<result>""
+
+  Examples:
+    | time             | result                                                         |
+    | 2026-09-16 09:59 | saved, with the previous text kept in the note history         |
+    | 2026-09-16 10:00 | rejected: ""This note is locked. Add an addendum instead.""      |
+
+Scenario: US-036-AC3 Add a signed addendum to a locked note
+  Given the note is ""Locked""
+  When Rosa adds the addendum ""Correction: client used the cane, not the walker."" and re-enters her PIN to sign
+  Then the addendum is saved with Rosa as author, a timestamp and her electronic signature
+  And the original note text is unchanged and shown above the addendum
+
+Scenario Outline: US-036-AC4 Who can add an addendum
+  Given the note is ""Locked""
+  When a user with role <role> tries to add an addendum
+  Then the result is ""<result>""
+
+  Examples:
+    | role                             | result    |
+    | CG (the note's author)           | allowed   |
+    | AG-SUPV                          | allowed   |
+    | CG (another caregiver)           | rejected  |
+    | AG-COORD                         | rejected  |
+
+Scenario: US-036-AC5 Draft notes survive loss of signal
+  Given Rosa has no connectivity
+  When she writes the note and clocks out
+  Then the note is queued with the clock-out punch and submitted on sync
+  And the 24-hour lock is measured from the clock-out punch time, not the sync time","Highest","3","EP-08","S3","R1","DOC FR-DOC-01 FR-DOC-02","Caregiver Mobile App"
+"US-037","Story","Report a client incident from the field","As a caregiver, I want to report a client incident from my phone while the details are fresh, so that the nurse and the agency can act at once and nothing is lost on paper.
+
+Persona: PER-01 Rosa Delgado (CG)
+Requirements: FR-DOC-03, FR-DOC-04
+Business rules: BR-036, BR-053
+Dependencies: US-050
+
+Notes:
+- Notification text was tightened by CR-006 after INC-2026-015: no client name, initials or incident category in any SMS, push or email body.
+- Office staff (AG-COORD) can report incidents from the Agency Web App with the same fields.
+- Up to 5 photos per incident, 10 MB each; images are scaled on the device before upload to work at 400 kbps (NFR-MOB-01).","Scenario: US-037-AC1 Report a fall with photos
+  Given Rosa is on a visit for C-10234
+  When she reports category ""Fall"", severity ""Medium"", occurred 2026-09-15 08:40, place ""Bathroom"", description, people involved ""Client only"", immediate actions ""Helped client to chair, checked for injuries, none visible"" and 2 photos taken in the app
+  Then the incident is saved with status ""Reported"" and linked to the visit
+  And the photos are stored encrypted and are not saved to the phone's photo gallery
+  And the incident appears in the Clinical Supervisor's incident queue
+
+Scenario Outline: US-037-AC2 Notify immediately for serious incidents
+  When Rosa reports an incident with category ""<category>"" and severity ""<severity>""
+  Then the Clinical Supervisor and the Agency Administrator <notification>
+
+  Examples:
+    | category              | severity | notification                                            |
+    | Fall                  | High     | are notified immediately as an urgent event             |
+    | SuspectedAbuseNeglect | Low      | are notified immediately as an urgent event             |
+    | Fall                  | Medium   | see it in the queue and receive a standard notification |
+    | PropertyDamage        | Low      | see it in the queue and receive a standard notification |
+
+Scenario: US-037-AC3 Urgent incident notifications bypass quiet hours
+  Given the time is 23:40, inside quiet hours
+  When Rosa reports category ""SuspectedAbuseNeglect""
+  Then Priya and Tom receive push and SMS notifications within 1 minute
+  And the notification text is ""Urgent: a client incident needs review. Sign in to Tendwell."" with no client name, initials or category
+
+Scenario: US-037-AC4 Start the deadline clock for suspected abuse or neglect
+  When Rosa reports category ""SuspectedAbuseNeglect"" that occurred 2026-09-14 13:00
+  Then the incident is flagged reportable with report deadline 2026-09-15 13:00
+
+Scenario: US-037-AC5 Report while offline
+  Given Rosa has no connectivity
+  When she reports a High severity fall
+  Then the incident is queued on the device with its photos, encrypted
+  And it is submitted and the urgent notifications are sent as soon as the phone reconnects
+  And the incident keeps its original occurred and reported times
+
+Scenario: US-037-AC6 Required fields
+  When Rosa submits an incident without a description or immediate actions
+  Then it is rejected with ""Describe what happened and what you did right away.""","Highest","5","EP-08","S5","R1","DOC FR-DOC-03 FR-DOC-04","Caregiver Mobile App"
+"US-038","Story","Investigate and close a client incident","As a Clinical Supervisor, I want to investigate each incident, assign corrective actions and track external reporting deadlines, so that every incident is closed properly and reported on time.
+
+Persona: PER-03 Priya Raman, RN (AG-SUPV)
+Requirements: FR-DOC-05, FR-DOC-06
+Business rules: BR-036, BR-037
+Dependencies: US-037
+
+Notes:
+- The Supervisor flags an incident reportable and chooses the reporting type (Suspected abuse or neglect, Serious injury, Medication error with harm); for category SuspectedAbuseNeglect the flag is set automatically at report time (US-037).
+- The deadline alert goes to the Supervisor and the Agency Administrator and is urgent (BR-053).
+- Out of scope: electronic submission to state incident systems.","Scenario: US-038-AC1 Record the investigation and corrective actions
+  Given the fall reported by Rosa is ""Reported""
+  When Priya records investigation notes, root cause ""Wet floor, no bath mat"" and the corrective action ""Install non-slip bath mat"" owned by Marcus Hale and due 2026-09-18
+  Then the incident status is ""ActionsOpen""
+  And Marcus sees the action on his task list
+
+Scenario Outline: US-038-AC2 Close only when every action is Done or Waived
+  Given the incident has 2 corrective actions with statuses <statuses>
+  When Priya closes the incident
+  Then the result is ""<result>""
+
+  Examples:
+    | statuses                                          | result                                                         |
+    | Done, Done                                        | Closed                                                         |
+    | Done, Waived with reason ""Family declined mat""    | Closed                                                         |
+    | Done, Open                                        | rejected: ""Complete or waive every corrective action first.""   |
+    | Done, Waived without a reason                     | rejected: ""Enter a reason for each waived action.""             |
+
+Scenario: US-038-AC3 Only a Clinical Supervisor can close
+  Given Tom Brennan holds only the AG-ADM role
+  When he calls POST /v1/client-incidents/{incidentId}/close
+  Then the request returns 403
+
+Scenario Outline: US-038-AC4 Alert at 50% and 90% of the reporting deadline
+  Given an incident of type <type> occurred 2026-09-14 13:00 and is flagged reportable with no external reference
+  Then Priya and Tom are alerted at <alert 50> and at <alert 90>
+  And the report deadline is <deadline>
+
+  Examples:
+    | type                         | deadline         | alert 50         | alert 90         |
+    | Suspected abuse or neglect   | 2026-09-15 13:00 | 2026-09-15 01:00 | 2026-09-15 10:36 |
+    | Serious injury               | 2026-09-15 13:00 | 2026-09-15 01:00 | 2026-09-15 10:36 |
+    | Medication error with harm   | 2026-09-17 13:00 | 2026-09-16 01:00 | 2026-09-17 05:48 |
+
+Scenario: US-038-AC5 Recording the external report stops deadline alerts
+  Given a reportable incident with deadline 2026-09-15 13:00
+  When Priya records external reference ""LKM-APS-2026-0912"" at 2026-09-15 09:15
+  Then no 90% alert is sent
+  And the incident shows ""Reported externally 2026-09-15 09:15""
+
+Scenario: US-038-AC6 Use the tenant's state deadline when configured
+  Given the tenant set the deadline for ""Medication error with harm"" to 48 hours
+  When a medication error with harm occurred 2026-09-14 13:00 is flagged reportable
+  Then the report deadline is 2026-09-16 13:00","Highest","5","EP-08","S5","R1","DOC FR-DOC-05 FR-DOC-06","Agency Web App"
+"US-039","Story","Request time off","As a caregiver, I want to request time off from the app and see my leave balance, so that I can plan my life without phoning the office and know what I have left.
+
+Persona: PER-01 Rosa Delgado (CG)
+Requirements: FR-TOF-01, FR-TOF-02, FR-TOF-04
+Business rules: BR-038, BR-040
+Dependencies: US-017
+
+Notes:
+- Accrual uses hours worked, including paid travel, but not PTO hours taken; accrual is held to the second and shown to 2 decimals (29.0 hours accrues 0.9667, shown as 0.97).
+- The accrual rate and cap are tenant-configurable; the defaults are 1 hour per 30 hours worked, capped at 80 hours (BR-040).
+- Out of scope: leave policies per employment type (backlog); sick-leave accrual laws, which the agency configures as a separate leave type.","Scenario: US-039-AC1 Submit a PTO request
+  Given today is 2026-09-14 and Rosa's PTO balance is 32.0 hours
+  When she requests PTO from 2026-09-28 to 2026-09-29 with partial-day hours 4.0 on 2026-09-29 and note ""Family event""
+  Then the request is saved with status ""Pending"" and 12.0 hours requested
+  And the Coordinators of her location are notified
+
+Scenario Outline: US-039-AC2 Flag short-notice requests
+  Given today is 2026-09-14
+  When Rosa requests <leave type> starting <start date>
+  Then the request is <flag>
+
+  Examples:
+    | leave type  | start date | flag                     |
+    | PTO         | 2026-09-21 | not flagged              |
+    | PTO         | 2026-09-20 | flagged ""Short notice""   |
+    | Unpaid      | 2026-09-16 | flagged ""Short notice""   |
+    | Bereavement | 2026-09-15 | flagged ""Short notice""   |
+    | Sick        | 2026-09-14 | not flagged              |
+
+Scenario Outline: US-039-AC3 Accrue PTO from hours worked up to the cap
+  Given Rosa's PTO balance is <balance> hours
+  When a pay period with <worked> hours worked is calculated
+  Then her PTO balance becomes <new balance> hours
+
+  Examples:
+    | balance | worked | new balance |
+    | 32.0    | 45.0   | 33.5        |
+    | 79.0    | 45.0   | 80.0        |
+    | 80.0    | 60.0   | 80.0        |
+    | 32.0    | 29.0   | 32.97       |
+
+Scenario: US-039-AC4 Requests above the balance are allowed but flagged
+  Given Rosa's PTO balance is 8.0 hours
+  When she requests 16.0 hours of PTO
+  Then the request is saved as ""Pending"" with the flag ""Exceeds PTO balance by 8.0 hours"" for the approver
+
+Scenario: US-039-AC5 Cancel a request
+  Given Rosa has a ""Pending"" request
+  When she cancels it
+  Then the status is ""Cancelled"" and the Coordinator is notified
+  And a request that is already ""Approved"" can be cancelled only by the Coordinator","Highest","3","EP-09","S5","R1","TOF FR-TOF-01 FR-TOF-02 FR-TOF-04","Caregiver Mobile App"
+"US-040","Story","Approve time off and reassign affected visits","As a Care Coordinator, I want to see which visits a time-off request affects before I decide, and have approved absences move those visits to Open Shifts, so that every client still gets a caregiver.
+
+Persona: PER-02 Marcus Hale (AG-COORD)
+Requirements: FR-TOF-03, FR-TOF-05
+Business rules: BR-039
+Dependencies: US-039, US-023, US-021
+
+Notes:
+- FR-TOF-05 (holiday calendar) is configured by the Agency Administrator; it sits in this story because the calendar is set up and tested together with time-off approval.
+- Partial-day requests affect only visits that overlap the requested hours.
+- Analytics: share of affected visits re-covered before their start time; median decision time.","Scenario: US-040-AC1 See the impact before deciding
+  Given Rosa requested PTO from 2026-09-28 to 2026-09-29
+  When Marcus opens the request
+  Then he sees the 5 affected visits with date, time, client first name and last initial, and service
+  And he sees Rosa's PTO balance and any ""Short notice"" or ""Exceeds PTO balance"" flag
+
+Scenario: US-040-AC2 Approve and move affected visits to Open Shifts
+  When Marcus approves the request
+  Then the status is ""Approved"" with Marcus and the decision time recorded
+  And the 5 affected visits move to Open Shifts and eligible caregivers are notified
+  And Rosa is notified of the decision without PHI
+
+Scenario: US-040-AC3 Decline with a reason
+  When Marcus declines the request with reason ""Two other aides already off that week""
+  Then the status is ""Declined"" and the 5 visits stay assigned to Rosa
+  And Rosa sees the reason in the app
+
+Scenario: US-040-AC4 Approved time off blocks new assignments
+  Given Rosa's PTO for 2026-09-28 is Approved
+  When Marcus tries to assign Rosa to a visit on 2026-09-28
+  Then the compliance check returns the hard block ""Rosa Delgado has approved time off on 2026-09-28.""
+
+Scenario: US-040-AC5 Maintain the holiday calendar
+  When Tom Brennan (AG-ADM) adds the holiday ""Labor Day"" on 2026-09-07
+  Then the schedule board marks 2026-09-07 as a holiday
+  And payroll applies the holiday multiplier to hours worked that day by holiday-eligible caregivers
+  And a user without the AG-ADM role cannot add, edit or remove holidays
+
+Scenario: US-040-AC6 Approve only for assigned locations
+  Given Marcus is assigned only to ""Lakemont North""
+  When a caregiver from ""Lakemont South"" requests time off
+  Then the request does not appear in Marcus's approval queue
+  And a direct call to POST /v1/time-off-requests/{requestId}/decision returns 404","Highest","5","EP-09","S5","R1","TOF FR-TOF-03 FR-TOF-05","Agency Web App"
+"US-041","Story","Calculate pay-period hours and pay lines","As a Billing & Payroll Specialist, I want Tendwell to calculate each caregiver's regular, overtime, holiday, travel, PTO and mileage lines from Verified visits, so that I review exceptions instead of rebuilding timesheets by hand.
+
+Persona: PER-04 Denise Carter (AG-FIN)
+Requirements: FR-PAY-01, FR-PAY-02, FR-PAY-03
+Business rules: BR-028, BR-041, BR-042, BR-043, BR-044, BR-045
+Dependencies: US-019, US-029, US-040
+
+Notes:
+- The workweek is the tenant's FLSA workweek (Monday to Sunday by default) and is independent of the pay period; weekly, bi-weekly and semi-monthly periods are supported (FR-PAY-01).
+- Holiday hours count toward the 40-hour overtime threshold because they are hours worked; the canonical example was confirmed with the pilot agencies (ISS-03).
+- The daily overtime profile (AC3) was added by CR-001 in SRS v1.1 and increased the estimate from 10 to 13 points. When both daily and weekly overtime apply, hours already paid as daily overtime are not counted again toward weekly overtime.
+- Estimated drive time comes from the distance matrix at the time the visit is verified and is stored, so that a recalculation produces the same result.
+- Performance: the summary for 250 caregivers completes within 60 s (NFR-PERF-04).","Scenario: US-041-AC1 Calculate the canonical workweek for E-2041
+  Given Maya Ortiz (E-2041) has 40.5 hours of Verified visits in the workweek 2026-09-07 to 2026-09-13, of which 6.0 hours are on Monday 2026-09-07 (Labor Day)
+  And she has 2.5 hours of paid travel between consecutive visits, none of it on Monday
+  And she drove 46.2 miles between consecutive visits
+  When the pay-period summary for 2026-08-31 to 2026-09-13 is calculated
+  Then her hours worked for the workweek total 43.0 and the overtime hours are the last 3.0 hours worked, on Sunday 2026-09-13
+  And her lines for the workweek are:
+    | line     | hours   | rate   | amount  |
+    | Holiday  | 6.0     | $29.25 | $175.50 |
+    | Regular  | 31.5    | $19.50 | $614.25 |
+    | Travel   | 2.5     | $19.50 | $48.75  |
+    | Overtime | 3.0     | $29.25 | $87.75  |
+    | Mileage  | 46.2 mi | $0.70  | $32.34  |
+  And total wages are $926.25 and total payable is $958.59
+  And the Mileage line is a reimbursement that adds no hours
+
+Scenario Outline: US-041-AC2 Paid travel between consecutive visits
+  Given Maya's visit ends at 10:00 and her next visit, at a different address, starts after a gap of <gap>
+  And the estimated drive time is <drive>
+  Then the paid travel time is <paid>
+
+  Examples:
+    | gap        | drive  | paid       |
+    | 45 min     | 20 min | 30 min     |
+    | 25 min     | 20 min | 25 min     |
+    | 2 h 00 min | 35 min | 45 min     |
+    | 2 h 01 min | 35 min | 0 min      |
+
+Scenario Outline: US-041-AC3 Daily overtime profile when the tenant enables it
+  Given the tenant has the daily overtime profile switched on
+  When Maya works <hours> hours of Verified visits on one day in a week with fewer than 40 hours worked
+  Then that day is paid as <regular> regular, <ot> overtime at 1.5x and <dt> double time at 2.0x
+
+  Examples:
+    | hours | regular | ot  | dt  |
+    | 8.0   | 8.0     | 0.0 | 0.0 |
+    | 10.0  | 8.0     | 2.0 | 0.0 |
+    | 13.0  | 8.0     | 4.0 | 1.0 |
+
+Scenario: US-041-AC4 No stacking of overtime and holiday multipliers
+  Given Maya's 40th hour of the week ends at 14:00 on a tenant holiday and she works until 16:00 that day
+  Then the 2.0 hours from 14:00 to 16:00 are paid once at 1.5x as Holiday or Overtime, not at 2.25x
+  And the line type used is the one with the higher multiplier, or Overtime when both are equal
+
+Scenario: US-041-AC5 Merge overlapping time so no minute is paid twice
+  Given Maya has a Verified visit from 08:00 to 10:00 and approved non-visit training time from 09:30 to 11:00
+  When the summary is calculated
+  Then 3.0 hours are counted, not 3.5
+  And hours are held to the second and rounded to 2 decimals only for display and export
+
+Scenario Outline: US-041-AC6 Count only eligible time
+  Given in the workweek Maya has <time>
+  Then <result>
+
+  Examples:
+    | time                                                       | result                                                                    |
+    | a Completed visit with an open LATE_START exception        | the visit is excluded and listed for review                               |
+    | 8.0 hours of approved PTO and 36.0 hours worked            | PTO is paid as 8.0 PTO hours and no overtime is calculated                |
+    | 30.0 hours worked and mileage-eligible set to No           | no Mileage line is created                                                |","Highest","13","EP-10","S5","R1","PAY FR-PAY-01 FR-PAY-02 FR-PAY-03","Agency Web App"
+"US-042","Story","Review and export payroll","As a Billing & Payroll Specialist, I want to see what still needs attention before I export, and then export a file my payroll provider accepts, so that payroll is right the first time and the period is locked.
+
+Persona: PER-04 Denise Carter (AG-FIN)
+Requirements: FR-PAY-04, FR-PAY-05
+Business rules: BR-046
+Dependencies: US-041
+
+Notes:
+- The export watermark (BR-058) is carried in the file name and in the audit event, not as a data row, so that the payroll provider's import is not broken (agreed with the Compliance and Privacy Officer, 2026-05-20).
+- Tendwell does not calculate tax withholding or produce pay stubs; full payroll processing was requested in CR-008 and rejected (DEC-04).
+- Analytics: time from period end to export per tenant is the measure for OBJ-02.","Scenario: US-042-AC1 Review open items before export
+  Given the pay period 2026-08-31 to 2026-09-13 has 3 caregivers with 5 visits that are Needs review or not yet Verified
+  When Denise opens the pre-export review
+  Then she sees each caregiver, visit, status and open exception code
+  And each visit links to the exception queue
+
+Scenario: US-042-AC2 Export with open items only after acknowledgement
+  Given the pre-export review lists 5 open visits
+  When Denise exports without acknowledging them
+  Then the export is not started and she sees ""5 visits are not Verified and will not be paid in this period. Review them or confirm to continue.""
+  When she confirms
+  Then the export runs and the 5 visits are listed in the export summary as excluded
+
+Scenario: US-042-AC3 Export with the tenant's column mapping
+  Given the tenant mapped employee number to ""EmpNo"", line types to earning codes REG, OT, DT, HOL, TRV, PTO, MIL and ADJ, and hours to 2 decimals
+  When Denise previews and exports the file
+  Then the preview shows the first 10 rows exactly as they will be exported
+  And the CSV is UTF-8 with a header row and one row per caregiver per line type
+  And the export records the row count, the SHA-256 of the file, Denise and the timestamp
+
+Scenario: US-042-AC4 Exporting locks the period
+  When the export completes
+  Then the pay period status is ""Locked""
+  And re-downloading the export returns the identical file with the same SHA-256
+  And later changes to visits in the period create adjustments in the next open period instead of changing the locked lines
+
+Scenario: US-042-AC5 Only users with the export permission can export
+  Given Marcus holds only the AG-COORD role
+  When he calls POST /v1/pay-periods/{periodId}/exports
+  Then the request returns 403","Highest","5","EP-10","S6","R1","PAY FR-PAY-04 FR-PAY-05","Agency Web App"
+"US-043","Story","Carry late changes into the next period as adjustments","As the payroll calculation service, I want changes that affect a locked period to become adjustment lines in the next open period, so that exported payroll is never rewritten and every correction is traceable to its visit.
+
+Persona: System (SYS)
+Requirements: FR-PAY-06
+Business rules: BR-046
+Dependencies: US-042
+
+Notes:
+- Adjustments use the multipliers of the original workweek, so overtime is calculated where it was earned (BR-041).
+- If the next period does not yet exist, it is created from the tenant's pay frequency before the adjustment is written.
+- Adjustment lines export with earning code ADJ, or with the mapped code of the adjusted line type if the tenant chooses that option.","Scenario: US-043-AC1 Turn a time correction into an adjustment
+  Given the pay period 2026-08-31 to 2026-09-13 is Locked
+  And Maya's Verified visit on 2026-09-10 lasted 2.0 hours in a week where she worked 38.0 hours
+  When on 2026-09-16 the Coordinator corrects the visit to 2.5 hours
+  Then an Adjustment line of +0.5 hours at $19.50 ($9.75) is created in the open period 2026-09-14 to 2026-09-27
+  And the line references the original visit and the line it adjusts
+  And the locked period's lines and export are unchanged
+
+Scenario: US-043-AC2 Recalculate overtime for the original workweek
+  Given Maya's workweek 2026-09-07 to 2026-09-13 already totals 43.0 hours worked
+  When a visit in that week is corrected from 2.0 to 2.5 hours after the period is locked
+  Then the adjustment is +0.5 hours of Overtime at $29.25, amount $14.63
+  And the amount is rounded half-up to the cent
+
+Scenario: US-043-AC3 Create a negative adjustment
+  Given a Verified visit in a locked period is corrected from 2.5 to 2.0 hours in a week under 40 hours
+  Then an Adjustment line of -0.5 hours at $19.50 (-$9.75) is created in the next open period
+
+Scenario: US-043-AC4 Pay a visit verified after the period was locked
+  Given a visit on 2026-09-11 was Needs review when the period was exported
+  When the Coordinator resolves its exception on 2026-09-17 and the visit becomes Verified
+  Then its hours are added as adjustment lines in the period 2026-09-14 to 2026-09-27, priced with the rate effective on 2026-09-11
+
+Scenario: US-043-AC5 Process each change once
+  Given the adjustment for a correction was created
+  When the same change event is delivered again
+  Then no second adjustment line is created","Highest","5","EP-10","S6","R1","PAY FR-PAY-06","Platform Services"
+"US-044","Story","Run monthly billing safely","As a Billing & Payroll Specialist, I want to run billing for a period and get exactly one draft invoice per client per payer from Verified visits, so that I can approve and issue invoices within two days without hunting for duplicates or gaps.
+
+Persona: PER-04 Denise Carter (AG-FIN)
+Requirements: FR-BIL-01, FR-BIL-04
+Business rules: BR-028, BR-050, BR-051
+Dependencies: US-045, US-029
+
+Notes:
+- AC3 and AC4 were added in R1.1 by CR-005 after INC-2026-007, when a deployment overlap let two scheduler workers run the nightly billing run; the application-level check-then-insert raced and 214 duplicate drafts were created across 9 tenants.
+- NFR-OBS-02 raises an alert when a run's invoice count deviates by more than 20% from the previous run.
+- Billing runs are single-flight (ADR-003); the database constraint is the last line of defense if single-flight fails.
+- Performance: a run for 1,000 clients completes within 10 minutes (NFR-PERF-04).","Scenario: US-044-AC1 Create one draft invoice per client per payer
+  Given C-10234 has Verified visits in September 2026 under ""Lakemont County Medicaid"" and under private pay
+  When Denise starts the billing run for 2026-09-01 to 2026-09-30 with an Idempotency-Key header
+  Then two Draft invoices are created for C-10234, one per payer, numbered like ""INV-2026-000123""
+  And each invoice carries the idempotency key tenant + client + payer + period
+
+Scenario: US-044-AC2 Re-running a period updates drafts and never duplicates
+  Given the September run created a Draft invoice for C-10234 and ""Lakemont County Medicaid""
+  And 2 more of the client's September visits became Verified afterwards
+  When Denise re-runs billing for September
+  Then the existing Draft invoice is updated with the 2 visits
+  And no second invoice exists for the same tenant, client, payer and period
+  And invoices that are already Approved or Issued are not changed and are listed as ""Skipped: already approved""
+
+Scenario: US-044-AC3 Concurrent runs cannot create duplicate invoices
+  Given two scheduler workers start the September billing run for the same tenant at the same moment
+  When both try to insert an invoice for C-10234 and ""Lakemont County Medicaid""
+  Then the database unique constraint on the idempotency key allows exactly one invoice
+  And the second worker's insert becomes an update of that Draft, with no error shown to users
+  And the run summary shows the same invoice count as a single run
+
+Scenario: US-044-AC4 Check for duplicates before issuing
+  Given a non-void invoice INV-2026-000123 already exists for C-10234, ""Lakemont County Medicaid"" and September 2026
+  When Denise tries to issue another invoice for the same client, payer and period
+  Then issuing is blocked with ""Possible duplicate of INV-2026-000123. Void one of them before issuing.""
+  And the block applies to automatic issuing of private-pay invoices as well
+
+Scenario Outline: US-044-AC5 Enforce the invoice lifecycle
+  Given an invoice with status ""<status>""
+  When Denise tries to <action>
+  Then the result is ""<result>""
+
+  Examples:
+    | status        | action                     | result                                                              |
+    | Draft         | approve it                 | status Approved                                                     |
+    | Approved      | issue it                   | status Issued, issue date set, due date 30 days later               |
+    | Issued        | edit a line                | rejected: ""Issued invoices cannot be edited. Use a credit note.""    |
+    | Issued        | void it, unpaid            | status Void                                                         |
+    | PartiallyPaid | void it                    | rejected: ""Invoices with payments cannot be voided. Use a credit note."" |
+    | Draft         | issue it without approval  | rejected: ""Approve the invoice before issuing it.""                  |
+
+Scenario: US-044-AC6 Bill only Verified visits
+  Given C-10234 has 12 Completed visits in September, of which 11 are Verified and 1 is Needs review
+  When billing runs for September
+  Then the invoice includes the 11 Verified visits
+  And the Needs review visit appears in the run summary as ""Unbilled: pending verification""","Highest","8","EP-11","S6","R1","BIL FR-BIL-01 FR-BIL-04","Agency Web App"
+"US-045","Story","Price visits by billing model and authorization cap","As the billing engine, I want to price each Verified visit with the billing model of its matching authorization and cap units at what remains authorized, so that invoices match what the payer will pay and authorization overruns never reach a claim.
+
+Persona: System (SYS)
+Requirements: FR-BIL-02, FR-BIL-03
+Business rules: BR-047, BR-048, BR-049
+Dependencies: US-013, US-029
+
+Notes:
+- Minutes are the Verified duration between the effective clock-in and clock-out, after any Manual corrections (BR-026).
+- Unit rounding applies per visit, not to the monthly total (BR-047); the rule is tenant-configurable, with 8-minute rounding as the default (DEC-06).
+- Non-billable lines are kept on the invoice for transparency and excluded from totals and claim batches.
+- Remaining units for the cap are recalculated per run in visit date order, so earlier visits are billed first.","Scenario: US-045-AC1 Price hourly visits in 15-minute units
+  Given C-10234's authorization T1019 is Hourly at $7.25 per 15-minute unit with enough units remaining
+  And visits A, B and C lasted 127, 113 and 120 Verified minutes
+  When the visits are priced
+  Then the invoice lines are:
+    | visit | minutes | calculation            | units |
+    | A     | 127     | 8 r7, no round-up      | 8     |
+    | B     | 113     | 7 r8, round up         | 8     |
+    | C     | 120     | 8 r0                   | 8     |
+  And the total is 24 units = $174.00
+
+Scenario Outline: US-045-AC2 Round units at the 8-minute boundary
+  When a Verified hourly visit lasts <minutes> minutes
+  Then it is billed as <units> units
+
+  Examples:
+    | minutes | units |
+    | 7       | 0     |
+    | 8       | 1     |
+    | 15      | 1     |
+    | 22      | 1     |
+    | 23      | 2     |
+    | 127     | 8     |
+    | 113     | 8     |
+
+Scenario: US-045-AC3 Cap billed units at the remaining authorization
+  Given only 20 units remain on C-10234's T1019 authorization
+  When visits A, B and C (24 units) are priced
+  Then 20 units are billable for $145.00
+  And 4 units appear on a line ""Not billable - exceeds authorization"" that is excluded from the invoice total
+
+Scenario: US-045-AC4 Price a daily rate once per calendar day
+  Given an adult day participant's authorization S5102 is Daily at $78.00 per day
+  And the participant attended on 14 days in September 2026, with two check-ins on 2026-09-15
+  When September is priced
+  Then 14 daily charges are billed for $1,092.00
+  And 2026-09-15 is charged once
+
+Scenario: US-045-AC5 Prorate a fixed monthly rate in the month of admission
+  Given a supported-living resident's authorization is Fixed monthly at $6,200.00
+  And the resident was admitted on 2026-09-10, so active 21 of 30 days in September
+  When September is priced
+  Then the charge is $4,340.00 (6,200 x 21/30)
+
+Scenario Outline: US-045-AC6 Per-visit pricing and visits without a matching authorization
+  Given a Verified visit with <authorization>
+  Then the invoice line is <line>
+
+  Examples:
+    | authorization                                   | line                                                         |
+    | a Per visit authorization at $55.00, 47 minutes | 1 unit at $55.00, billable                                   |
+    | a Per visit authorization at $55.00, 95 minutes | 1 unit at $55.00, billable                                   |
+    | no active authorization covering the visit date | 0 billable, non-billable reason ""No matching authorization""  |","Highest","8","EP-11","S6","R1","BIL FR-BIL-02 FR-BIL-03","Platform Services"
+"US-046","Story","Collect private-pay invoices online","As a Billing & Payroll Specialist, I want private-pay invoices sent with a card or ACH payment link and their status updated automatically, so that families can pay in minutes and I stop chasing checks.
+
+Persona: PER-04 Denise Carter (AG-FIN)
+Requirements: FR-BIL-05, FR-BIL-08
+Business rules: BR-052
+Dependencies: US-044, DEP-05
+
+Notes:
+- Payment pages are hosted by the payment provider; Tendwell never handles card or bank details (PCI DSS scope stays with the provider).
+- An invoice paid before a reminder date receives no further reminders.
+- Out of scope: autopay, payment plans and payer remittance (835) import.","Scenario: US-046-AC1 Send an invoice with a payment link and no PHI
+  Given INV-2026-000141 for $174.00 is Approved for a private-pay client whose legal representative is ""jamie.kimball@example.org""
+  When Denise issues it
+  Then an email is sent to ""jamie.kimball@example.org"" with the agency name, the invoice number, the amount due $174.00, the due date and a payment link
+  And the email body contains no client name, service description, diagnosis or address
+
+Scenario: US-046-AC2 Record a payment from the provider's webhook
+  When the payment provider sends a signed ""payment succeeded"" webhook for $174.00 on INV-2026-000141
+  Then a payment is recorded with method Card and the provider reference
+  And the invoice status is ""Paid"" with balance $0.00
+
+Scenario: US-046-AC3 Ignore duplicate and unsigned webhooks
+  Given the webhook event ""evt_0001"" was already processed
+  When the same event is delivered again
+  Then the server returns 200 and records no second payment
+  When a webhook arrives with an invalid signature
+  Then the server returns 400, changes nothing and logs a security event
+
+Scenario: US-046-AC4 Record a partial payment
+  When a signed webhook reports a payment of $100.00 on the $174.00 invoice
+  Then the invoice status is ""PartiallyPaid"" with balance $74.00
+
+Scenario Outline: US-046-AC5 Mark overdue and send reminders
+  Given INV-2026-000141 was issued 2026-10-01 with net 30 terms, due 2026-10-31, and is unpaid
+  When the daily job runs on <date>
+  Then <result>
+
+  Examples:
+    | date       | result                                          |
+    | 2026-10-31 | the invoice is Issued and no reminder is sent   |
+    | 2026-11-01 | the invoice is Overdue and reminder 1 is sent   |
+    | 2026-11-07 | reminder 2 is sent                              |
+    | 2026-11-14 | reminder 3 is sent                              |
+    | 2026-11-15 | no reminder is sent                             |
+
+Scenario: US-046-AC6 Handle a failed ACH payment
+  Given INV-2026-000141 was marked Paid from an ACH payment
+  When the provider reports the ACH payment as failed
+  Then the payment status is ""Failed"", the balance returns to $174.00 and the invoice status returns to Overdue or Issued based on the due date
+  And Denise receives an in-app notification","Highest","5","EP-11","S6","R1","BIL FR-BIL-05 FR-BIL-08","Agency Web App"
+"US-047","Story","Export a payer claim batch","As a Billing & Payroll Specialist, I want to export a claim batch file per payer and period, so that I can submit claims through our clearinghouse without retyping them.
+
+Persona: PER-04 Denise Carter (AG-FIN)
+Requirements: FR-BIL-06
+Business rules: None
+Dependencies: US-044
+
+Notes:
+- The column layout is configurable per payer so that each clearinghouse template can be matched without code changes.
+- The file contains PHI; it is downloaded through a short-lived link and audited as a PHI export.
+- Delivery: S6 stretch item, completed in hardening week 1 on 2026-06-03 (see the release and sprint plan).
+- Out of scope: EDI 837 generation and clearinghouse APIs (backlog).","Scenario: US-047-AC1 Export a claim batch for a payer and period
+  Given ""Lakemont County Medicaid"" has 62 Approved or Issued invoices for September 2026
+  When Denise exports a claim batch for that payer and period
+  Then a CSV is created with one row per billable invoice line, including Medicaid ID, authorization number, service code, service dates, units, unit rate and amount
+  And the batch records the claim count and the total
+  And the export carries a watermark with Denise's name, the tenant and the timestamp and creates an audit event
+
+Scenario: US-047-AC2 Exclude lines that cannot be claimed
+  Given the September invoices include 3 ""Not billable - exceeds authorization"" lines and 1 Draft invoice
+  When the batch is exported
+  Then none of those lines are in the file
+
+Scenario: US-047-AC3 Report claims with missing data
+  Given 2 invoices belong to a client with no Medicaid ID on file
+  When Denise exports the batch
+  Then those 2 invoices are left out and listed in an error report ""Medicaid ID missing""
+  And the batch is created for the other 60 invoices
+
+Scenario: US-047-AC4 Warn before exporting the same period twice
+  Given a batch for ""Lakemont County Medicaid"" and September 2026 was exported on 2026-10-02
+  When Denise exports the same payer and period again
+  Then she is warned ""A batch for this payer and period was exported on 2026-10-02. Exporting again may create duplicate claims.""
+  And the export runs only after she confirms","High","5","EP-11","S6","R1","BIL FR-BIL-06","Agency Web App"
+"US-048","Story","Issue a credit note","As a Billing & Payroll Specialist, I want to correct an issued invoice with a credit note and a reason, so that the client's balance is right while the original invoice stays untouched for audit.
+
+Persona: PER-04 Denise Carter (AG-FIN)
+Requirements: FR-BIL-07
+Business rules: BR-051
+Dependencies: US-044
+
+Notes:
+- A credit on a Paid invoice creates a credit balance shown as ""Credit due""; refunds are handled in the payment provider and recorded against the invoice.
+- Credit notes are included in AR ageing (US-051) and in the audit log.","Scenario: US-048-AC1 Issue a credit note against an issued invoice
+  Given INV-2026-000123 for $174.00 is Issued and unpaid
+  When Denise issues a credit note of $14.50 with reason ""Visit B time corrected: 2 units overbilled""
+  Then the credit note is saved with its own number, the reason and Denise as issuer
+  And the invoice balance is $159.50
+  And the invoice lines and total stay unchanged
+
+Scenario Outline: US-048-AC2 Validate the credit amount
+  Given INV-2026-000123 totals $174.00 with no earlier credits
+  When Denise enters a credit of <amount>
+  Then the result is ""<result>""
+
+  Examples:
+    | amount  | result                                                               |
+    | $0.00   | rejected: enter an amount greater than $0.00                         |
+    | $174.00 | accepted, balance $0.00                                              |
+    | $174.01 | rejected: the credit cannot exceed the uncredited total of $174.00   |
+
+Scenario: US-048-AC3 A reason is required
+  When Denise issues a credit note without a reason
+  Then it is rejected with ""Enter the reason for this credit note.""
+
+Scenario Outline: US-048-AC4 Credit notes only on issued invoices
+  Given an invoice with status ""<status>""
+  When Denise tries to issue a credit note
+  Then the result is ""<result>""
+
+  Examples:
+    | status | result                                                       |
+    | Draft  | rejected: ""Edit the draft instead of issuing a credit note."" |
+    | Void   | rejected: ""This invoice is void.""                            |
+    | Paid   | accepted, and the balance shows the credit due to the payer  |","Highest","3","EP-11","S6","R1","BIL FR-BIL-07","Agency Web App"
+"US-049","Story","Choose notification channels and respect quiet hours","As a caregiver, I want to choose how Tendwell contacts me and not be disturbed at night by anything that can wait, so that I see what matters without my phone buzzing all evening.
+
+Persona: PER-01 Rosa Delgado (CG)
+Requirements: FR-NTF-01, FR-NTF-02, FR-NTF-05
+Business rules: BR-053, BR-056
+Dependencies: US-007, DEP-01
+
+Notes:
+- Before CR-006, email bodies could include the client's first name, last initial and incident category; INC-2026-015 showed that this was unsafe, and AC3 now covers email as well as SMS and push.
+- The SMS vendor operates under a BAA (DEP-01), but message content is still PHI-free by design (minimum necessary, NFR-PRIV-01).
+- Quiet hours follow the tenant's time zone, not the device's.
+- Out of scope: per-user quiet-hour settings (R2 candidate).","Scenario: US-049-AC1 Choose channels per event type
+  When Rosa sets ""Schedule changed"" to Push and SMS and ""Credential expiring"" to In-app only
+  Then a schedule change is delivered to her by push and SMS
+  And a credential reminder appears only in her in-app inbox
+  And In-app delivery cannot be switched off for any event type
+
+Scenario Outline: US-049-AC2 Hold non-urgent notifications during quiet hours
+  Given the tenant time zone is America/New_York
+  When a <kind> notification for Rosa is created at <time>
+  Then it is <result>
+
+  Examples:
+    | kind                        | time  | result                     |
+    | non-urgent schedule change  | 20:59 | sent immediately           |
+    | non-urgent schedule change  | 21:00 | held and sent at 07:00     |
+    | non-urgent schedule change  | 06:59 | held and sent at 07:00     |
+    | non-urgent schedule change  | 07:00 | sent immediately           |
+    | urgent missed-dose alert    | 23:15 | sent immediately           |
+
+Scenario Outline: US-049-AC3 Keep PHI out of every external channel
+  When a ""Schedule changed"" notification for a visit to C-10234 is sent by <channel>
+  Then the message text is ""<text>""
+  And it contains no client name, initials, diagnosis, medication or address
+
+  Examples:
+    | channel | text                                                                         |
+    | SMS     | Tendwell: your schedule changed. Open the app to see details.                |
+    | Push    | Your schedule changed. Tap to see details.                                   |
+    | Email   | Your schedule changed. Sign in to Tendwell to see details. (with deep link)  |
+
+Scenario: US-049-AC4 Deep links require sign-in
+  Given Rosa's session has expired
+  When she taps the deep link in a notification
+  Then she is asked to sign in or confirm her device PIN
+  And she then lands on the changed visit
+
+Scenario: US-049-AC5 Release held notifications in order
+  Given 3 non-urgent notifications for Rosa were held between 21:10 and 23:50
+  When the time reaches 07:00
+  Then they are delivered in the order they were created
+  And a notification whose visit was later cancelled is delivered as the cancellation only","Highest","5","EP-12","S2","R1","NTF FR-NTF-01 FR-NTF-02 FR-NTF-05","Caregiver Mobile App"
+"US-050","Story","Configure escalation ladders","As an Agency Administrator, I want to configure who is alerted, how and after what delay when an urgent event is not handled, so that nothing urgent sits unnoticed and escalation stops as soon as someone acts.
+
+Persona: PER-05 Tom Brennan (AG-ADM)
+Requirements: FR-NTF-03, FR-NTF-04
+Business rules: BR-054, BR-055
+Dependencies: US-049, US-009
+
+Notes:
+- AC3 was rewritten by CR-006 after INC-2026-015, in which an escalation email reached a deactivated former Coordinator because recipients had been cached when the ladder was configured. Ladders now store roles only, never user IDs.
+- NFR-OBS-02 alerts on any notification addressed to a deactivated user; the target is zero.
+- Dose escalation timing (BR-030) is fixed by the clinical rule; the ladder controls recipients and channels, not the 60-minute thresholds.
+- Clarification of BR-055: the 1, 4 and 16 minutes are the waits between attempts (exponential backoff, factor 4), so retries happen 1, 5 and 21 minutes after the first failure. Confirmed with the Engineering Lead on 2026-04-22.","Scenario: US-050-AC1 Configure a ladder by role
+  When Tom configures the ladder for ""Client incident - High severity"" as:
+    | step | delay  | recipient role | channels          |
+    | 1    | 0 min  | AG-SUPV        | Push, SMS, Email  |
+    | 2    | 15 min | AG-ADM         | Push, SMS         |
+    | 3    | 30 min | AG-COORD       | Push, SMS         |
+  Then the ladder is saved and audited with before and after values
+  And it applies to new incidents in every location of the tenant
+
+Scenario: US-050-AC2 Stop escalating once the condition is resolved
+  Given a High severity incident was reported at 14:00 and step 1 was sent
+  When Priya opens the incident and sets it to ""UnderReview"" at 14:09
+  Then step 2 at 14:15 and step 3 at 14:30 are not sent
+
+Scenario: US-050-AC3 Resolve recipients at send time from active users
+  Given the ladder was configured when Coordinator ""Casey Lund"" was active in ""Lakemont North""
+  And Casey Lund was deactivated on 2026-09-01
+  When step 3 fires for an incident in ""Lakemont North"" on 2026-09-09
+  Then the recipients are the users who are active and hold AG-COORD in ""Lakemont North"" at that moment
+  And Casey Lund receives nothing on any channel
+  And if no active user holds the role in that location, the step goes to the tenant's Agency Administrators and the ladder shows a configuration warning
+
+Scenario Outline: US-050-AC4 Deduplicate by event, recipient and step
+  Given notification <first> was already queued
+  When notification <second> is created
+  Then <result>
+
+  Examples:
+    | first                          | second                         | result                         |
+    | event E1, Priya, step 1        | event E1, Priya, step 1        | no second notification         |
+    | event E1, Priya, step 1        | event E1, Priya, step 2        | a second notification is sent  |
+    | event E1, Priya, step 1        | event E2, Priya, step 1        | a second notification is sent  |
+
+Scenario: US-050-AC5 Retry failed deliveries at 1, 4 and 16 minutes
+  Given an SMS to Priya fails at 14:00:00
+  Then it is retried at 14:01:00, 14:05:00 and 14:21:00
+  And if the third retry fails, the notification status is ""Failed"" and it stays visible in Priya's in-app inbox
+
+Scenario Outline: US-050-AC6 Validate ladder configuration
+  When Tom saves a ladder with <setting>
+  Then it is rejected with ""<message>""
+
+  Examples:
+    | setting                                    | message                                                      |
+    | step 2 delay 10 min after step 1 at 15 min | Each step must start later than the step before it.          |
+    | a step with no recipient role              | Choose a recipient role for each step.                       |
+    | no steps for an urgent event type          | Urgent event types need at least one step.                   |","Highest","8","EP-12","S4","R1","NTF FR-NTF-03 FR-NTF-04","Agency Web App"
+"US-051","Story","See the operations dashboard and standard reports","As an agency owner, I want one dashboard for today's operations and a standard set of reports I can filter and export, so that I can manage by exception and show regulators and payers our numbers.
+
+Persona: PER-05 Tom Brennan (AG-ADM)
+Requirements: FR-RPT-01, FR-RPT-02
+Business rules: None
+Dependencies: US-029, US-033, US-018, US-013, US-044
+
+Notes:
+- KPI definitions: the EVV compliance report measures OBJ-01, MAR compliance measures OBJ-03, authorization utilization and denial-related reasons support OBJ-06, and AR ageing plus the invoice issue dates support OBJ-04.
+- Reports with PHI columns (for example, a claim-ready visit list) need the export permission and the reveal permission; standard reports exclude PHI by default.
+- The missed-doses tile defaults to the last 24 hours; older Missed - undocumented doses stay in the Clinical Supervisor's review queue (US-033). This default was the agreed answer to the need behind the rejected CR-007.
+- Out of scope: a custom report builder and BI connectors (R2 candidates).","Scenario: US-051-AC1 Show today's operations at a glance
+  When Tom opens the operations dashboard at 09:30
+  Then he sees tiles for today's visits by status, open EVV exceptions, missed doses, credentials expiring within 30 days, authorizations at 90% or more utilization, and unbilled Verified visits
+  And each tile shows an ""as of"" time no more than 5 minutes old
+  And selecting a tile opens the filtered list behind it
+
+Scenario: US-051-AC2 Scope the dashboard to the user's locations
+  Given Marcus is assigned only to ""Lakemont North""
+  When he opens the dashboard
+  Then every tile counts only ""Lakemont North"" records
+  And Tom, with access to all locations, can filter the dashboard by location
+
+Scenario Outline: US-051-AC3 Run and export each standard report
+  When Tom runs the report ""<report>"" for 2026-09-01 to 2026-09-30 and location ""Lakemont North""
+  Then the report shows the filtered results
+  And he can export it as CSV and as PDF
+
+  Examples:
+    | report                     |
+    | EVV compliance             |
+    | Visit history              |
+    | Caregiver hours            |
+    | Authorization utilization  |
+    | MAR compliance             |
+    | Incident log               |
+    | AR ageing                  |
+
+Scenario: US-051-AC4 Calculate EVV compliance consistently
+  Given in September 2026 ""Lakemont North"" had 1,000 Completed or Verified visits
+  And 968 of them have all six EVV data elements captured electronically with no Manual time or location punch
+  When Tom runs the EVV compliance report
+  Then the report shows 96.8% complete EVV data
+  And lists the 32 visits that were not complete, with the reason for each
+
+Scenario: US-051-AC5 Mask PHI in report output
+  When Tom exports the Visit history report
+  Then client date of birth, Medicaid ID, phone, address and diagnoses are not included
+  And the export carries the watermark and creates an audit event as required for every export","Highest","8","EP-13","S6","R1","RPT FR-RPT-01 FR-RPT-02","Agency Web App"
+"US-052","Story","Search and export the audit log","As an Agency Administrator, I want to search and export a tamper-proof audit log, so that I can answer ""who saw or changed this record, and when"" for an auditor, a payer or a client complaint.
+
+Persona: PER-05 Tom Brennan (AG-ADM)
+Requirements: FR-RPT-03, FR-RPT-04
+Business rules: BR-057, BR-058
+Dependencies: US-009
+
+Notes:
+- Retention: audit events are kept for 7 years (BR-057, NFR-PRIV-02). How this interacts with tenant deletion after cancellation (NFR-PRIV-03) is set out in the data classification and retention document, which the Compliance and Privacy Officer owns.
+- Delivered early (S3) so that every later story could rely on the audit service; FR-RPT-04 watermarking is reused by all exports.
+- Performance: a 30-day search for one tenant returns the first page within 2 s at p95 using cursor pagination.","Scenario: US-052-AC1 Search the audit log
+  When Tom filters the audit log by entity ""Client C-10234"", action ""phi.reveal"" and dates 2026-09-01 to 2026-09-30
+  Then he sees each matching event with actor, action, entity, IP address, device and timestamp
+  And for update events he sees the before and after values side by side
+
+Scenario Outline: US-052-AC2 Record every auditable action
+  When <action> happens
+  Then an audit event with action ""<audit action>"" is written
+
+  Examples:
+    | action                                               | audit action               |
+    | Marcus creates a client                              | client.create              |
+    | Marcus edits a visit's time                          | visit.update               |
+    | Marcus cancels a visit                               | visit.cancel               |
+    | Marcus reveals a client's phone number               | phi.reveal                 |
+    | Denise exports payroll                               | export.create              |
+    | Rosa signs in                                        | auth.sign_in               |
+    | Tom changes Marcus's permission overrides            | access.permissions_update  |
+    | a support agent views a client under a grant         | support.read               |
+
+Scenario: US-052-AC3 The audit log is append-only
+  Given an audit event exists
+  When any user, including a Platform Administrator, tries to update or delete it through the API
+  Then the API offers no such operation and returns 405
+  And the application's database role has no UPDATE or DELETE privilege on the audit table
+
+Scenario: US-052-AC4 Export with a watermark and audit the export
+  When Tom exports the filtered audit log as CSV
+  Then the file name and the first line carry the watermark ""Exported by Tom Brennan, Harborview Home Care, 2026-10-02 14:05 America/New_York""
+  And an audit event ""export.create"" records the export, its filters and its row count
+
+Scenario: US-052-AC5 Support actions show the grant
+  Given a support agent acted under grant SAG-0042
+  When Tom filters the audit log by actor type ""Support""
+  Then each event shows the grant ID SAG-0042 and the support agent's name
+
+Scenario: US-052-AC6 Tenants see only their own events
+  When an Agency Administrator of Cedar Lane Adult Day Center searches the audit log
+  Then no event from Harborview Home Care is returned","Highest","5","EP-13","S3","R1","RPT FR-RPT-03 FR-RPT-04","Agency Web App"
+"US-053","Story","View my relative's visits","As a family contact of a client, I want to see my relative's upcoming visits and summaries of completed visits and message the Care Coordinator, so that I know care is happening without calling the agency.
+
+Persona: Family Contact (FAM)
+Requirements: FR-FAM-01, FR-FAM-03
+Business rules: BR-001
+Dependencies: US-012, US-029, US-009
+
+Notes:
+- Deferred by CR-003 (DEC-09): the consent model and minimum-necessary scope needed more privacy review than R1 allowed, and the pilot agencies ranked the portal lowest of the R1 features.
+- MFA for family contacts, the consent scopes and the retention of messages are open questions for R2 discovery with the Compliance and Privacy Officer.
+- Out of scope for R2: family access to clinical documentation or invoices.","Scenario: US-053-AC1 Invite a family contact only after consent
+  Given C-10234's legal representative Jamie Kimball is a client contact with email ""jamie.kimball@example.org""
+  And no family-access consent is recorded
+  When Marcus tries to invite Jamie to the Family Portal
+  Then the invite is blocked with ""Record the client's consent to share visit information before inviting a family contact.""
+  When Marcus records consent with the date, who gave it and the scope ""Schedule and visit summaries""
+  Then the invitation can be sent
+
+Scenario: US-053-AC2 Show only the schedule and completed visit summaries
+  Given Jamie accepted the invitation and signed in with MFA
+  When Jamie opens the portal
+  Then Jamie sees C-10234's visits for the next 14 days with date, time window and caregiver first name
+  And for completed visits, the clock-in and clock-out times and which care-plan tasks were done
+  And Jamie does not see visit notes, medications, vitals, diagnoses, incidents or billing
+
+Scenario: US-053-AC3 Isolate data to one client and one tenant
+  Given Jamie has access to C-10234 only
+  When Jamie requests GET /v1/family/clients/{clientId}/visits for another client of the same agency or of another agency
+  Then the API returns 404
+  And row-level security returns no rows outside C-10234's tenant
+
+Scenario: US-053-AC4 Message the Care Coordinator
+  When Jamie sends the message ""Mom has a doctor's appointment on Thursday at 10:00.""
+  Then the Coordinators of C-10234's location see it in the Agency Web App
+  And the message and any reply are kept in the client's record and audited
+  And the portal shows ""For emergencies, call 911. Messages are answered during office hours.""
+
+Scenario: US-053-AC5 Withdrawing consent removes access at once
+  Given Jamie is signed in to the portal
+  When Marcus records that the client withdrew consent
+  Then Jamie's next request returns 403 and the portal shows ""Your access to this information has ended.""","Medium","8","EP-14","","R2","FAM FR-FAM-01 FR-FAM-03","Family Portal"
+"US-054","Story","Get notified when a visit starts and ends","As a family contact, I want an optional notification when a visit starts and ends, so that I know my relative has been seen without having to check the portal.
+
+Persona: Family Contact (FAM)
+Requirements: FR-FAM-02
+Business rules: BR-056
+Dependencies: US-053, US-049
+
+Notes:
+- The 60-minute staleness limit in AC3 is a proposal for R2 refinement.
+- Recipients are resolved at send time (BR-054), reusing the CR-006 design.
+- SMS for family contacts is out of scope until the consent scope covers phone numbers.","Scenario: US-054-AC1 Notifications are off until the family contact opts in
+  Given Jamie has just joined the Family Portal
+  Then visit start and end notifications are off
+  When Jamie switches them on for push and email
+  Then they are sent for every visit of C-10234 from then on
+
+Scenario: US-054-AC2 Send start and end notifications without PHI
+  Given Jamie has opted in
+  When the caregiver clocks in at 08:02 and clocks out at 09:58
+  Then Jamie receives ""Today's visit has started. Open the Family Portal for details."" at clock-in
+  And ""Today's visit has ended. Open the Family Portal for details."" at clock-out
+  And neither message contains the client's name, the caregiver's name or the address
+
+Scenario Outline: US-054-AC3 Skip stale notifications from offline punches
+  Given a clock-in captured offline at 08:02
+  When the punch syncs at <sync time>
+  Then the start notification is <result>
+
+  Examples:
+    | sync time | result                                                   |
+    | 08:40     | sent, saying the visit started at 08:02                  |
+    | 09:03     | not sent; the portal shows the visit start time          |
+
+Scenario: US-054-AC4 Quiet hours apply
+  Given a supported-living visit ends at 21:30
+  Then the end notification is held and sent at 07:00, or dropped if a newer notification for the same visit exists
+
+Scenario: US-054-AC5 Notifications stop when access ends
+  Given Jamie's portal access was removed because consent was withdrawn
+  When the next visit starts
+  Then no notification is sent to Jamie","Medium","3","EP-14","","R2","FAM FR-FAM-02","Family Portal"

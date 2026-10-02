@@ -1,0 +1,8 @@
+payer_id,tenant_id,name,payer_type
+PYR-101,TEN-001,Lakemont County Medicaid,Medicaid
+PYR-102,TEN-001,Riverbend Health Plan,ManagedCare
+PYR-103,TEN-001,Private Pay,PrivatePay
+PYR-201,TEN-002,Lakemont County Medicaid,Medicaid
+PYR-202,TEN-002,Private Pay,PrivatePay
+PYR-301,TEN-003,Lakemont County Medicaid,Medicaid
+PYR-302,TEN-003,Evergreen Long-Term Care Insurance,LTCInsurance
