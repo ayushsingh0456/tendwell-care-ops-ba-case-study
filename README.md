@@ -4,6 +4,8 @@
 
 > **Fictional case study.** Tendwell, Tendwell Labs, the pilot agencies, every person, figure and record in this repository are invented for portfolio purposes. All test data is synthetic. Nothing here is drawn from any employer or client. Compliance content is written to show how requirements support regulations; it is not legal advice.
 
+> **Read it in the browser.** The [case study page](https://ayushsingh0456.github.io/case-studies/tendwell.html) walks through the work, and the [document library](https://ayushsingh0456.github.io/library.html?project=tendwell) opens every file here with diagrams rendered. Formatted PDFs: [BRD](https://ayushsingh0456.github.io/assets/docs/tendwell-BRD.pdf) · [SRS](https://ayushsingh0456.github.io/assets/docs/tendwell-SRS.pdf).
+
 ---
 
 ## The product in one paragraph
