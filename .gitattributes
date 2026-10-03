@@ -1,0 +1,3 @@
+# This is a documentation repository. Count Markdown in the language bar and ignore the small test-data validator script.
+*.md linguist-detectable=true
+*.py linguist-detectable=false
